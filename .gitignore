@@ -4,3 +4,5 @@
 # git tracking whitelist
 !.gitignore
 !.gitconfig
+
+!.config/nvim/init.vim
