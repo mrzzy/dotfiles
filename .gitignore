@@ -3,3 +3,4 @@
 
 # git tracking whitelist
 !.gitignore
+!.gitconfig
