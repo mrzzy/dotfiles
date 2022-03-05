@@ -1,0 +1,5 @@
+# git ignore all untracked unless explicitly tracked
+/**
+
+# git tracking whitelist
+!.gitignore
