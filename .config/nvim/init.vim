@@ -25,6 +25,9 @@ Plug 'tpope/vim-abolish'
 " sensible key bindings
 Plug 'tpope/vim-unimpaired'
 
+" editor sessions
+Plug 'tpope/vim-obsession'
+
 " auto alignment
 Plug 'junegunn/vim-easy-align'
 xmap ga <Plug>(EasyAlign)
