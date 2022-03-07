@@ -5,4 +5,6 @@
 !.gitignore
 !.gitconfig
 
+!.config/
+!.config/nvim/
 !.config/nvim/init.vim
