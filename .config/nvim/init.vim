@@ -15,6 +15,12 @@ set updatetime=300
 " show no-visible characters
 set list
 
+" show number, cursor and column guides
+set number
+
+" docs lookup
+set keywordprg=:Man
+
 " Plugins
 call plug#begin()
 " Plugins: Editor
@@ -37,7 +43,55 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " code completion
-Plug 'neoclide/coc.nvim', {'commit': '5830e03dc346d4502111a00c6c11cb5e44df5596'}
+Plug 'neoclide/coc.nvim', {'commit': '16e74f9b31d20b8dfc8933132beed4c175d824ea'}
+
+" coc: tab completion
+" check if char before cursor is whitespace or empty
+function! s:is_space_empty() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>is_space_empty() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" coc: view docs
+function! s:view_docs() abort
+  " extract the current keyword as search keyword
+  let keyword = expand('<cword>')
+  try
+    " lookup vim docs for keyword
+    execute 'help ' . keyword
+  catch
+    if (coc#rpc#ready())
+      " lookup coc engine for docs
+      call CocActionAsync('doHover')
+    else
+      " lookup manpage for keyword
+      execute &keywordprg . ' ' . keyword
+    endif
+  endtry
+endfunction
+
+nnoremap K :call <SID>view_docs()<CR>
+
+" patch editor fixes: https://github.com/neovim/neovim/issues/12587
+" fix CursorHold performance issue
+Plug 'antoinemadec/FixCursorHold.nvim'
+
+" Plugins: Utility
+call plug#end()
+
+" Autocmds
+augroup init_vim
+  " delete any existing autocmds to prevent autocmd spam
+  autocmd!
+
+  autocmd FileType gitcommit,gitrebase let g:gutentags_enabled=0
+augroup end
 
 " patch editor fixes: https://github.com/neovim/neovim/issues/12587
 " fix CursorHold performance issue
