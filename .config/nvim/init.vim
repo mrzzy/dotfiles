@@ -48,6 +48,7 @@ nmap ga <Plug>(EasyAlign)
 " COC completion engine
 function! Install_coc_extensions() abort
   CocInstall coc-json@1.4.1
+  CocInstall coc-yaml@1.7.5
   CocInstall coc-pyright@1.1.232
 endfunction
 
