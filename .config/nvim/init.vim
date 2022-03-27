@@ -45,8 +45,16 @@ Plug 'junegunn/vim-easy-align', {'commit': '12dd6316974f71ce333e360c0260b4e1f811
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" Coc code completion engine
-Plug 'neoclide/coc.nvim', {'commit': '16e74f9b31d20b8dfc8933132beed4c175d824ea'}
+" COC completion engine
+function! Install_coc_extensions() abort
+  CocInstall coc-json@1.4.1
+  CocInstall coc-pyright@1.1.232
+endfunction
+
+Plug 'neoclide/coc.nvim', {
+\ 'commit': '16e74f9b31d20b8dfc8933132beed4c175d824ea',
+\ 'do': function('Install_coc_extensions')
+\}
 
 " coc: tab completion
 " check if char before cursor is whitespace or empty
