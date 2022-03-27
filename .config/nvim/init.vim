@@ -15,11 +15,14 @@ set updatetime=300
 " show no-visible characters
 set list
 
-" show number, cursor and column guides
+" show number
 set number
 
 " docs lookup
 set keywordprg=:Man
+
+" keybinding default leader
+let mapleader=","
 
 " Plugins
 call plug#begin()
@@ -42,7 +45,7 @@ Plug 'junegunn/vim-easy-align', {'commit': '12dd6316974f71ce333e360c0260b4e1f811
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" code completion
+" Coc code completion engine
 Plug 'neoclide/coc.nvim', {'commit': '16e74f9b31d20b8dfc8933132beed4c175d824ea'}
 
 " coc: tab completion
@@ -78,6 +81,24 @@ endfunction
 
 nnoremap K :call <SID>view_docs()<CR>
 
+" coc: code navigation
+nmap gd <Plug>(coc-definition)
+nmap gD <Plug>(coc-type-definition)
+nmap gi <Plug>(coc-implementation)
+nmap gr <Plug>(coc-references)
+nnoremap <silent><nowait> <C-j>  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <C-k>  :<C-u>CocList -I symbols<cr>
+
+" coc: code text objects
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
 " patch editor fixes: https://github.com/neovim/neovim/issues/12587
 " fix CursorHold performance issue
 Plug 'antoinemadec/FixCursorHold.nvim'
@@ -95,7 +116,7 @@ augroup end
 
 " patch editor fixes: https://github.com/neovim/neovim/issues/12587
 " fix CursorHold performance issue
-Plug 'antoinemadec/FixCursorHold.nvim'
+"Plug 'antoinemadec/FixCursorHold.nvim'
 
 " Plugins: Utility
 call plug#end()
