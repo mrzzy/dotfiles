@@ -24,6 +24,9 @@ set keywordprg=:Man
 " keybinding default leader
 let mapleader=","
 
+" 24-bit color goodness
+set termguicolors
+
 " Plugins
 call plug#begin()
 " Plugins: Editor
@@ -52,7 +55,13 @@ nmap <C-p> Files
 nmap <C-TAB> Buffers
 nmap <C-G> Rg
 
-" COC completion engine
+" syntax highlighting
+Plug 'sainnhe/gruvbox-material', {'tag': 'v1.2.3'}
+let g:gruvbox_material_background = 'medium'
+
+Plug 'sheerun/vim-polyglot'
+
+" coc completion engine
 function! Install_coc_extensions() abort
   CocInstall coc-json@1.4.1
   CocInstall coc-yaml@1.7.5
@@ -121,6 +130,9 @@ Plug 'antoinemadec/FixCursorHold.nvim'
 
 " Plugins: Utility
 call plug#end()
+
+" Colorscheme
+colorscheme gruvbox-material
 
 " Autocmds
 augroup init_vim
