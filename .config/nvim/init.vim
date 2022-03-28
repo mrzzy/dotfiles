@@ -21,9 +21,9 @@ set number
 " docs lookup
 set keywordprg=:Man
 
-" keybinding default leader
-let mapleader=","
-
+" keyboard bindings default leader key
+let mapleader=','
+ 
 " 24-bit color goodness
 set termguicolors
 
@@ -45,20 +45,20 @@ Plug 'tpope/vim-obsession', {'commit': 'd2818a614ec3a5d174c6bb19e87e2eeb207f4900
 
 " auto alignment
 Plug 'junegunn/vim-easy-align', {'commit': '12dd6316974f71ce333e360c0260b4e1f81169c3'}
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
+xmap <leader>= <Plug>(EasyAlign)
+nmap <leader>= <Plug>(EasyAlign)
 
 " code jumping
 Plug 'junegunn/fzf', {'tag': '0.29.0'}
 Plug 'junegunn/fzf.vim', {'commit': 'b23e4bb8f853cb9641a609c5c8545751276958b0'}
-nmap <C-p> Files
-nmap <C-TAB> Buffers
-nmap <C-G> Rg
+nmap <C-p> :Files<CR>
+nmap <TAB> :Buffers<CR>
+" ctrl-/ to ripgrep
+nmap <C-_> :Rg<CR>
 
 " syntax highlighting
 Plug 'sainnhe/gruvbox-material', {'tag': 'v1.2.3'}
 let g:gruvbox_material_background = 'medium'
-
 Plug 'sheerun/vim-polyglot'
 
 " coc completion engine
