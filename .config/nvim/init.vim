@@ -124,30 +124,18 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
-" patch editor fixes: https://github.com/neovim/neovim/issues/12587
+" git integration
+Plug 'tpope/vim-fugitive', {'tag': 'v3.6'}
+nmap <leader>cc :Git<CR>
+
+" patch: https://github.com/neovim/neovim/issues/12587
 " fix CursorHold performance issue
 Plug 'antoinemadec/FixCursorHold.nvim'
 
-" Plugins: Utility
 call plug#end()
 
 " Colorscheme
 colorscheme gruvbox-material
-
-" Autocmds
-augroup init_vim
-  " delete any existing autocmds to prevent autocmd spam
-  autocmd!
-
-  autocmd FileType gitcommit,gitrebase let g:gutentags_enabled=0
-augroup end
-
-" patch editor fixes: https://github.com/neovim/neovim/issues/12587
-" fix CursorHold performance issue
-"Plug 'antoinemadec/FixCursorHold.nvim'
-
-" Plugins: Utility
-call plug#end()
 
 " Autocmds
 augroup init_vim
