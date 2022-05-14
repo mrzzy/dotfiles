@@ -64,9 +64,14 @@ Plug 'sheerun/vim-polyglot'
 
 " coc completion engine
 function! Install_coc_extensions(info) abort
-  CocInstall coc-json@1.4.1
-  CocInstall coc-yaml@1.7.5
-  CocInstall coc-pyright@1.1.232
+  " install or update coc extensions
+  if a:info.status == "installed"
+    CocInstall -sync coc-json@1.4.1
+    CocInstall -sync coc-yaml@1.7.5
+    CocInstall -sync coc-pyright@1.1.232
+  else a:info.status == "updated"
+    CocUpdateSync
+  endif
 endfunction
 
 Plug 'neoclide/coc.nvim', {
