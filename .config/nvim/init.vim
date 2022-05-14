@@ -63,7 +63,7 @@ let g:gruvbox_material_background = 'medium'
 Plug 'sheerun/vim-polyglot'
 
 " coc completion engine
-function! Install_coc_extensions() abort
+function! Install_coc_extensions(info) abort
   CocInstall coc-json@1.4.1
   CocInstall coc-yaml@1.7.5
   CocInstall coc-pyright@1.1.232
