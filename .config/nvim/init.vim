@@ -137,6 +137,10 @@ omap ac <Plug>(coc-classobj-a)
 Plug 'tpope/vim-fugitive', {'tag': 'v3.6'}
 nmap <leader>cc :Git<CR>
 
+" undo historys
+Plug 'mbbill/undotree', {'tag': 'rel_6.1'}
+nmap <leader>uu :UndotreeToggle<CR>
+
 " patch: https://github.com/neovim/neovim/issues/12587
 " fix CursorHold performance issue
 Plug 'antoinemadec/FixCursorHold.nvim'
