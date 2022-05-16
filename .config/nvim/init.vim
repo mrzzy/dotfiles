@@ -145,6 +145,9 @@ nmap <leader>uu :UndotreeToggle<CR>
 Plug 'simeji/winresizer' 
 let g:winresizer_start_key='<leader>ww'
 
+" project-specific file navigation
+Plug 'tpope/vim-projectionist'
+
 " patch: https://github.com/neovim/neovim/issues/12587
 " fix CursorHold performance issue
 Plug 'antoinemadec/FixCursorHold.nvim'
