@@ -120,6 +120,8 @@ nmap gi <Plug>(coc-implementation)
 nmap gr <Plug>(coc-references)
 nnoremap <silent><nowait> <C-j>  :<C-u>CocList outline<cr>
 nnoremap <silent><nowait> <C-k>  :<C-u>CocList -I symbols<cr>
+" populate location list instead of CocList with diagnostics
+let g:coc_enable_locationlist=1
 
 " coc: code text objects
 xmap if <Plug>(coc-funcobj-i)
