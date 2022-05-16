@@ -70,7 +70,7 @@ function! Install_coc_extensions(info) abort
     CocInstall -sync coc-json@1.4.1
     CocInstall -sync coc-yaml@1.7.5
     CocInstall -sync coc-pyright@1.1.232
-  else a:info.status == "updated"
+  elseif a:info.status == "updated"
     CocUpdateSync
   endif
 endfunction
