@@ -54,8 +54,9 @@ Plug 'junegunn/fzf.vim', {'commit': 'b23e4bb8f853cb9641a609c5c8545751276958b0'}
 nmap <C-p> :GFiles<CR>
 nmap <C-Space> :Buffers<CR>
 
-" ctrl-/ to ripgrep
+" project wide search
 nmap <C-_> :Rg<CR>
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 
 " syntax highlighting
 Plug 'sainnhe/gruvbox-material', {'tag': 'v1.2.3'}
