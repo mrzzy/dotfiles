@@ -7,7 +7,7 @@
 " coc: completion engine
 function! Install_coc_extensions(info) abort
   " install or update coc extensions
-  if a:info.status == "installed"
+  if a:info.status == "installed" || a:info.force
     CocInstall -sync coc-json@1.4.1
     CocInstall -sync coc-yaml@1.7.5
     CocInstall -sync coc-pyright@1.1.232
