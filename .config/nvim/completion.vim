@@ -13,6 +13,7 @@ function! Install_coc_extensions(info) abort
     CocInstall -sync coc-pyright@1.1.232
     CocInstall -sync coc-html@1.6.1
     CocInstall -sync coc-css@1.3.0
+    CocInstall -sync coc-snippets@3.0.10
   elseif a:info.status == "updated"
     CocUpdateSync
   endif
@@ -22,6 +23,11 @@ Plug 'neoclide/coc.nvim', {
 \ 'commit': '16e74f9b31d20b8dfc8933132beed4c175d824ea',
 \ 'do': function('Install_coc_extensions')
 \}
+
+" coc: code snippets
+Plug 'honza/vim-snippets'
+" snippet expansion on enter
+inoremap <silent><expr> <CR> pumvisible()? coc#_select_confirm() : "\<CR>"
 
 " coc: tab completion
 " check if char before cursor is whitespace or empty
