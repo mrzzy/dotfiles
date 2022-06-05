@@ -51,8 +51,9 @@ zstyle ':vcs_info:git:*' formats '%u%r[%b]'
 # render prompt before running command
 precmd() {
     vcs_info
-    PROMPT='%B%F{yellow}%#%f%b '
-    RPROMPT='${vcs_info_msg_0_}%f %m(%(?.%F{green}OK.%F{red}%?)%f)'
+    # style prompt using https://github.com/sainnhe/gruvbox-material palette
+    PROMPT='%B%F{#d4be98}%#%f%b '
+    RPROMPT='%F{#7c6f64}${vcs_info_msg_0_} %m(%f%(?.%F{#6f8352}OK.%F{red}%?)%F{#7c6f64})%f'
 }
 
 # syntax highlighting
