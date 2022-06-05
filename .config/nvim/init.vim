@@ -59,7 +59,6 @@ nmap <C-_> :Rg<CR>
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 
 " syntax highlighting
-Plug 'sainnhe/gruvbox-material', {'tag': 'v1.2.3'}
 let g:gruvbox_material_background = 'medium'
 Plug 'sheerun/vim-polyglot'
 
@@ -88,7 +87,10 @@ Plug 'antoinemadec/FixCursorHold.nvim'
 call plug#end()
 
 " Colorscheme
+Plug 'sainnhe/gruvbox-material', {'tag': 'v1.2.3'}
 colorscheme gruvbox-material
+nmap <leader>hl :set background=light<cr>
+nmap <leader>hd :set background=dark<cr>
 
 " Autocmds
 augroup init_vim
