@@ -84,13 +84,14 @@ Plug 'tpope/vim-projectionist'
 " fix CursorHold performance issue
 Plug 'antoinemadec/FixCursorHold.nvim'
 
-call plug#end()
-
 " Colorscheme
 Plug 'sainnhe/gruvbox-material', {'tag': 'v1.2.3'}
-colorscheme gruvbox-material
 nmap <leader>hl :set background=light<cr>
 nmap <leader>hd :set background=dark<cr>
+
+call plug#end()
+" colorscheme plugin must be load before colorscheme can be set
+colorscheme gruvbox-material
 
 " Autocmds
 augroup init_vim
