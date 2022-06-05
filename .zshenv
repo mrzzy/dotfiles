@@ -5,4 +5,4 @@
 #
 
 # default editor
-EDITOR=nvim
+export EDITOR=nvim
