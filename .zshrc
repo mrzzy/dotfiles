@@ -30,8 +30,12 @@ bindkey '^R' history-incremental-search-backward
 setopt autocd
 # shared history file
 setopt append_history share_history histignorealldups
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
 # extended globbing syntax
 setopt extendedglob
+
 
 # prompt
 # expand expr in prompt
