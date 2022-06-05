@@ -57,3 +57,6 @@ precmd() {
 
 # syntax highlighting
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# z jump tool
+source ~/.local/share/zsh/zsh-z.plugin.zsh
