@@ -14,6 +14,8 @@ promptinit
 zstyle ':completion:*' menu select
 # enable colors on path completion
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+# fuzzy suggestions while typing commands
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # key bindings
 # vi style command editing
@@ -52,3 +54,6 @@ precmd() {
     PROMPT='%B%F{yellow}%#%f%b '
     RPROMPT='${vcs_info_msg_0_}%f %m(%(?.%F{green}OK.%F{red}%?)%f)'
 }
+
+# syntax highlighting
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
