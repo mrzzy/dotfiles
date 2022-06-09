@@ -1,0 +1,14 @@
+/*
+ * dotfiles
+ * neovim - coc completion engine config
+*/
+
+{
+  // project root directory detection patterns
+  "coc.preferences.rootPatterns": [
+    ".git",
+    ".hg",
+    ".projections.json",
+    ".vim"
+  ]
+}
