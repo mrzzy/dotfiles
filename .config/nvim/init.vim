@@ -81,11 +81,11 @@ Plug 'simeji/winresizer'
 let g:winresizer_start_key='<leader>ww'
 
 " project-specific file navigation
-Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-projectionist', {'commit': 'd4aee3035699b82b3789cee0e88dad0e38c423ab'}
 
 " patch: https://github.com/neovim/neovim/issues/12587
 " fix CursorHold performance issue
-Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'antoinemadec/FixCursorHold.nvim', {'commit': '1bfb32e7ba1344925ad815cb0d7f901dbc0ff7c1'}
 
 " Colorscheme
 Plug 'sainnhe/gruvbox-material', {'tag': 'v1.2.3'}
