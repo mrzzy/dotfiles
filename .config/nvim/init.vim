@@ -65,6 +65,9 @@ Plug 'sheerun/vim-polyglot'
 " code completion
 source ~/.config/nvim/completion.vim
 
+" code tagging
+Plug 'ludovicchabant/vim-gutentags', {'commit': 'b77b8fabcb0b052c32fe17efcc0d44f020975244'}
+
 " git integration
 Plug 'tpope/vim-fugitive', {'tag': 'v3.6'}
 nmap <leader>cc :Git<CR>
