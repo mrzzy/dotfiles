@@ -10,5 +10,6 @@
     ".hg",
     ".projections.json",
     ".vim"
-  ]
+  ],
+  "coc.preferences.useQuickfixForLocations": true
 }
