@@ -11,5 +11,6 @@
     ".projections.json",
     ".vim"
   ],
-  "coc.preferences.useQuickfixForLocations": true
+  "coc.preferences.useQuickfixForLocations": true,
+  "diagnostic.locationlistUpdate": true
 }
