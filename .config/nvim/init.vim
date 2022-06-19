@@ -27,6 +27,9 @@ let mapleader=','
 " 24-bit color goodness
 set termguicolors
 
+" 80-char column as reminder to break long lines
+set colorcolumn=80
+
 " Plugins
 call plug#begin()
 " Plugins: Editor
