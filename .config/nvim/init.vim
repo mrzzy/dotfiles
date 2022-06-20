@@ -30,6 +30,10 @@ set termguicolors
 " 80-char column as reminder to break long lines
 set colorcolumn=80
 
+" search: ignore case unless uppercase letters in query
+set ignorecase
+set smartcase
+
 " Plugins
 call plug#begin()
 " Plugins: Editor
