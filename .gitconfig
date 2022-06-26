@@ -1,3 +1,5 @@
 [user]
 	email = program.nom@gmail.com
 	name = Zhu Zhanyan
+[init]
+	defaultBranch = main
