@@ -78,7 +78,7 @@ Plug 'ludovicchabant/vim-gutentags', {'commit': 'b77b8fabcb0b052c32fe17efcc0d44f
 
 " git integration
 Plug 'tpope/vim-fugitive', {'tag': 'v3.6'}
-nmap <leader>cc :Git<CR>
+nmap <leader>vv :Git<CR>
 
 " undo history
 Plug 'mbbill/undotree', {'tag': 'rel_6.1'}
