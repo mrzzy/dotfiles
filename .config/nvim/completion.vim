@@ -72,7 +72,7 @@ nnoremap <silent><nowait> <C-j>  :<C-u>CocList outline<cr>
 nnoremap <silent><nowait> <C-k>  :<C-u>CocList symbols<cr>
 nnoremap <silent><nowait> <C-l>  :<C-u>CocList diagnostics<cr>
 " populate location list with diagnostics
-let g:coc_enable_locationlist=
+let g:coc_enable_locationlist=1
 nmap <leader>cd :CocDiagnostics<cr>
 
 " coc: code text objects
