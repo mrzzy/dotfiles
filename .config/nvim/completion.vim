@@ -14,6 +14,7 @@ function! Install_coc_extensions(info) abort
     CocInstall -sync coc-html@1.6.1
     CocInstall -sync coc-css@1.3.0
     CocInstall -sync coc-snippets@3.0.10
+    CocInstall -sync coc-tsserver@1.10.5
   elseif a:info.status == "updated"
     CocUpdateSync
   endif
