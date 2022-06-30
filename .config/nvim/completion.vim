@@ -74,6 +74,7 @@ nnoremap <silent><nowait> <C-l>  :<C-u>CocList diagnostics<cr>
 " populate location list with diagnostics
 let g:coc_enable_locationlist=1
 nmap <leader>cd :CocDiagnostics<cr>
+nmap <leader>cc :CocCommand<cr>
 
 " coc: code text objects
 xmap if <Plug>(coc-funcobj-i)
