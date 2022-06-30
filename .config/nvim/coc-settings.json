@@ -14,5 +14,19 @@
   // use quickfix list for jump location
   "coc.preferences.useQuickfixForLocations": true,
   // push diagnostics into location list
-  "diagnostic.locationlistUpdate": true
+  "diagnostic.locationlistUpdate": true,
+
+  "languageserver": {
+    // terraform completion
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": [
+        "terraform",
+        "tf"
+      ],
+      "initializationOptions": {},
+      "settings": {}
+    }
+  }
 }
