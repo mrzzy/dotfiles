@@ -1,5 +1,6 @@
 [user]
 	email = program.nom@gmail.com
 	name = Zhu Zhanyan
+	signingKey = 1D09BB4C89BF757B42619071BFF4124F7CE0454E
 [init]
 	defaultBranch = main
