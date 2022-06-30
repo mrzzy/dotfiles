@@ -11,6 +11,8 @@
     ".projections.json",
     ".vim"
   ],
+  // use quickfix list for jump location
   "coc.preferences.useQuickfixForLocations": true,
+  // push diagnostics into location list
   "diagnostic.locationlistUpdate": true
 }
