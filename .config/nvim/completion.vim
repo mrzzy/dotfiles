@@ -68,11 +68,16 @@ nmap gd <Plug>(coc-definition)
 nmap gD <Plug>(coc-type-definition)
 nmap gi <Plug>(coc-implementation)
 nmap gr <Plug>(coc-references)
-nnoremap <silent><nowait> <C-j>  :<C-u>CocList outline<cr>
-nnoremap <silent><nowait> <C-k>  :<C-u>CocList symbols<cr>
-nnoremap <silent><nowait> <C-l>  :<C-u>CocList diagnostics<cr>
-" populate location list with diagnostics
+nmap <silent><nowait> <C-j>  :<C-u>CocList outline<cr>
+nmap <silent><nowait> <C-k>  :<C-u>CocList symbols<cr>
+nmap <silent><nowait> <C-l>  :<C-u>CocList diagnostics<cr
+
+" coc: diagnostics navigation
 nmap <leader>cd :CocDiagnostics<cr>
+nmap [e <Plug>(coc-diagnostic-prev)
+nmap ]e <Plug>(coc-diagnostic-next)
+
+" coc: run coc command
 nmap <leader>cc :CocCommand<cr>
 
 " coc: code text objects
