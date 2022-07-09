@@ -70,7 +70,7 @@ nmap gi <Plug>(coc-implementation)
 nmap gr <Plug>(coc-references)
 nmap <silent><nowait> <C-j>  :<C-u>CocList outline<cr>
 nmap <silent><nowait> <C-k>  :<C-u>CocList symbols<cr>
-nmap <silent><nowait> <C-l>  :<C-u>CocList diagnostics<cr
+nmap <silent><nowait> <C-l>  :<C-u>CocList diagnostics<cr>
 
 " coc: diagnostics navigation
 nmap <leader>cd :CocDiagnostics<cr>
