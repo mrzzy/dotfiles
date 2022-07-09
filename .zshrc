@@ -16,6 +16,8 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # fuzzy suggestions while typing commands
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# fzf key bindings: CTRL-T for files, CTRL-R for history, ALT-C to chdir
+source /usr/local/share/fzf/key-bindings.zsh
 
 # key bindings
 # vi style command editing
@@ -37,7 +39,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 # extended globbing syntax
 setopt extendedglob
-
 
 # prompt
 # expand expr in prompt
