@@ -39,8 +39,12 @@ bindkey -v
 autoload edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd '\e' edit-command-line
-# ctrl-r interactive history recall
-bindkey '^R' history-incremental-search-backward
+# fuzzy history recall
+bindkey '^R' fzf-history-widget
+# fuzzy file completion
+bindkey '^T' fzf-file-widget
+# fuzzy change directory
+bindkey '\ec' fzf-cd-widget
 
 # Prompt
 # display current repo & brnach
