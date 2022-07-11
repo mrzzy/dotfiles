@@ -4,32 +4,7 @@
 # interactive customizations
 #
 
-# import completions & prompts
-autoload -Uz compinit promptinit
-compinit
-promptinit
-
-# autocomplete
-# tab completion - menu select
-zstyle ':completion:*' menu select
-# enable colors on path completion
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-# fuzzy suggestions while typing commands
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# fzf key bindings: CTRL-T for files, CTRL-R for history, ALT-C to chdir
-source /usr/local/share/fzf/key-bindings.zsh
-
-# key bindings
-# vi style command editing
-bindkey -v
-# edit command with double-esc
-autoload edit-command-line
-zle -N edit-command-line
-bindkey -M vicmd '\e' edit-command-line
-# ctrl-r interactive history recall
-bindkey '^R' history-incremental-search-backward
-
-# settings
+# Settings
 # cd without having to type cd
 setopt autocd
 # shared history file
@@ -39,11 +14,35 @@ HISTSIZE=10000
 SAVEHIST=10000
 # extended globbing syntax
 setopt extendedglob
-
-# prompt
 # expand expr in prompt
 setopt PROMPT_SUBST
 
+# import completions & prompts
+autoload -Uz compinit promptinit
+compinit
+promptinit
+
+# Autocomplete
+# tab completion - menu select
+zstyle ':completion:*' menu select
+# enable colors on path completion
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+# fuzzy suggestions while typing commands
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# fzf key bindings: CTRL-T for files, CTRL-R for history, ALT-C to chdir
+source /usr/local/share/fzf/key-bindings.zsh
+
+# Key bindings
+# vi style command editing
+bindkey -v
+# edit command with double-esc
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd '\e' edit-command-line
+# ctrl-r interactive history recall
+bindkey '^R' history-incremental-search-backward
+
+# Prompt
 # display current repo & brnach
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' check-for-changes true
