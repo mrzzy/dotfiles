@@ -60,8 +60,13 @@ precmd() {
     RPROMPT='%F{#7c6f64}${vcs_info_msg_0_} %m(%f%(?.%F{#6f8352}OK.%F{red}%?)%F{#7c6f64})%f'
 }
 
-# syntax highlighting
+# Syntax Highlighting
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# z jump tool
+# Tooling
+# z jump Tool
 source ~/.local/share/zsh/zsh-z.plugin.zsh
+
+# sdkman: jvm sdk manager
+export SDKMAN_DIR="/usr/local/lib/sdkman"
+source "$SDKMAN_DIR/bin/sdkman-init.sh"
