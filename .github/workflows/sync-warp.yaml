@@ -1,0 +1,28 @@
+#
+# dotfiles
+# Sync WARP VM's dotfiles
+#
+
+name: Sync dotfiles on WARP
+on:
+  push: {}
+    #branches: [main]
+jobs:
+  create-warp-pr:
+    name: Create PR to update dotfiles in WARP Box
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Clone WARP repository
+        uses: actions/checkout@v3
+        with:
+          repository: mrzzy/warp
+      - name: Push updated mrzzy/dotfiles commit hash
+        run: |
+          set -ex -o pipefail
+
+          # commit updated dotfiles repo hash
+          DEFAULT_VARS=box/ansible/roles/devbox/defaults/main.yaml
+          git switch -c build/dotfiles-${{ github.sha }}
+          sed '/devbox_dotfiles_rev:/s/[^ ]\+$/${{ github.sha }}/' ${DEFAULT_VARS}
+          git commit -m "build(ansible): update revision of dotfiles installed"
+
