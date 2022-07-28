@@ -15,19 +15,20 @@ jobs:
       WARP_REPO: mrzzy/warp
       COMMIT_USER: github-actions[bot]
       COMMIT_EMAIL: github-actions[bot]@users.noreply.github.com
+      BRANCH: build/update-dotfiles
     steps:
       - name: Clone WARP repository
         uses: actions/checkout@v3
         with:
           repository: ${{ env.WARP_REPO }}
           token: ${{ secrets.GH_PUSH_TOKEN }}
+
       - name: Push updated mrzzy/dotfiles commit hash
         run: |
           set -ex -o pipefail
 
           # update hash in devbox playbook to use latest dotfiles
           DEFAULT_VARS=box/ansible/roles/devbox/defaults/main.yaml
-          BRANCH=build/update-dotfiles
           git switch -c ${BRANCH}
           sed -i -e '/devbox_dotfiles_rev:/s/[^ ]\+$/${{ github.sha }}/' ${DEFAULT_VARS}
 
@@ -36,3 +37,15 @@ jobs:
           git config user.email ${COMMIT_EMAIL}
           git commit -m "build(ansible): update revision of dotfiles installed" ${DEFAULT_VARS}
           git push -u https://github.com/${WARP_REPO} +${BRANCH}
+
+      - name: Apply Pull Request (PR) to Update Dotfiles
+        uses: actions/github-script
+        with:
+          script: |
+            const {data: prs} = await github.rest.pulls({
+              owner: "mrzzy",
+              repo: "warp",
+              base: ${{ env.BRANCH }}
+            });
+            return `PRs:${prs}`;
+          result-encoding: string
