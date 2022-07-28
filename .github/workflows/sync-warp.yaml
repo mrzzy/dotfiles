@@ -20,9 +20,12 @@ jobs:
         run: |
           set -ex -o pipefail
 
-          # commit updated dotfiles repo hash
+          # update hash in devbox playbook to use latest dotfiles
           DEFAULT_VARS=box/ansible/roles/devbox/defaults/main.yaml
           git switch -c build/dotfiles-${{ github.sha }}
-          sed '/devbox_dotfiles_rev:/s/[^ ]\+$/${{ github.sha }}/' ${DEFAULT_VARS}
-          git commit -m "build(ansible): update revision of dotfiles installed"
+          sed -i -e '/devbox_dotfiles_rev:/s/[^ ]\+$/${{ github.sha }}/' ${DEFAULT_VARS}
 
+          # commit changes to dotfiles commit hash
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "build(ansible): update revision of dotfiles installed" ${DEFAULT_VARS}
