@@ -27,7 +27,7 @@ jobs:
 
           # update hash in devbox playbook to use latest dotfiles
           DEFAULT_VARS=box/ansible/roles/devbox/defaults/main.yaml
-          BRANCH=build/dotfiles-${{ github.sha }}
+          BRANCH=build/update-dotfiles
           git switch -c ${BRANCH}
           sed -i -e '/devbox_dotfiles_rev:/s/[^ ]\+$/${{ github.sha }}/' ${DEFAULT_VARS}
 
