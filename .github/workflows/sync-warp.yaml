@@ -11,21 +11,28 @@ jobs:
   create-warp-pr:
     name: Create PR to update dotfiles in WARP Box
     runs-on: ubuntu-22.04
+    env:
+      WARP_REPO: mrzzy/warp
+      COMMIT_USER: github-actions[bot]
+      COMMIT_EMAIL: github-actions[bot]@users.noreply.github.com
     steps:
       - name: Clone WARP repository
         uses: actions/checkout@v3
         with:
-          repository: mrzzy/warp
+          repository: ${{ env.WARP_REPO }}
+          token: ${{ secrets.GH_PUSH_TOKEN }}
       - name: Push updated mrzzy/dotfiles commit hash
         run: |
           set -ex -o pipefail
 
           # update hash in devbox playbook to use latest dotfiles
           DEFAULT_VARS=box/ansible/roles/devbox/defaults/main.yaml
-          git switch -c build/dotfiles-${{ github.sha }}
+          BRANCH=build/dotfiles-${{ github.sha }}
+          git switch -c ${BRANCH}
           sed -i -e '/devbox_dotfiles_rev:/s/[^ ]\+$/${{ github.sha }}/' ${DEFAULT_VARS}
 
-          # commit changes to dotfiles commit hash
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # commit & changes to dotfiles commit hash
+          git config user.name ${COMMIT_USER}
+          git config user.email ${COMMIT_EMAIL}
           git commit -m "build(ansible): update revision of dotfiles installed" ${DEFAULT_VARS}
+          git push -u https://github.com/${WARP_REPO} +${BRANCH}
