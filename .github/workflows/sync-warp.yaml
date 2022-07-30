@@ -6,7 +6,7 @@
 name: Sync dotfiles on WARP
 on:
   push: {}
-    #branches: [main]
+    branches: [main]
 
 jobs:
   create-warp-pr:
