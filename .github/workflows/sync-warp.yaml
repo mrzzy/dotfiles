@@ -1,0 +1,68 @@
+#
+# dotfiles
+# Sync WARP VM's dotfiles
+#
+
+name: Sync dotfiles on WARP
+on:
+  push: {}
+    branches: [main]
+
+jobs:
+  create-warp-pr:
+    name: Create PR to update dotfiles in WARP Box
+    runs-on: ubuntu-22.04
+    env:
+      WARP_REPO: mrzzy/warp
+      COMMIT_USER: github-actions[bot]
+      COMMIT_EMAIL: github-actions[bot]@users.noreply.github.com
+      BRANCH: build/update-dotfiles
+    steps:
+      - name: Clone WARP repository
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ env.WARP_REPO }}
+          token: ${{ secrets.GH_PUSH_TOKEN }}
+
+      - name: Push updated ${{ github.repository }} commit hash
+        run: |
+          set -ex -o pipefail
+
+          # update hash in devbox playbook to use latest dotfiles
+          DEFAULT_VARS=box/ansible/roles/devbox/defaults/main.yaml
+          git switch -c ${BRANCH}
+          sed -i -e '/devbox_dotfiles_rev:/s/[^ ]\+$/${{ github.sha }}/' ${DEFAULT_VARS}
+
+          # commit & changes to dotfiles commit hash
+          SHORT_SHA=$(printf ${{ github.sha }} | cut -c -8)
+          git config user.name ${COMMIT_USER}
+          git config user.email ${COMMIT_EMAIL}
+          git commit \
+            -m "build(ansible): bump revision of dotfiles to ${WARP_REPO}@${SHORT_SHA}" \
+            ${DEFAULT_VARS}
+          git push -u https://github.com/${WARP_REPO} +${BRANCH}
+
+      - name: Apply Pull Request (PR) to Update Dotfiles
+        uses: actions/github-script@v6.1.0
+        with:
+          github-token: ${{ secrets.GH_PUSH_TOKEN }}
+          script: |
+            const [owner, repo] = "${{ env.WARP_REPO }}".split("/");
+            const repoSpec = { owner, repo };
+
+            // avoid creating a duplicate pull request if one already exists
+            const {data: prs} = await github.rest.pulls.list(Object.assign({},
+              repoSpec, {
+              head: "${{ env.BRANCH }}"
+            }));
+            if(prs.length > 0) return;
+
+            // create pull request to update dotfiles on WARP repo
+            github.rest.pulls.create(Object.assign({}, repoSpec, {
+              head: "${{ env.BRANCH }}",
+              base: "main",
+              title: "build(ansible): Update dotfiles embedded in WARP Box",
+              body: "Update the revision of  ${{ github.repository }}) \
+                     embeded in WARP Box with upstream repository to \
+                     ${{ github.repository }}@${{ github.sha }}"
+            }));
