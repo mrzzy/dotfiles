@@ -24,7 +24,7 @@ jobs:
           repository: ${{ env.WARP_REPO }}
           token: ${{ secrets.GH_PUSH_TOKEN }}
 
-      - name: Push updated mrzzy/dotfiles commit hash
+      - name: Push updated ${{ github.repository }} commit hash
         run: |
           set -ex -o pipefail
 
@@ -47,22 +47,22 @@ jobs:
         with:
           github-token: ${{ secrets.GH_PUSH_TOKEN }}
           script: |
+            const [owner, repo] = "${{ env.WARP_REPO }}".split("/");
+            const repoSpec = { owner, repo };
+
             // avoid creating a duplicate pull request if one already exists
-            const {data: prs} = await github.rest.pulls.list({
-              owner: "mrzzy",
-              repo: "warp",
+            const {data: prs} = await github.rest.pulls.list(Object.assign({},
+              repoSpec, {
               head: "${{ env.BRANCH }}"
-            });
+            }));
             if(prs.length > 0) return;
 
             // create pull request to update dotfiles on WARP repo
-            github.rest.pulls.create({
-              owner: "mrzzy",
-              repo: "warp",
+            github.rest.pulls.create(Object.assign({}, repoSpec, {
               head: "${{ env.BRANCH }}",
               base: "main",
               title: "build(ansible): Update dotfiles embedded in WARP Box",
-              body: "Update the revision of [dotfiles](github.com/mrzzy/dotfiles) \
+              body: "Update the revision of  ${{ github.repository }}) \
                      embeded in WARP Box with upstream repository to \
-                     mrzzy/dotfiles@${{ github.sha }}"
-            });
+                     ${{ github.repository }}@${{ github.sha }}"
+            }));
