@@ -33,19 +33,31 @@ jobs:
           sed -i -e '/devbox_dotfiles_rev:/s/[^ ]\+$/${{ github.sha }}/' ${DEFAULT_VARS}
 
           # commit & changes to dotfiles commit hash
+          SHORT_SHA=$(git rev-parse --short HEAD)
           git config user.name ${COMMIT_USER}
           git config user.email ${COMMIT_EMAIL}
-          git commit -m "build(ansible): update revision of dotfiles installed" ${DEFAULT_VARS}
+          git commit -m "build(ansible): bump revision of dotfiles to ${SHORT_SHA}" ${DEFAULT_VARS}
           git push -u https://github.com/${WARP_REPO} +${BRANCH}
 
       - name: Apply Pull Request (PR) to Update Dotfiles
         uses: actions/github-script@v6.1.0
         with:
           script: |
+            // avoid creating a duplicate pull request if one already exists
             const {data: prs} = await github.rest.pulls.list({
               owner: "mrzzy",
               repo: "warp",
-              base: "${{ env.BRANCH }}"
+              head: "${{ env.BRANCH }}"
             });
-            return `PRs:${prs}`;
-          result-encoding: string
+            if(prs.length > 0) return;
+
+            // create pull request to update dotfiles on WARP repo
+            github.rest.pulls.create({
+              owner: "mrzzy",
+              repo: "warp",
+              head: "${{ env.BRANCH }}",
+              base: "main",
+              title: "build(ansible): Update dotfiles embeded in WARP Box",
+              description: "Keep the revision of [dotfiles](github.com/mrzzy/dotfiles)\
+                            embeded in WARP Box with upstream repository"
+            });
