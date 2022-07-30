@@ -7,6 +7,7 @@ name: Sync dotfiles on WARP
 on:
   push: {}
     #branches: [main]
+
 jobs:
   create-warp-pr:
     name: Create PR to update dotfiles in WARP Box
@@ -42,6 +43,7 @@ jobs:
       - name: Apply Pull Request (PR) to Update Dotfiles
         uses: actions/github-script@v6.1.0
         with:
+          github-token: ${{ secrets.GH_PUSH_TOKEN }}
           script: |
             // avoid creating a duplicate pull request if one already exists
             const {data: prs} = await github.rest.pulls.list({
