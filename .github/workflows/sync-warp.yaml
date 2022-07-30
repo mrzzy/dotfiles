@@ -61,7 +61,7 @@ jobs:
               repo: "warp",
               head: "${{ env.BRANCH }}",
               base: "main",
-              title: "build(ansible): Update dotfiles embeded in WARP Box",
+              title: "build(ansible): Update dotfiles embedded in WARP Box",
               body: "Update the revision of [dotfiles](github.com/mrzzy/dotfiles) \
                      embeded in WARP Box with upstream repository to \
                      mrzzy/dotfiles@${{ github.sha }}"
