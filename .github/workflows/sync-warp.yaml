@@ -39,7 +39,7 @@ jobs:
           git push -u https://github.com/${WARP_REPO} +${BRANCH}
 
       - name: Apply Pull Request (PR) to Update Dotfiles
-        uses: actions/github-script
+        uses: actions/github-script@v6.1.0
         with:
           script: |
             const {data: prs} = await github.rest.pulls({
