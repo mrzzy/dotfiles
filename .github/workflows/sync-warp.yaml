@@ -38,7 +38,7 @@ jobs:
           git config user.name ${COMMIT_USER}
           git config user.email ${COMMIT_EMAIL}
           git commit \
-            -m "build(ansible): bump revision of dotfiles to ${{ env.REPO }}@${SHORT_SHA}" \
+            -m "build(ansible): bump revision of dotfiles to ${WARP_REPO}@${SHORT_SHA}" \
             ${DEFAULT_VARS}
           git push -u https://github.com/${WARP_REPO} +${BRANCH}
 
