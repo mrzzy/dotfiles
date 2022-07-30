@@ -42,10 +42,10 @@ jobs:
         uses: actions/github-script@v6.1.0
         with:
           script: |
-            const {data: prs} = await github.rest.pulls({
+            const {data: prs} = await github.rest.pulls.list({
               owner: "mrzzy",
               repo: "warp",
-              base: ${{ env.BRANCH }}
+              base: "${{ env.BRANCH }}"
             });
             return `PRs:${prs}`;
           result-encoding: string
