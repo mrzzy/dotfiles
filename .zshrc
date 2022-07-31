@@ -56,7 +56,7 @@ alias m=make
 alias tf=terraform
 
 # Prompt
-# display current repo & brnach
+# display current repo & branch
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr '+'

@@ -5,7 +5,7 @@
 
 name: Sync dotfiles on WARP
 on:
-  push: {}
+  push:
     branches: [main]
 
 jobs:
