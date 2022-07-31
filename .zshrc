@@ -49,6 +49,11 @@ bindkey '\ec' fzf-cd-widget
 # Aliases
 alias r=ranger
 alias g=git
+alias k=kubectl
+alias v=nvim
+alias py=python
+alias m=make
+alias tf=terraform
 
 # Prompt
 # display current repo & brnach
