@@ -46,6 +46,10 @@ bindkey '^T' fzf-file-widget
 # fuzzy change directory
 bindkey '\ec' fzf-cd-widget
 
+# Aliases
+alias r=ranger
+alias g=git
+
 # Prompt
 # display current repo & brnach
 autoload -Uz vcs_info
