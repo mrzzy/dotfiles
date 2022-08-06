@@ -28,5 +28,7 @@
       "initializationOptions": {},
       "settings": {}
     }
-  }
+  },
+  // needed for coc-clangd to find clangd executable with '-12' suffix
+  "clangd.path": "clangd-12"
 }
