@@ -16,7 +16,8 @@ function! Install_coc_extensions(info) abort
     CocInstall -sync coc-snippets@3.0.10
     CocInstall -sync coc-tsserver@1.10.5 " JS/Typescript
     " TODO(mrzzy): coc-metals is deprecated in favor of nvim-metals
-    CocInstall -sync coc-metals@1.0.14 "Scala
+    CocInstall -sync coc-metals@1.0.14 " Scala
+    CocInstall -sync coc-clangd@0.23.0 " C/C++
   elseif a:info.status == "updated"
     CocUpdateSync
   endif
