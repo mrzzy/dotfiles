@@ -58,8 +58,8 @@ nmap <leader>= <Plug>(EasyAlign)
 " code jumping
 Plug 'junegunn/fzf', {'tag': '0.29.0'}
 Plug 'junegunn/fzf.vim', {'commit': 'b23e4bb8f853cb9641a609c5c8545751276958b0'}
-nmap <C-p> :Files<CR>
-nmap <M-p> :GFiles<CR>
+nmap <M-p> :Files<CR>
+nmap <C-p> :GFiles<CR>
 nmap <C-t> :Tags<CR>
 nmap <C-Space> :Buffers<CR>
 
