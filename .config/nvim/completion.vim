@@ -34,10 +34,9 @@ Plug 'honza/vim-snippets'
 " custom snippets
 Plug 'SirVer/ultisnips'
 let g:UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit=$HOME . '/.local/share/nvim/snippets'
-let g:UltiSnipsExpandTrigger="<C-X"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
-
+let g:UltiSnipsExpandTrigger="<C-X>"
+let g:UltiSnipsJumpForwardTrigger="<C-J>"
+let g:UltiSnipsJumpBackwardTrigger="<C-K>"
 
 " snippet expansion on enter
 inoremap <silent><expr> <CR> pumvisible()? coc#_select_confirm() : "\<CR>"
