@@ -71,7 +71,6 @@ function! s:view_docs() abort
     endif
   endtry
 endfunction
-
 nnoremap K :call <SID>view_docs()<CR>
 
 " coc: code navigation
@@ -82,6 +81,10 @@ nmap gr <Plug>(coc-references)
 nmap <silent><nowait> <C-j>  :<C-u>CocList outline<cr>
 nmap <silent><nowait> <C-k>  :<C-u>CocList symbols<cr>
 nmap <silent><nowait> <C-l>  :<C-u>CocList diagnostics<cr>
+" alternative bindings for use in web terminal
+nmap <silent><nowait> <M-j>  :<C-u>CocList outline<cr>
+nmap <silent><nowait> <M-k>  :<C-u>CocList symbols<cr>
+nmap <silent><nowait> <M-l>  :<C-u>CocList diagnostics<cr>
 
 " coc: diagnostics navigation
 nmap <leader>cd :CocDiagnostics<cr>

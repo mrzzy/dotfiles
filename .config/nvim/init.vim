@@ -61,10 +61,12 @@ Plug 'junegunn/fzf.vim', {'commit': 'b23e4bb8f853cb9641a609c5c8545751276958b0'}
 nmap <M-p> :Files<CR>
 nmap <C-p> :GFiles<CR>
 nmap <C-t> :Tags<CR>
+nmap <M-t> :Tags<CR>
 nmap <C-Space> :Buffers<CR>
 
 " project wide search
 nmap <C-_> :Rg<CR>
+nmap <M-/> :Rg<CR>
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 
 " syntax highlighting
@@ -85,9 +87,16 @@ nmap <leader>vv :Git<CR>
 Plug 'mbbill/undotree', {'tag': 'rel_6.1'}
 nmap <leader>uu :UndotreeToggle<CR>
 
-" window resizing
+" window management
 Plug 'simeji/winresizer' 
 let g:winresizer_start_key='<leader>ww'
+" alternative bindings for use inside web terminals
+nmap <leader>wh <C-w><C-h>
+nmap <leader>wl <C-w><C-l>
+nmap <leader>wj <C-w><C-j>
+nmap <leader>wk <C-w><C-k>
+nmap <leader>ws <C-w><C-s>
+nmap <leader>wv <C-w><C-v>
 
 " project-specific file navigation
 Plug 'tpope/vim-projectionist', {'commit': 'd4aee3035699b82b3789cee0e88dad0e38c423ab'}
