@@ -89,14 +89,9 @@ nmap <leader>uu :UndotreeToggle<CR>
 
 " window management
 Plug 'simeji/winresizer' 
-let g:winresizer_start_key='<leader>ww'
-" alternative bindings for use inside web terminals
-nmap <leader>wh <C-w><C-h>
-nmap <leader>wl <C-w><C-l>
-nmap <leader>wj <C-w><C-j>
-nmap <leader>wk <C-w><C-k>
-nmap <leader>ws <C-w><C-s>
-nmap <leader>wv <C-w><C-v>
+let g:winresizer_start_key='<leader>w<CR>'
+" alternative binding for <C-w> window manipulation bindings
+nmap <silent><nowait> <leader>w <C-w>
 
 " project-specific file navigation
 Plug 'tpope/vim-projectionist', {'commit': 'd4aee3035699b82b3789cee0e88dad0e38c423ab'}
