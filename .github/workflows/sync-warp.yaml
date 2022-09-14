@@ -53,7 +53,7 @@ jobs:
             // avoid creating a duplicate pull request if one already exists
             const {data: prs} = await github.rest.pulls.list(Object.assign({},
               repoSpec, {
-              head: "${{ env.BRANCH }}"
+              base: "${{ env.BRANCH }}"
             }));
             if(prs.length > 0) return;
 
