@@ -75,7 +75,7 @@ source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Tooling
 # z jump Tool
-source ~/.local/share/zsh/zsh-z.plugin.zsh
+source /usr/local/share/zsh/site-functions/zsh-z.plugin.zsh
 
 # sdkman: jvm sdk manager
 export SDKMAN_DIR="/usr/local/lib/sdkman"
