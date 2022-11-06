@@ -29,7 +29,7 @@ jobs:
           set -ex -o pipefail
 
           # update hash in devbox playbook to use latest dotfiles
-          DEFAULT_VARS=box/ansible/roles/devbox/defaults/main.yaml
+          DEFAULT_VARS=box/ansible/roles/dotfiles/defaults/main.yaml
           git switch -c ${BRANCH}
           sed -i -e '/devbox_dotfiles_rev:/s/[^ ]\+$/${{ github.sha }}/' ${DEFAULT_VARS}
 
