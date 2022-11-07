@@ -27,6 +27,8 @@ Plug 'neoclide/coc.nvim', {
 \ 'commit': '16e74f9b31d20b8dfc8933132beed4c175d824ea',
 \ 'do': function('Install_coc_extensions')
 \}
+" prevent cursor from disappearing after using :CocList
+let g:coc_disable_transparent_cursor=1
 
 " coc: code snippets
 " snippet library
