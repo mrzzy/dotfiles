@@ -5,28 +5,20 @@
 "
 
 " coc: completion engine
-function! Install_coc_extensions(info) abort
-  " install or update coc extensions
-  if a:info.status == "installed" || a:info.force
-    CocInstall -sync coc-json@1.4.1
-    CocInstall -sync coc-yaml@1.7.5
-    CocInstall -sync coc-pyright@1.1.232 " python
-    CocInstall -sync coc-html@1.6.1
-    CocInstall -sync coc-css@1.3.0
-    CocInstall -sync coc-snippets@3.0.10
-    CocInstall -sync coc-tsserver@1.10.5 " JS/Typescript
-    " TODO(mrzzy): coc-metals is deprecated in favor of nvim-metals
-    CocInstall -sync coc-metals@1.0.14 " Scala
-    CocInstall -sync coc-clangd@0.23.0 " C/C++
-  elseif a:info.status == "updated"
-    CocUpdateSync
-  endif
+function! Install_coc_extensions() abort
+  CocInstall -sync coc-json@1.4.1
+  CocInstall -sync coc-yaml@1.7.5
+  CocInstall -sync coc-pyright@1.1.232 " python
+  CocInstall -sync coc-html@1.6.1
+  CocInstall -sync coc-css@1.3.0
+  CocInstall -sync coc-snippets@3.0.10
+  CocInstall -sync coc-tsserver@1.10.5 " JS/Typescript
+  " TODO(mrzzy): coc-metals is deprecated in favor of nvim-metals
+  CocInstall -sync coc-metals@1.0.14 " Scala
+  CocInstall -sync coc-clangd@0.23.0 " C/C++
 endfunction
 
-Plug 'neoclide/coc.nvim', {
-\ 'commit': '16e74f9b31d20b8dfc8933132beed4c175d824ea',
-\ 'do': function('Install_coc_extensions')
-\}
+Plug 'neoclide/coc.nvim', {'commit': '16e74f9b31d20b8dfc8933132beed4c175d824ea'}
 " prevent cursor from disappearing after using :CocList
 let g:coc_disable_transparent_cursor=1
 
