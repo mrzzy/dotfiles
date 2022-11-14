@@ -34,6 +34,10 @@ set colorcolumn=80
 set ignorecase
 set smartcase
 
+" project specific nvim config via .nvimrc/.exrc
+set exrc
+set secure
+
 " Plugins
 call plug#begin()
 " Plugins: Editor
