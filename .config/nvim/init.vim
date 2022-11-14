@@ -78,6 +78,9 @@ source ~/.config/nvim/completion.vim
 
 " code tagging
 Plug 'ludovicchabant/vim-gutentags', {'commit': 'b77b8fabcb0b052c32fe17efcc0d44f020975244'}
+" disable gutentags by default, unless toggled on explictly 
+let g:gutentags_enabled=0
+let g:gutentags_define_advanced_commands=1
 
 " git integration
 Plug 'tpope/vim-fugitive', {'tag': 'v3.6'}
