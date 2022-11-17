@@ -95,6 +95,15 @@ packer.startup(function(use)
       -- disable gutentags by default, unless toggled on explictly 
       vim.g.gutentags_enabled = false
       vim.g.gutentags_define_advanced_commands = false
+      -- disable gutentags as it does not play well with git commits
+      -- TODO(mrzzy): port to nvim lua API introduces v0.7
+      vim.cmd [[
+      augroup gutentags
+        " delete any existing autocmds to prevent autocmd spam
+        autocmd!
+        autocmd FileType gitcommit,gitrebase let g:gutentags_enabled=0
+      augroup end
+      ]]
     end
   }
   -- git integration
@@ -127,15 +136,4 @@ packer.startup(function(use)
       vim.cmd[[colorscheme gruvbox-material]]
     end
   }
-end)  -- default to no mapping optionks
-
--- Autocommands
--- TODO(mrzzy): port to nvim lua API introduces v0.7
-vim.cmd [[
-augroup init_vim
-  " delete any existing autocmds to prevent autocmd spam
-  autocmd!
-
-  autocmd FileType gitcommit,gitrebase let g:gutentags_enabled=0
-augroup end
-]]
+end)  -- default to no mapping options
