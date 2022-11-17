@@ -37,13 +37,20 @@ function map(modes, lhs, rhs, opts)
 end
 -- keyboard bindings default leader key
 vim.g.mapleader = ","
+-- toggle vetween light & dark colorschemes
+for key, background in pairs({
+  ["<leader>hl"]="light",
+  ["<leader>hd"]="dark",
+}) do
+  map({"n"}, key, string.format(":set background=%s<CR>", background))
+end
 
 -- Plugins
 -- load & install plugins with packer plugin manager if its installed
 local has_packer, packer = pcall(require, "packer")
 packer.startup(function(use)
-  -- self manage packer
-  use 'wbthomason/packer.nvim'
+  -- self manage packer.nvim
+  use {"wbthomason/packer.nvim"}
   -- text editing
   use {"tpope/vim-repeat", commit="24afe922e6a05891756ecf331f39a1f6743d3d5a"}
   use {"tpope/vim-surround", commit="9857a874632d1b983a7f4b1c85e3d15990c8b101"}
@@ -80,4 +87,55 @@ packer.startup(function(use)
   }
   -- syntax highlighting
   use {"sheerun/vim-polyglot"}
-end)  -- default to no mapping options
+  -- tag file manager
+  use {
+    "ludovicchabant/vim-gutentags",
+    commit="b77b8fabcb0b052c32fe17efcc0d44f020975244",
+    config=function()
+      -- disable gutentags by default, unless toggled on explictly 
+      vim.g.gutentags_enabled = false
+      vim.g.gutentags_define_advanced_commands = false
+    end
+  }
+  -- git integration
+  use {
+    "tpope/vim-fugitive",
+    tag="v3.6",
+    config=function() map({"n"}, "<leader>vv", ":Git<CR>") end,
+  }
+  -- undo history
+  use {
+     "mbbill/undotree",
+    tag="rel_6.1",
+    config=function() map({"n"}, "<leader>uu", ":UndotreeToggle<CR>") end,
+  }
+  -- window management
+  use {
+    "simeji/winresizer",
+    config=function() 
+      vim.g.winresizer_start_key = "<leader>w<CR>"
+    end,
+  }
+  -- project specific file navigation
+  use {"tpope/vim-projectionist", commit="d4aee3035699b82b3789cee0e88dad0e38c423ab"}
+  -- colorscheme
+  use {
+    "sainnhe/gruvbox-material",
+    tag="v1.2.3",
+    config=function()
+      vim.g.gruvbox_material_background = "medium"
+      vim.cmd[[colorscheme gruvbox-material]]
+    end
+  }
+end)  -- default to no mapping optionks
+
+-- Autocommands
+-- TODO(mrzzy): port to nvim lua API introduces v0.7
+vim.cmd [[
+augroup init_vim
+  " delete any existing autocmds to prevent autocmd spam
+  autocmd!
+
+  autocmd FileType gitcommit,gitrebase let g:gutentags_enabled=0
+augroup end
+]]
