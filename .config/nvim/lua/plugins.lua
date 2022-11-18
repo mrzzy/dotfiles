@@ -4,8 +4,6 @@
 -- Plugins
 --
 
-k = require("keymap")
-
 -- load & install plugins with packer plugin manager if its installed
 local has_packer, packer = pcall(require, "packer")
 if has_packer then
@@ -26,7 +24,7 @@ if has_packer then
       "junegunn/vim-easy-align",
       commit="12dd6316974f71ce333e360c0260b4e1f81169c3",
       config=function()
-        k.map({"n", "x"}, "<leader>=", "<Plug>(EasyAlign)")
+        vim.keymap.set({"n", "x"}, "<leader>=", "<Plug>(EasyAlign)")
       end,
     }
     -- code jumping & project wide grep
@@ -37,13 +35,14 @@ if has_packer then
         {"junegunn/fzf", tag="0.29.0"}
       },
       config=function()
-        k.map({"n"}, "<M-p>", ":Files<CR>")
-        k.map({"n"}, "<C-p>", ":GFiles<CR>")
-        k.map({"n"}, "<C-t>", ":Tags<CR>")
-        k.map({"n"}, "<M-t>", ":Tags<CR>")
-        k.map({"n"}, "<C-Space>", ":Buffers<CR>")
-        k.map({"n"}, "<C-_>", ":Rg<CR>")
-        k.map({"n"}, "<M-/>", ":Rg<CR>")
+        local map = vim.keymap.set
+        map({"n"}, "<M-p>", ":Files<CR>")
+        map({"n"}, "<C-p>", ":GFiles<CR>")
+        map({"n"}, "<C-t>", ":Tags<CR>")
+        map({"n"}, "<M-t>", ":Tags<CR>")
+        map({"n"}, "<C-Space>", ":Buffers<CR>")
+        map({"n"}, "<C-_>", ":Rg<CR>")
+        map({"n"}, "<M-/>", ":Rg<CR>")
       end,
     }
     -- syntax highlighting
@@ -71,13 +70,13 @@ if has_packer then
     use {
       "tpope/vim-fugitive",
       tag="v3.6",
-      config=function() k.map({"n"}, "<leader>vv", ":Git<CR>") end,
+      config=function() vim.keymap.set({"n"}, "<leader>vv", ":Git<CR>") end,
     }
     -- undo history
     use {
        "mbbill/undotree",
       tag="rel_6.1",
-      config=function() k.map({"n"}, "<leader>uu", ":UndotreeToggle<CR>") end,
+      config=function() vim.keymap.set({"n"}, "<leader>uu", ":UndotreeToggle<CR>") end,
     }
     -- window management
     use {
@@ -99,8 +98,6 @@ if has_packer then
     }
 
     -- Autocomplete
-    use {
-      "neovim/nvim-lspconfig", tag="v0.1.3",
-    }
-  end)  -- default to no mapping option
+    use {"neovim/nvim-lspconfig", tag="v0.1.3" }
+  end)
 end

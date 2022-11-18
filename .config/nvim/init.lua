@@ -3,7 +3,7 @@
 -- nvim config
 --
 
-k = require("keymap")
+
 require("plugins")
 
 -- Editor
@@ -38,6 +38,5 @@ for key, background in pairs({
   ["<leader>hl"]="light",
   ["<leader>hd"]="dark",
 }) do
-  k.map({"n"}, key, string.format(":set background=%s<CR>", background))
+  vim.keymap.set({"n"}, key, string.format(":set background=%s<CR>", background))
 end
-
