@@ -118,7 +118,8 @@ if has_packer then
         "cmp-path",
         "cmp-cmdline",
         "cmp_luasnip",
-      }
+      },
+      config=require("autocomplete").setup,
     }
   end)
 end
