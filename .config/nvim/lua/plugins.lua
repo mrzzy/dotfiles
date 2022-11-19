@@ -94,10 +94,31 @@ if has_packer then
       config=function()
         vim.g.gruvbox_material_background = "medium"
         vim.cmd[[colorscheme gruvbox-material]]
-      end
+      end,
     }
 
-    -- Autocomplete
-    use {"neovim/nvim-lspconfig", tag="v0.1.3" }
+    -- autocomplete & snippets
+    use {"neovim/nvim-lspconfig", tag="v0.1.3"}
+    use {"hrsh7th/cmp-nvim-lsp", commit="59224771f91b86d1de12570b4070fe4ad7cd1eeb"}
+    use {"hrsh7th/cmp-buffer", commit="3022dbc9166796b644a841a02de8dd1cc1d311fa"}
+    use {"hrsh7th/cmp-path", commit="91ff86cd9c29299a64f968ebb45846c485725f23"}
+    use {"hrsh7th/cmp-cmdline", commit="8bc9c4a34b223888b7ffbe45c4fe39a7bee5b74d"}
+    use {
+      "saadparwaiz1/cmp_luasnip",
+      commit="18095520391186d634a0045dacaa346291096566",
+      requires={{"L3MON4D3/LuaSnip", tag="v1.1.0"}},
+    }
+    use {
+      "hrsh7th/nvim-cmp", 
+      commit="8a9e8a89eec87f86b6245d77f313a040a94081c1",
+      after={
+        "nvim-lspconfig",
+        "cmp-nvim-lsp",
+        "cmp-buffer",
+        "cmp-path",
+        "cmp-cmdline",
+        "cmp_luasnip",
+      }
+    }
   end)
 end
