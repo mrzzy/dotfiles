@@ -17,11 +17,9 @@ function M.lookback()
     return nil
   end
 
-  -- subtract 1 from line as nvim_buf_get_text() is 0-indexed
-  local line = line - 1
-  local back_col = col - 1
   -- lookback at character at previous column
-  return vim.api.nvim_buf_get_text(buffer, line, col - 1, line, col, {})[1]
+  -- subtract 1 from line as nvim_buf_get_text() is 0-indexed
+  return vim.api.nvim_buf_get_text(buffer, line - 1, col - 1, line - 1, col, {})[1]
 end
 
 -- Setup language servers
@@ -33,36 +31,38 @@ function M.setup_lsp()
 
   -- download language servers
   require('mason').setup()
-  require('mason-lspconfig').setup({ensure_installed = lang_servers})
+  require('mason-lspconfig').setup({ ensure_installed = lang_servers })
 
   -- add additional LSP capabilities supported by nvim-cmp
   lsp.util.default_config = vim.tbl_extend(
-    "force", lsp.util.default_config, {
-      capabilities = require('cmp_nvim_lsp').default_capabilities(),
-    }
+    "force",
+    lsp.util.default_config, {
+    capabilities = require('cmp_nvim_lsp').default_capabilities(),
+  }
   )
   -- configure language servers
+  require("neodev").setup {}
   for _, server in ipairs(lang_servers) do
-    lsp[server].setup{}
+    lsp[server].setup {}
   end
-end 
+end
 
 -- Setup the autocomplete engine based on nvim-cmp & neovim's LSP client
 function M.setup_cmp()
   local cmp = require("cmp")
   local luasnip = require("luasnip")
-  
+
   cmp.setup({
     -- each list of sources forms a source group. When one group fails
     -- to produce completions, nvim-cmp falls back to the next source group.
     sources = cmp.config.sources(
-      {{name="nvim_lsp_signature_help"}},{
-        {name="nvim_lsp"},
-        {name="luasnip"},
+      { { name = "nvim_lsp_signature_help" } }, {
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
       }, {
-        {name="buffer"},
-        {name="path"},
-      }
+      { name = "buffer" },
+      { name = "path" },
+    }
     ),
     -- snippet expansion
     snippet = {
@@ -70,7 +70,7 @@ function M.setup_cmp()
     },
     -- key mappings
     mapping = cmp.mapping.preset.insert({
-      ["<Tab>"]=function(fallback)
+      ["<Tab>"] = function(fallback)
         if cmp.visible() then
           -- select next item if completion menu is visible
           cmp.select_next_item()
@@ -85,7 +85,7 @@ function M.setup_cmp()
           cmp.complete()
         end
       end,
-      ["<S-Tab>"]=function(fallback)
+      ["<S-Tab>"] = function(fallback)
         if cmp.visible() then
           -- select previous item if completion menu is visible
           cmp.select_prev_item()
@@ -103,11 +103,12 @@ function M.setup_cmp()
   cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-      {name="cmdline"},
-      {name="path"},
+      { name = "cmdline" },
+      { name = "path" },
     }, {
-      {name="buffer"},
+      { name = "buffer" },
     })
   })
 end
+
 return M

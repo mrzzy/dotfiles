@@ -3,7 +3,6 @@
 -- nvim config
 --
 
-
 require("plugins")
 
 -- Editor
@@ -38,13 +37,13 @@ local map = vim.keymap.set
 vim.g.mapleader = ","
 -- toggle vetween light & dark colorschemes
 for key, background in pairs({
-  ["<leader>hl"]="light",
-  ["<leader>hd"]="dark",
+  ["<leader>hl"] = "light",
+  ["<leader>hd"] = "dark",
 }) do
-  map({"n"}, key, string.format(":set background=%s<CR>", background))
+  map({ "n" }, key, string.format(":set background=%s<CR>", background), {})
 end
 --- alternative binding for the <C-w> prefix used in window manipulation keys
-map({"n"}, "<leader>w", "<C-w>", {silent=true, nowait=true})
+map({ "n" }, "<leader>w", "<C-w>", { silent = true, nowait = true })
 -- LSP key bindings
 for key, lsp_fn in pairs({
   -- documentation
@@ -56,8 +55,8 @@ for key, lsp_fn in pairs({
   ["gi"] = vim.lsp.buf.implementation,
   ["gr"] = vim.lsp.buf.references
 }) do
-  map({"n"}, key, lsp_fn, {silent=true, noremap=true})
-end 
+  map({ "n" }, key, lsp_fn, { silent = true, noremap = true })
+end
 for key, lsp_fn in pairs({
   -- workspace folders
   ["<leader>wa"] = vim.lsp.buf.add_workspace_folder,
@@ -70,9 +69,10 @@ for key, lsp_fn in pairs({
   ["<leader>cw"] = vim.lsp.buf.rename,
   ["<leader>cf"] = vim.lsp.buf.formatting,
 }) do
-  map({"n"}, key, lsp_fn, {noremap=true})
+  map({ "n" }, key, lsp_fn, { noremap = true })
 end
 -- diagnostics key bindings
-map({"n"}, "[e", vim.diagnostic.goto_prev, {silent=true, noremap=true})
-map({"n"}, "]e", vim.diagnostic.goto_next, {silent=true, noremap=true})
-map({"n"}, "<leader>ee", vim.diagnostic.open_float)
+map({ "n" }, "[e", vim.diagnostic.goto_prev, { silent = true, noremap = true })
+map({ "n" }, "]e", vim.diagnostic.goto_next, { silent = true, noremap = true })
+map({ "n" }, "<leader>E", vim.diagnostic.open_float, {})
+map({ "n" }, "<C-e>", vim.diagnostic.setloclist, {})
