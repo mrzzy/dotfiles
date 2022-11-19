@@ -29,7 +29,10 @@ vim.o.exrc = true
 vim.o.secure = true
 -- use ripgrep as project wide search tool
 vim.o.grepprg = [[rg --vimgrep --no-heading --smart-case]]
- 
+-- insert & command line auto completion options
+vim.o.completeopt = "menu,menuone,longest"
+vim.o.wildmode = "longest:full,full"
+
 -- Keyboard Bindings
 -- keyboard bindings default leader key
 vim.g.mapleader = ","
