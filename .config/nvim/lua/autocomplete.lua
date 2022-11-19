@@ -24,15 +24,40 @@ function M.lookback()
   return vim.api.nvim_buf_get_text(buffer, line, col - 1, line, col, {})[1]
 end
 
+-- Setup language servers
+function M.setup_lsp()
+  local lsp = require("lspconfig")
+  local lang_servers = {
+    "sumneko_lua",
+  }
+
+  -- download language servers
+  require('mason').setup()
+  require('mason-lspconfig').setup({ensure_installed = lang_servers})
+
+  -- add additional LSP capabilities supported by nvim-cmp
+  lsp.util.default_config = vim.tbl_extend(
+    "force", lsp.util.default_config, {
+      capabilities = require('cmp_nvim_lsp').default_capabilities(),
+    }
+  )
+  -- configure language servers
+  for _, server in ipairs(lang_servers) do
+    lsp[server].setup{}
+  end
+end 
+
 -- Setup the autocomplete engine based on nvim-cmp & neovim's LSP client
-function M.setup()
+function M.setup_cmp()
   local cmp = require("cmp")
   local luasnip = require("luasnip")
+  
   cmp.setup({
     -- each list of sources forms a source group. When one group fails
     -- to produce completions, nvim-cmp falls back to the next source group.
-    sources = cmp.config.sources({
-        {name="nvim-lsp"},
+    sources = cmp.config.sources(
+      {{name="nvim_lsp_signature_help"}},{
+        {name="nvim_lsp"},
         {name="luasnip"},
       }, {
         {name="buffer"},
@@ -85,5 +110,4 @@ function M.setup()
     })
   })
 end
-
 return M

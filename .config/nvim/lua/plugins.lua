@@ -4,6 +4,8 @@
 -- Plugins
 --
 
+local autocomplete = require("autocomplete")
+
 -- load & install plugins with packer plugin manager if its installed
 local has_packer, packer = pcall(require, "packer")
 if has_packer then
@@ -97,29 +99,47 @@ if has_packer then
       end,
     }
 
-    -- autocomplete & snippets
-    use {"neovim/nvim-lspconfig", tag="v0.1.3"}
-    use {"hrsh7th/cmp-nvim-lsp", commit="59224771f91b86d1de12570b4070fe4ad7cd1eeb"}
-    use {"hrsh7th/cmp-buffer", commit="3022dbc9166796b644a841a02de8dd1cc1d311fa"}
-    use {"hrsh7th/cmp-path", commit="91ff86cd9c29299a64f968ebb45846c485725f23"}
-    use {"hrsh7th/cmp-cmdline", commit="8bc9c4a34b223888b7ffbe45c4fe39a7bee5b74d"}
+    -- language servers
     use {
-      "saadparwaiz1/cmp_luasnip",
-      commit="18095520391186d634a0045dacaa346291096566",
-      requires={{"L3MON4D3/LuaSnip", tag="v1.1.0"}},
+      "williamboman/mason-lspconfig.nvim", 
+      requires={
+        {"hrsh7th/cmp-nvim-lsp", commit="59224771f91b86d1de12570b4070fe4ad7cd1eeb"},
+        {"neovim/nvim-lspconfig", tag="v0.1.3"},
+        {"williamboman/mason.nvim"}
+      },
+      after={
+        "nvim-lspconfig",
+        "cmp-nvim-lsp",
+        "mason.nvim",
+      },
+      config=autocomplete.setup_lsp,
     }
+
+    -- autocomplete & snippets
     use {
       "hrsh7th/nvim-cmp", 
       commit="8a9e8a89eec87f86b6245d77f313a040a94081c1",
+      requires={
+        {"hrsh7th/cmp-path", commit="91ff86cd9c29299a64f968ebb45846c485725f23"},
+        {"hrsh7th/cmp-cmdline", commit="8bc9c4a34b223888b7ffbe45c4fe39a7bee5b74d"},
+        {"hrsh7th/cmp-buffer", commit="3022dbc9166796b644a841a02de8dd1cc1d311fa"},
+        {"hrsh7th/cmp-nvim-lsp-signature-help", commit="d2768cb1b83de649d57d967085fe73c5e01f8fd7"},
+        {
+          "saadparwaiz1/cmp_luasnip",
+          commit="18095520391186d634a0045dacaa346291096566",
+          requires={{"L3MON4D3/LuaSnip", tag="v1.1.0"}},
+        }
+      },
       after={
-        "nvim-lspconfig",
+        "mason-lspconfig.nvim",
         "cmp-nvim-lsp",
         "cmp-buffer",
         "cmp-path",
         "cmp-cmdline",
         "cmp_luasnip",
+        "cmp-nvim-lsp-signature-help",
       },
-      config=require("autocomplete").setup,
+      config=autocomplete.setup_cmp,
     }
   end)
 end
