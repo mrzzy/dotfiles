@@ -74,6 +74,16 @@ function M.setup()
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
     }),
   })
+  -- autocomplete at the vim command line
+  cmp.setup.cmdline(":", {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      {name="cmdline"},
+      {name="path"},
+    }, {
+      {name="buffer"},
+    })
+  })
 end
 
 return M
