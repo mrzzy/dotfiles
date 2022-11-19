@@ -105,8 +105,7 @@ if has_packer then
       tag = "v0.1.3",
       requires = {
         { "hrsh7th/cmp-nvim-lsp", commit = "59224771f91b86d1de12570b4070fe4ad7cd1eeb" },
-        { "williamboman/mason.nvim" },
-        { "williamboman/mason-lspconfig.nvim" },
+        { "williamboman/mason-lspconfig.nvim", requires = { { "williamboman/mason.nvim" } }, },
         { "folke/neodev.nvim", commit = "071c8895bbff0e4d1d3d4c531adfe20e3a2a6e82" },
       },
       after = {
@@ -130,7 +129,10 @@ if has_packer then
         {
           "saadparwaiz1/cmp_luasnip",
           commit = "18095520391186d634a0045dacaa346291096566",
-          requires = { { "L3MON4D3/LuaSnip", tag = "v1.1.0" } },
+          requires = {
+            { "L3MON4D3/LuaSnip", tag = "v1.1.0" },
+            { "honza/vim-snippets"},
+          },
         }
       },
       after = {

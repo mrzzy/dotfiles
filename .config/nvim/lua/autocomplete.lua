@@ -52,6 +52,13 @@ function M.setup_cmp()
   local cmp = require("cmp")
   local luasnip = require("luasnip")
 
+  -- load snapmate snippets from plugins (eg. vim-snippets) into luasnip's catalogue
+  -- assumes snippets are stored the 'snippets' sub directory in the runtime path
+  -- pass paths explicitly to workaround bug with LuaSnip's path expansion:
+  -- https://github.com/L3MON4D3/LuaSnip/pull/666
+  paths = table.concat(vim.api.nvim_get_runtime_file("snippets"), ",")
+  require("luasnip.loaders.from_snipmate").lazy_load({paths=paths})
+
   cmp.setup({
     -- each list of sources forms a source group. When one group fails
     -- to produce completions, nvim-cmp falls back to the next source group.
