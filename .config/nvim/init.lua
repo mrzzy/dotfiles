@@ -33,6 +33,7 @@ vim.o.grepprg = [[rg --vimgrep --no-heading --smart-case]]
 vim.o.completeopt = "menu,menuone,noselect"
 
 -- Keyboard Bindings
+local map = vim.keymap.set
 -- keyboard bindings default leader key
 vim.g.mapleader = ","
 -- toggle vetween light & dark colorschemes
@@ -40,5 +41,7 @@ for key, background in pairs({
   ["<leader>hl"]="light",
   ["<leader>hd"]="dark",
 }) do
-  vim.keymap.set({"n"}, key, string.format(":set background=%s<CR>", background))
+  map({"n"}, key, string.format(":set background=%s<CR>", background))
 end
+--- alternative binding for the <C-w> prefix used in window manipulation keys
+map({"n"}, "<leader>w", "<C-w>", {silent=true, nowait=true})
