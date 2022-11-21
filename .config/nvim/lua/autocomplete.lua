@@ -56,7 +56,7 @@ function M.setup_cmp()
   -- assumes snippets are stored the 'snippets' sub directory in the runtime path
   -- pass paths explicitly to workaround bug with LuaSnip's path expansion:
   -- https://github.com/L3MON4D3/LuaSnip/pull/666
-  paths = table.concat(vim.api.nvim_get_runtime_file("snippets"), ",")
+  local paths = table.concat(vim.api.nvim_get_runtime_file("snippets", true), ",")
   require("luasnip.loaders.from_snipmate").lazy_load({paths=paths})
 
   cmp.setup({
