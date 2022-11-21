@@ -27,6 +27,7 @@ function M.setup_lsp()
   local lsp = require("lspconfig")
   local lang_servers = {
     "sumneko_lua",
+    "terraformls",
   }
 
   -- download language servers
