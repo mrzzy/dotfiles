@@ -12,7 +12,7 @@ function M.lookback()
   local line, col = unpack(vim.api.nvim_win_get_cursor(buffer))
 
   -- lookback not possible if we are currently on the first character
-  if col == 0 then
+  if col <= 0 then
     return nil
   end
 
