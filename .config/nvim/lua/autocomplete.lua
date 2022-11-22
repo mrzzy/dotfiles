@@ -25,6 +25,7 @@ end
 M.language_servers = {
   "sumneko_lua",
   "terraformls",
+  "pyright",
 }
 
 -- Install language servers
