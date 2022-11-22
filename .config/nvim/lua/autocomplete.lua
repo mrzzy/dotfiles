@@ -90,7 +90,7 @@ function M.setup_cmp()
         elseif luasnip.expand_or_jumpable() then
           -- expand snippet or jump to next field
           luasnip.expand_or_jump()
-        elseif M.lookback():match("%s") then
+        elseif M.lookback() == nil or M.lookback():match("%s") then
           -- insert a tab if character preceeding is whitespace
           fallback()
         else
