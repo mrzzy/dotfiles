@@ -5,7 +5,6 @@
 --
 
 M = {}
-
 -- Lookback & return the character just prior to the position of the cursor
 function M.lookback()
   -- specify 0 for current buffer
@@ -18,21 +17,26 @@ function M.lookback()
   end
 
   -- lookback at character at previous column
-  -- subtract 1 from line as nvim_buf_get_text() is 0-indexed
+  -- subtract 1 from line as it is 0-indexed in nvim_buf_get_text()
   return vim.api.nvim_buf_get_text(buffer, line - 1, col - 1, line - 1, col, {})[1]
+end
+
+-- Language servers providing completion support
+M.language_servers = {
+  "sumneko_lua",
+  "terraformls",
+}
+
+-- Install language servers
+function M.install()
+  require('mason').setup()
+  require('mason-lspconfig').setup({ ensure_installed = M.language_servers })
 end
 
 -- Setup language servers
 function M.setup_lsp()
   local lsp = require("lspconfig")
-  local lang_servers = {
-    "sumneko_lua",
-    "terraformls",
-  }
-
-  -- download language servers
-  require('mason').setup()
-  require('mason-lspconfig').setup({ ensure_installed = lang_servers })
+  M.install()
 
   -- add additional LSP capabilities supported by nvim-cmp
   lsp.util.default_config = vim.tbl_extend(
@@ -43,7 +47,7 @@ function M.setup_lsp()
   )
   -- configure language servers
   require("neodev").setup {}
-  for _, server in ipairs(lang_servers) do
+  for _, server in ipairs(M.language_servers) do
     lsp[server].setup {}
   end
 end
@@ -58,7 +62,7 @@ function M.setup_cmp()
   -- pass paths explicitly to workaround bug with LuaSnip's path expansion:
   -- https://github.com/L3MON4D3/LuaSnip/pull/666
   local paths = table.concat(vim.api.nvim_get_runtime_file("snippets", true), ",")
-  require("luasnip.loaders.from_snipmate").lazy_load({paths=paths})
+  require("luasnip.loaders.from_snipmate").lazy_load({ paths = paths })
 
   cmp.setup({
     -- each list of sources forms a source group. When one group fails

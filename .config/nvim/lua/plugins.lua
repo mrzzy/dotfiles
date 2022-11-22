@@ -105,7 +105,11 @@ if has_packer then
       tag = "v0.1.3",
       requires = {
         { "hrsh7th/cmp-nvim-lsp", commit = "59224771f91b86d1de12570b4070fe4ad7cd1eeb" },
-        { "williamboman/mason-lspconfig.nvim", requires = { { "williamboman/mason.nvim" } }, },
+        {
+          "williamboman/mason-lspconfig.nvim",
+          requires = { { "williamboman/mason.nvim" } },
+          run = autocomplete.install
+        },
         { "folke/neodev.nvim", commit = "071c8895bbff0e4d1d3d4c531adfe20e3a2a6e82" },
       },
       after = {
