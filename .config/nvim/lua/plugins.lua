@@ -134,7 +134,7 @@ if has_packer then
           "saadparwaiz1/cmp_luasnip",
           commit = "18095520391186d634a0045dacaa346291096566",
           requires = {
-            { "L3MON4D3/LuaSnip", tag = "v1.1.0" },
+            { "L3MON4D3/LuaSnip", commit = "09ce9a70bd787d4ce188f2de1390f656f119347c" },
             { "honza/vim-snippets"},
           },
         }
