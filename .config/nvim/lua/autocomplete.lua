@@ -44,10 +44,8 @@ function M.setup_lsp()
     "force",
     lsp.util.default_config, {
     capabilities = require('cmp_nvim_lsp').default_capabilities(),
-  }
-  )
+  })
   -- configure language servers
-  require("neodev").setup {}
   for _, server in ipairs(M.language_servers) do
     lsp[server].setup {}
   end
@@ -57,9 +55,6 @@ end
 function M.setup_cmp()
   local cmp = require("cmp")
   local luasnip = require("luasnip")
-
-  -- load snapmate snippets from plugins (eg. vim-snippets) into luasnip's catalogue
-  require("luasnip.loaders.from_snipmate").lazy_load()
 
   cmp.setup({
     -- each list of sources forms a source group. When one group fails
