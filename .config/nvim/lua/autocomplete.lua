@@ -110,6 +110,8 @@ function M.setup_cmp()
         end
       end,
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      ['<M-u>'] = cmp.mapping.scroll_docs(-4),
+      ['<M-d>'] = cmp.mapping.scroll_docs(4),
     }),
   })
   -- autocomplete at the vim command line
