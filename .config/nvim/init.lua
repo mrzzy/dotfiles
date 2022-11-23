@@ -60,7 +60,7 @@ end
 for key, lsp_fn in pairs({
   -- workspace folders
   ["<leader>wa"] = vim.lsp.buf.add_workspace_folder,
-  ["<leader>wd"] = vim.lsp.buf.add_workspace_folder,
+  ["<leader>wd"] = vim.lsp.buf.remove_workspace_folder,
   ["<leader>ww"] = function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end,
