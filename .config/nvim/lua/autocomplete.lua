@@ -23,9 +23,10 @@ end
 
 -- Language servers providing completion support
 M.language_servers = {
-  "sumneko_lua",
-  "terraformls",
-  "pyright",
+  "sumneko_lua", -- lua
+  "terraformls", -- terraform
+  "dockerls", -- docker
+  "pyright", -- python
 }
 
 -- Install language servers
