@@ -57,15 +57,16 @@ if has_packer then
         -- disable gutentags by default, unless toggled on explictly
         vim.g.gutentags_enabled = false
         vim.g.gutentags_define_advanced_commands = false
-        -- disable gutentags as it does not play well with git commits
-        -- TODO(mrzzy): port to nvim lua API introduces v0.7
-        vim.cmd [[
-        augroup gutentags
-          " delete any existing autocmds to prevent autocmd spam
-          autocmd!
-          autocmd FileType gitcommit,gitrebase let g:gutentags_enabled=0
-        augroup end
-        ]]
+        -- disable gutentags for git commit as they do not does not play well together
+        -- clear any existing autocmds to prevent autocmd spam
+        local group_id = vim.api.nvim_create_augroup("gutentags", { clear = true })
+        vim.api.nvim_create_autocmd({ "FileType" }, {
+          group=group_id,
+          pattern = { "gitcommit", "gitrebase" },
+          callback = function(_)
+            vim.g.gutentags_enabled = false
+          end
+        })
       end
     }
     -- git integration
@@ -135,7 +136,7 @@ if has_packer then
           commit = "18095520391186d634a0045dacaa346291096566",
           requires = {
             { "L3MON4D3/LuaSnip", commit = "09ce9a70bd787d4ce188f2de1390f656f119347c" },
-            { "honza/vim-snippets"},
+            { "honza/vim-snippets" },
           },
         }
       },
