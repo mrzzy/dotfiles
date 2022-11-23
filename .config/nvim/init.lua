@@ -40,7 +40,7 @@ for key, background in pairs({
   ["<leader>hl"] = "light",
   ["<leader>hd"] = "dark",
 }) do
-  map({ "n" }, key, string.format(":set background=%s<CR>", background), {})
+  map({ "n" }, key, function() vim.o.background = background end, {})
 end
 --- alternative binding for the <C-w> prefix used in window manipulation keys
 map({ "n" }, "<leader>w", "<C-w>", { silent = true, nowait = true })
