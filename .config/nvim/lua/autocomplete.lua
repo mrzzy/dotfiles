@@ -26,6 +26,7 @@ M.language_servers = {
   "sumneko_lua", -- lua
   "terraformls", -- terraform
   "dockerls", -- docker
+  "bashls", -- bash
   "pyright", -- python
 }
 
