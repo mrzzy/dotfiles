@@ -74,5 +74,5 @@ end
 -- diagnostics key bindings
 map({ "n" }, "[e", vim.diagnostic.goto_prev, { silent = true, noremap = true })
 map({ "n" }, "]e", vim.diagnostic.goto_next, { silent = true, noremap = true })
-map({ "n" }, "<leader>E", vim.diagnostic.open_float, {})
+map({ "n" }, "<leader>ee", vim.diagnostic.open_float, {})
 map({ "n" }, "<C-e>", vim.diagnostic.setloclist, {})
