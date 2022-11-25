@@ -110,16 +110,16 @@ if has_packer then
           requires = { { "williamboman/mason.nvim" } },
           config = autocomplete.install,
         },
+        {
+          "folke/neodev.nvim",
+          commit = "071c8895bbff0e4d1d3d4c531adfe20e3a2a6e82",
+          config = function(_) require("neodev").setup {} end,
+        }
       },
       config = autocomplete.setup_lsp,
     }
 
     -- autocomplete & snippets
-    use {
-      "folke/neodev.nvim",
-      commit = "071c8895bbff0e4d1d3d4c531adfe20e3a2a6e82",
-      config = function(_) require("neodev").setup {} end,
-    }
     use {
       "hrsh7th/nvim-cmp",
       commit = "8a9e8a89eec87f86b6245d77f313a040a94081c1",
