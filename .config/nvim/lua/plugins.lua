@@ -65,7 +65,7 @@ if has_packer then
           pattern = { "gitcommit", "gitrebase" },
           callback = function(_)
             vim.g.gutentags_enabled = false
-          end
+          end,
         })
       end
     }
@@ -108,7 +108,11 @@ if has_packer then
         {
           "williamboman/mason-lspconfig.nvim",
           requires = { { "williamboman/mason.nvim" } },
-          config = autocomplete.install,
+          run = autocomplete.install,
+          config = function(_)
+            require('mason').setup()
+            require('mason-lspconfig').setup()
+          end
         },
         {
           "folke/neodev.nvim",

@@ -3,7 +3,7 @@
 -- Neovim config
 -- Autocomplete
 --
-
+-- TODO(mrzzy): this should not be global
 M = {}
 -- Lookback & return the character just prior to the position of the cursor
 function M.lookback()
@@ -32,14 +32,20 @@ M.language_servers = {
 
 -- Install language servers
 function M.install()
-  require('mason').setup()
-  require('mason-lspconfig').setup({ ensure_installed = M.language_servers })
+  -- convert lsp server name ot mason naming scheme
+  local mason_servers = {}
+  local mason_map = require("mason-lspconfig.mappings.server").lspconfig_to_package
+  for _, server in ipairs(M.language_servers) do
+     table.insert(mason_servers, mason_map[server])
+  end
+
+  -- install language servers with mason
+  require("mason.api.command").MasonInstall(mason_servers)
 end
 
 -- Setup language servers
 function M.setup_lsp()
   local lsp = require("lspconfig")
-  M.install()
 
   -- add additional LSP capabilities supported by nvim-cmp
   lsp.util.default_config = vim.tbl_extend(
