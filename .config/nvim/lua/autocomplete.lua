@@ -28,6 +28,7 @@ M.language_servers = {
   "dockerls", -- docker
   "bashls", -- bash
   "pyright", -- python
+  "gopls", -- golang
 }
 
 -- Install language servers
