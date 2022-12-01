@@ -120,7 +120,7 @@ if has_packer then
           config = function(_) require("neodev").setup {} end,
         }
       },
-      config = autocomplete.setup_lsp,
+      config = require("autocomplete").setup_lsp,
     }
 
     -- autocomplete & snippets

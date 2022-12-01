@@ -3,8 +3,8 @@
 -- Neovim config
 -- Autocomplete
 --
--- TODO(mrzzy): this should not be global
-M = {}
+
+local M = {}
 -- Lookback & return the character just prior to the position of the cursor
 function M.lookback()
   -- specify 0 for current buffer
@@ -35,7 +35,7 @@ function M.install()
   -- convert lsp server name ot mason naming scheme
   local mason_servers = {}
   local mason_map = require("mason-lspconfig.mappings.server").lspconfig_to_package
-  for _, server in ipairs(M.language_servers) do
+  for _, server in ipairs(require("autocomplete").language_servers) do
      table.insert(mason_servers, mason_map[server])
   end
 
@@ -54,7 +54,7 @@ function M.setup_lsp()
     capabilities = require('cmp_nvim_lsp').default_capabilities(),
   })
   -- configure language servers
-  for _, server in ipairs(M.language_servers) do
+  for _, server in ipairs(require("autocomplete").language_servers) do
     lsp[server].setup {}
   end
 end
@@ -83,6 +83,7 @@ function M.setup_cmp()
     -- key mappings
     mapping = cmp.mapping.preset.insert({
       ["<Tab>"] = function(fallback)
+        local M = require("autocomplete")
         if cmp.visible() then
           -- select next item if completion menu is visible
           cmp.select_next_item()
