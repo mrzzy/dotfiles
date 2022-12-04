@@ -30,6 +30,7 @@ M.language_servers = {
   "pyright", -- python
   "gopls", -- golang
   "yamlls", -- yaml
+  "ansiblels", -- ansiblels
 }
 
 -- Install language servers
