@@ -93,14 +93,12 @@ function M.setup_cmp()
     },
     -- key mappings
     mapping = cmp.mapping.preset.insert({
+      -- autocomplete bindings
       ["<Tab>"] = function(fallback)
         local M = require("autocomplete")
         if cmp.visible() then
           -- select next item if completion menu is visible
           cmp.select_next_item()
-        elseif luasnip.expand_or_jumpable() then
-          -- expand snippet or jump to next field
-          luasnip.expand_or_jump()
         elseif M.lookback() == nil or M.lookback():match("%s") then
           -- insert a tab if character preceeding is whitespace
           fallback()
@@ -113,9 +111,6 @@ function M.setup_cmp()
         if cmp.visible() then
           -- select previous item if completion menu is visible
           cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) then
-          -- jump to previous field in snippet
-          luasnip.jump(-1)
         else
           fallback()
         end
@@ -123,6 +118,10 @@ function M.setup_cmp()
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
       ['<M-u>'] = cmp.mapping.scroll_docs(-4),
       ['<M-d>'] = cmp.mapping.scroll_docs(4),
+      -- snippet bindings
+      ['<M-x>'] = cmp.mapping(function() luasnip.expand_or_jump() end, { "i", "s" }),
+      ['<M-k>'] = cmp.mapping(function() luasnip.jump(-1) end, { "i", "s" }),
+      ['<M-j>'] = cmp.mapping(function() luasnip.jump(1) end, { "i", "s" }),
     }),
   })
   -- autocomplete at the vim command line
