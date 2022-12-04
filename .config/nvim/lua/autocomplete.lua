@@ -30,7 +30,8 @@ M.language_servers = {
   "pyright", -- python
   "gopls", -- golang
   "yamlls", -- yaml
-  "ansiblels", -- ansiblels
+  "ansiblels", -- ansible
+  "rust_analyzer", -- rust
 }
 
 -- Install language servers
