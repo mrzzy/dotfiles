@@ -29,6 +29,7 @@ M.language_servers = {
   "bashls", -- bash
   "pyright", -- python
   "gopls", -- golang
+  "yamlls", -- yaml
 }
 
 -- Install language servers
@@ -37,7 +38,7 @@ function M.install()
   local mason_servers = {}
   local mason_map = require("mason-lspconfig.mappings.server").lspconfig_to_package
   for _, server in ipairs(require("autocomplete").language_servers) do
-     table.insert(mason_servers, mason_map[server])
+    table.insert(mason_servers, mason_map[server])
   end
 
   -- install language servers with mason
@@ -47,7 +48,8 @@ end
 -- Setup language servers
 function M.setup_lsp()
   local lsp = require("lspconfig")
-
+  -- setup vim lua api completion, must be done before lspconfig setup
+  require("neodev").setup {}
   -- add additional LSP capabilities supported by nvim-cmp
   lsp.util.default_config = vim.tbl_extend(
     "force",

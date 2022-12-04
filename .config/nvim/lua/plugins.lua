@@ -117,7 +117,6 @@ if has_packer then
         {
           "folke/neodev.nvim",
           commit = "071c8895bbff0e4d1d3d4c531adfe20e3a2a6e82",
-          config = function(_) require("neodev").setup {} end,
         }
       },
       config = require("autocomplete").setup_lsp,
