@@ -32,6 +32,7 @@ M.language_servers = {
   "yamlls", -- yaml
   "ansiblels", -- ansible
   "rust_analyzer", -- rust
+  "tsserver", -- javascript
 }
 
 -- Install language servers
