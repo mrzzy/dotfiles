@@ -118,6 +118,10 @@ function M.setup_cmp()
         end
       end,
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      ['<BS>'] = function(fallback)
+        cmp.close()
+        fallback()
+      end,
       ['<M-u>'] = cmp.mapping.scroll_docs(-4),
       ['<M-d>'] = cmp.mapping.scroll_docs(4),
       -- snippet bindings
