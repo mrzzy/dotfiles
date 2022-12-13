@@ -4,6 +4,7 @@
 -- Autocomplete
 --
 
+
 local M = {}
 -- Lookback & return the character just prior to the position of the cursor
 function M.lookback()
@@ -40,11 +41,12 @@ M.language_servers = {
 function M.install()
   -- convert lsp server name ot mason naming scheme
   local mason_servers = {}
-  local mason_map = require("mason-lspconfig.mappings.server").lspconfig_to_package
   for _, server in ipairs(require("autocomplete").language_servers) do
-    table.insert(mason_servers, mason_map[server])
+    table.insert(
+      mason_servers,
+      require("mason-lspconfig.mappings.server").lspconfig_to_package[server]
+    )
   end
-
   -- install language servers with mason
   require("mason.api.command").MasonInstall(mason_servers)
 end
@@ -60,6 +62,10 @@ function M.setup_lsp()
     lsp.util.default_config, {
     capabilities = require('cmp_nvim_lsp').default_capabilities(),
   })
+  -- jdtls's lspconfig references $JDTLS_HOME env var, so we set it here.
+  vim.env.JDTLS_HOME = require("mason-registry").get_package(
+    require("mason-lspconfig.mappings.server").lspconfig_to_package["jdtls"]
+  ):get_install_path()
   -- configure language servers
   for _, server in ipairs(require("autocomplete").language_servers) do
     lsp[server].setup {}
