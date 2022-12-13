@@ -33,6 +33,7 @@ M.language_servers = {
   "ansiblels", -- ansible
   "rust_analyzer", -- rust
   "tsserver", -- javascript
+  "jdtls", -- java
 }
 
 -- Install language servers
