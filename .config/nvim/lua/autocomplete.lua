@@ -39,13 +39,14 @@ M.language_servers = {
 
 -- Install language servers
 function M.install()
+  local map_package = require("mason-lspconfig.mappings.server").lspconfig_to_package
   -- convert lsp server name ot mason naming scheme
   local mason_servers = {}
   for _, server in ipairs(require("autocomplete").language_servers) do
-    table.insert(
-      mason_servers,
-      require("mason-lspconfig.mappings.server").lspconfig_to_package[server]
-    )
+    -- only install servers supported by mason
+    if map_package[server] ~= nil then
+      table.insert(mason_servers, map_package[server])
+    end
   end
   -- install language servers with mason
   require("mason.api.command").MasonInstall(mason_servers)
