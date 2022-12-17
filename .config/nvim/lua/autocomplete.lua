@@ -35,6 +35,7 @@ M.language_servers = {
   "rust_analyzer", -- rust
   "tsserver", -- javascript
   "jdtls", -- java
+  "metals", -- scala, installed manually.
 }
 
 -- Install language servers
