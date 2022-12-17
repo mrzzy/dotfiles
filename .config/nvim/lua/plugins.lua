@@ -146,4 +146,11 @@ if has_packer then
       config = autocomplete.setup_cmp,
     }
   end)
+
+  -- auto :PackerCompile on plugins.lua wrie to sync compiled packer config
+  vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+    group = vim.api.nvim_create_augroup("packer", { clear = true }),
+    pattern = { vim.fn.stdpath("config") .. "/lua/plugins.lua" },
+    callback = function() print("HERE"); vim.cmd("PackerCompile") end,
+  })
 end
