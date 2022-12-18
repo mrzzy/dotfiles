@@ -36,6 +36,7 @@ M.language_servers = {
   "tsserver", -- javascript
   "jdtls", -- java
   "metals", -- scala, installed manually.
+  "clangd", -- c/c++
 }
 
 -- Install language servers
