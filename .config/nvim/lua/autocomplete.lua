@@ -87,6 +87,10 @@ function M.setup_cmp()
     }
   }
   cmp.setup({
+    -- trigger completion after 'keyword_length' characters
+    completion = {
+      keyword_length = 2,
+    },
     -- each list of sources forms a source group. When one group fails
     -- to produce completions, nvim-cmp falls back to the next source group.
     sources = cmp.config.sources(
@@ -143,6 +147,10 @@ function M.setup_cmp()
   })
   -- autocomplete at the vim command line
   cmp.setup.cmdline(":", {
+    -- trigger completion after 'keyword_length' characters
+    completion = {
+      keyword_length = 2,
+    },
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
       { name = "cmdline" },
