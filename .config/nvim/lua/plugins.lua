@@ -56,7 +56,7 @@ if has_packer then
       config = function()
         -- disable gutentags by default, unless toggled on explictly
         vim.g.gutentags_enabled = false
-        vim.g.gutentags_define_advanced_commands = false
+        vim.g.gutentags_define_advanced_commands = true
         -- disable gutentags for git commit as they do not does not play well together
         -- clear any existing autocmds to prevent autocmd spam
         local group_id = vim.api.nvim_create_augroup("gutentags", { clear = true })
