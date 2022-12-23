@@ -23,9 +23,6 @@ vim.o.colorcolumn = "80"
 -- search: ignore case unless uppercase letters in query
 vim.o.ignorecase = true
 vim.o.smartcase = true
--- project specific nvim config via .nvimrc/.exrc
-vim.o.exrc = true
-vim.o.secure = true
 -- use ripgrep as project wide search tool
 vim.o.grepprg = [[rg --vimgrep --no-heading --smart-case]]
 -- insert & command line auto completion options
