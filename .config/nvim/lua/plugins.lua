@@ -151,6 +151,6 @@ if has_packer then
   vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     group = vim.api.nvim_create_augroup("packer", { clear = true }),
     pattern = { vim.fn.stdpath("config") .. "/lua/plugins.lua" },
-    callback = function() print("HERE"); vim.cmd("PackerCompile") end,
+    callback = function() vim.cmd("PackerCompile") end,
   })
 end

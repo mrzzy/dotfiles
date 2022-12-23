@@ -31,6 +31,12 @@ vim.o.grepprg = [[rg --vimgrep --no-heading --smart-case]]
 -- insert & command line auto completion options
 vim.o.completeopt = "menu,menuone,noselect"
 
+-- File Explorer (Netrw)
+-- file explorer window size
+vim.g.netrw_winsize = "20%"
+-- tree style file listing
+vim.g.netrw_liststyle = 3
+
 -- Keyboard Bindings
 local map = vim.keymap.set
 -- key bindings default leader key
