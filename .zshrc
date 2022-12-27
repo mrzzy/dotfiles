@@ -48,6 +48,7 @@ bindkey '\ec' fzf-cd-widget
 
 # Aliases
 alias r=ranger
+alias n=nnn
 alias rc=rclone
 alias g=git
 alias k=kubectl
