@@ -71,7 +71,14 @@ function M.setup_lsp()
   ):get_install_path()
   -- configure language servers
   for _, server in ipairs(require("autocomplete").language_servers) do
-    lsp[server].setup {}
+    if server == "clangd" then
+      lsp[server].setup {
+        -- clangd needs to query native gcc compiler for build config
+        cmd = { "clangd", "--query-driver=/usr/bin/*" },
+      }
+    else
+      lsp[server].setup {}
+    end
   end
 end
 
