@@ -22,21 +22,47 @@ function M.lookback()
   return vim.api.nvim_buf_get_text(buffer, line - 1, col - 1, line - 1, col, {})[1]
 end
 
--- Language servers providing completion support
+-- Language servers providing completion support & their custom setup functions
+-- each setup function returns a table that is passed to the lspconfig's setup()
+local noop = function() return {} end
 M.language_servers = {
-  "sumneko_lua", -- lua
-  "terraformls", -- terraform
-  "dockerls", -- docker
-  "bashls", -- bash
-  "pyright", -- python
-  "gopls", -- golang
-  "yamlls", -- yaml
-  "ansiblels", -- ansible
-  "rust_analyzer", -- rust
-  "tsserver", -- javascript
-  "jdtls", -- java
-  "metals", -- scala, installed manually.
-  "clangd", -- c/c++
+  -- lua
+  ["sumneko_lua"] = noop,
+  -- terraform
+  ["terraformls"] = noop,
+  -- docker
+  ["dockerls"] = noop,
+  -- bash
+  ["bashls"] = noop,
+  -- python
+  ["pyright"] = noop,
+  -- golang
+  ["gopls"] = noop,
+  -- yaml
+  ["yamlls"] = noop,
+  -- ansible
+  ["ansiblels"] = noop,
+  -- rust
+  ["rust_analyzer"] = noop,
+  -- javascript
+  ["tsserver"] = noop,
+  -- java
+  ["jdtls"] = function()
+    -- jdtls's lspconfig references $JDTLS_HOME env var, so we set it here.
+    vim.env.JDTLS_HOME = require("mason-registry").get_package(
+      require("mason-lspconfig.mappings.server").lspconfig_to_package["jdtls"]
+    ):get_install_path()
+    return {}
+  end,
+  -- scala, installed manually.
+  ["metals"] = noop,
+  -- c/c++
+  ["clangd"] = function()
+    -- clangd needs to query native gcc compiler for build config
+    return {
+      cmd = { "clangd", "--query-driver=/usr/bin/*" },
+    }
+  end
 }
 
 -- Install language servers
@@ -44,7 +70,7 @@ function M.install()
   local map_package = require("mason-lspconfig.mappings.server").lspconfig_to_package
   -- convert lsp server name ot mason naming scheme
   local mason_servers = {}
-  for _, server in ipairs(require("autocomplete").language_servers) do
+  for server, _ in pairs(require("autocomplete").language_servers) do
     -- only install servers supported by mason
     if map_package[server] ~= nil then
       table.insert(mason_servers, map_package[server])
@@ -65,20 +91,9 @@ function M.setup_lsp()
     lsp.util.default_config, {
     capabilities = require('cmp_nvim_lsp').default_capabilities(),
   })
-  -- jdtls's lspconfig references $JDTLS_HOME env var, so we set it here.
-  vim.env.JDTLS_HOME = require("mason-registry").get_package(
-    require("mason-lspconfig.mappings.server").lspconfig_to_package["jdtls"]
-  ):get_install_path()
   -- configure language servers
-  for _, server in ipairs(require("autocomplete").language_servers) do
-    if server == "clangd" then
-      lsp[server].setup {
-        -- clangd needs to query native gcc compiler for build config
-        cmd = { "clangd", "--query-driver=/usr/bin/*" },
-      }
-    else
-      lsp[server].setup {}
-    end
+  for server, setup_fn in pairs(require("autocomplete").language_servers) do
+    lsp[server].setup(setup_fn())
   end
 end
 
