@@ -149,11 +149,24 @@ if has_packer then
 
     -- commenting code
     use {
-      'numToStr/Comment.nvim',
+      "numToStr/Comment.nvim",
       tag = "v0.7.0",
       config = function()
         require('Comment').setup()
       end
+    }
+
+    -- linters & formatters
+    use {
+      "jose-elias-alvarez/null-ls.nvim",
+      branch = "0.7-compat",
+      requires = { { "nvim-lua/plenary.nvim", tag = "v0.1.2" } },
+      config = function()
+        local null_ls = require("null-ls")
+        null_ls.setup {
+          -- TODO(mrzzy): add sources
+        }
+      end,
     }
   end)
 
