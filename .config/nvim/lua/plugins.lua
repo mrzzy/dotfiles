@@ -49,6 +49,7 @@ if has_packer then
     }
     -- syntax highlighting
     use { "sheerun/vim-polyglot" }
+
     -- tag file manager
     use {
       "ludovicchabant/vim-gutentags",
@@ -145,7 +146,17 @@ if has_packer then
       },
       config = autocomplete.setup_cmp,
     }
+
+    -- commenting code
+    use {
+      'numToStr/Comment.nvim',
+      tag = "v0.7.0",
+      config = function()
+        require('Comment').setup()
+      end
+    }
   end)
+
 
   -- auto :PackerCompile on plugins.lua wrie to sync compiled packer config
   vim.api.nvim_create_autocmd({ "BufWritePost" }, {
