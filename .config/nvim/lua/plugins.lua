@@ -147,15 +147,6 @@ if has_packer then
       config = autocomplete.setup_cmp,
     }
 
-    -- commenting code
-    use {
-      "numToStr/Comment.nvim",
-      tag = "v0.7.0",
-      config = function()
-        require('Comment').setup()
-      end
-    }
-
     -- linters & formatters
     use {
       "jose-elias-alvarez/null-ls.nvim",
@@ -168,8 +159,24 @@ if has_packer then
         }
       end,
     }
-  end)
 
+    -- commenting code
+    use {
+      "numToStr/Comment.nvim",
+      tag = "v0.7.0",
+      config = function()
+        require('Comment').setup()
+      end
+    }
+    -- indent guides
+    use {
+      "lukas-reineke/indent-blankline.nvim",
+      tag = "v2.20.2",
+      config = function()
+        require("indent_blankline").setup {}
+      end,
+    }
+  end)
 
   -- auto :PackerCompile on plugins.lua wrie to sync compiled packer config
   vim.api.nvim_create_autocmd({ "BufWritePost" }, {
