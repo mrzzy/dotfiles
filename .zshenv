@@ -13,7 +13,7 @@ export PATH="$HOME/.local/share/coursier/bin:$PATH"
 
 # 'time' builtin output format
 export TIMEFMT="%J   %U user %S system %P cpu %E total
-ram: %KKB avg %MKB max 
+ram: %KMB avg %MMB max 
 page faults: %F major %R minor
 io: %I input %O output
 packets: %s sent %r received"
