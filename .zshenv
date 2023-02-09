@@ -10,3 +10,10 @@ export EDITOR=nvim
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/share/coursier/bin:$PATH"
+
+# 'time' builtin output format
+export TIMEFMT="%J   %U user %S system %P cpu %E total
+ram: %KKB avg %MKB max 
+page faults: %F major %R minor
+io: %I input %O output
+packets: %s sent %r received"
