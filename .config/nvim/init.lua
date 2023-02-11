@@ -37,7 +37,7 @@ for key, background in pairs({
     ["<leader>hl"] = "light",
     ["<leader>hd"] = "dark",
 }) do
-  map({ "n" }, key, function() vim.o.background = background end, {})
+    map({ "n" }, key, function() vim.o.background = background end, {})
 end
 --- alternative binding for the <C-w> prefix used in window manipulation keys
 map({ "n" }, "<leader>w", "<C-w>", { silent = true, nowait = true })
@@ -52,21 +52,21 @@ for key, lsp_fn in pairs({
     ["gi"] = vim.lsp.buf.implementation,
     ["gr"] = vim.lsp.buf.references
 }) do
-  map({ "n" }, key, lsp_fn, { silent = true, noremap = true })
+    map({ "n" }, key, lsp_fn, { silent = true, noremap = true })
 end
 for key, lsp_fn in pairs({
     -- workspace folders
     ["<leader>wa"] = vim.lsp.buf.add_workspace_folder,
     ["<leader>wd"] = vim.lsp.buf.remove_workspace_folder,
     ["<leader>ww"] = function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end,
     -- code actions
     ["<leader>cc"] = vim.lsp.buf.code_action,
     ["<leader>cw"] = vim.lsp.buf.rename,
-    ["<leader>cf"] = vim.lsp.buf.format { async = true },
+    ["<leader>cf"] = vim.lsp.buf.format,
 }) do
-  map({ "n" }, key, lsp_fn, { noremap = true })
+    map({ "n" }, key, lsp_fn, { noremap = true })
 end
 -- diagnostics key bindings
 map({ "n" }, "[e", vim.diagnostic.goto_prev, { silent = true, noremap = true })

@@ -31,24 +31,6 @@ if has_packer then
           vim.keymap.set({ "n", "x" }, "<leader>=", "<Plug>(EasyAlign)", {})
         end,
     }
-    -- code jumping & project wide grep
-    use {
-        "junegunn/fzf.vim",
-        commit = "b23e4bb8f853cb9641a609c5c8545751276958b0",
-        requires = {
-            { "junegunn/fzf", tag = "0.29.0" }
-        },
-        config = function()
-          local map = vim.keymap.set
-          map({ "n" }, "<M-p>", ":Files<CR>", {})
-          map({ "n" }, "<C-p>", ":GFiles<CR>", {})
-          map({ "n" }, "<C-t>", ":Tags<CR>", {})
-          map({ "n" }, "<M-t>", ":Tags<CR>", {})
-          map({ "n" }, "<C-Space>", ":Buffers<CR>", {})
-          map({ "n" }, "<C-_>", ":Rg<CR>", {})
-          map({ "n" }, "<M-/>", ":Rg<CR>", {})
-        end,
-    }
     -- undo history
     use {
         "mbbill/undotree",
@@ -99,6 +81,24 @@ if has_packer then
     }
 
     -- Navigation
+    -- code jumping & project wide grep
+    use {
+        "junegunn/fzf.vim",
+        commit = "b23e4bb8f853cb9641a609c5c8545751276958b0",
+        requires = {
+            { "junegunn/fzf", tag = "0.29.0" }
+        },
+        config = function()
+          local map = vim.keymap.set
+          map({ "n" }, "<M-p>", ":Files<CR>", {})
+          map({ "n" }, "<C-p>", ":GFiles<CR>", {})
+          map({ "n" }, "<C-t>", ":Tags<CR>", {})
+          map({ "n" }, "<M-t>", ":Tags<CR>", {})
+          map({ "n" }, "<C-Space>", ":Buffers<CR>", {})
+          map({ "n" }, "<C-_>", ":Rg<CR>", {})
+          map({ "n" }, "<M-/>", ":Rg<CR>", {})
+        end,
+    }
     -- tag file manager
     use {
         "ludovicchabant/vim-gutentags",
@@ -121,6 +121,22 @@ if has_packer then
     }
     -- project specific file navigation
     use { "tpope/vim-projectionist", commit = "d4aee3035699b82b3789cee0e88dad0e38c423ab" }
+    -- file drawer
+    use {
+        "nvim-tree/nvim-tree.lua",
+        commit = "59e65d88db177ad1e6a8cffaafd4738420ad20b6",
+        config = function()
+          -- replace netrw builtin in file drawer
+          vim.g.loaded_netrw = 1
+          vim.g.loaded_netrwPlugin = 1
+          -- TODO(mrzzy): use custom
+          require("nvim-tree").setup {}
+          -- define key bindings
+          local map = vim.keymap.set
+          map({ "n" }, "<leader>ff", ":NvimTreeToggle<CR>", {})
+          map({ "n" }, "<leader>f.", ":NvimTreeFindFile<CR>", {})
+        end,
+    }
 
     -- Language Support
     -- language servers
