@@ -137,6 +137,17 @@ if has_packer then
           map({ "n" }, "<leader>f.", ":NvimTreeFindFile<CR>", {})
         end,
     }
+    -- document symbols outline
+    use {
+      "simrat39/symbols-outline.nvim",
+      commit = "512791925d57a61c545bc303356e8a8f7869763c",
+      config = function (_)
+          require("symbols-outline").setup {}
+          -- define key bindings
+          local map = vim.keymap.set
+          map({ "n" }, "<leader>#", ":SymbolsOutline<CR>", {})
+      end,
+    }
 
     -- Language Support
     -- language servers
