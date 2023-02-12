@@ -179,6 +179,14 @@ if has_packer then
           local map = vim.keymap.set
           map({ "n" }, "<leader>ff", ":NvimTreeToggle<CR>", {})
           map({ "n" }, "<leader>f.", ":NvimTreeFindFile<CR>", {})
+          map({ "n" }, "<leader>fa", function()
+            -- populate arglist with bookmarked files
+            local paths = {}
+            for _, node in ipairs(require("nvim-tree.api").marks.list()) do
+              table.insert(paths, node.absolute_path)
+            end
+            vim.cmd.args(paths)
+          end, {})
         end,
     }
     -- document symbols outline
