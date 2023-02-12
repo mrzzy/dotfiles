@@ -103,16 +103,6 @@ if has_packer then
           map({ "n" }, "<C-Space>", ":Buffers<CR>", {})
           map({ "n" }, "<C-_>", ":Rg<CR>", {})
           map({ "n" }, "<M-/>", ":Rg<CR>", {})
-          map({ "n" }, "<C-j>", function()
-            vim.lsp.buf.document_symbol {
-                on_list = function(opts)
-                  vim.fn["fzf#run"] {
-                      source = opts.items,
-                      sink = "e",
-                  }
-                end
-            }
-          end, {})
         end,
     }
     -- tag file manager
