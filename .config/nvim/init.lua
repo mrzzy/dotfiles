@@ -50,7 +50,9 @@ for key, lsp_fn in pairs({
     ["gD"] = vim.lsp.buf.declaration,
     ["gd"] = vim.lsp.buf.definition,
     ["gi"] = vim.lsp.buf.implementation,
-    ["gr"] = vim.lsp.buf.references
+    ["gr"] = vim.lsp.buf.references,
+    ["<C-j>"] = vim.lsp.buf.document_symbol,
+    ["<C-k>"] = vim.lsp.buf.workspace_symbol,
 }) do
     map({ "n" }, key, lsp_fn, { silent = true, noremap = true })
 end
