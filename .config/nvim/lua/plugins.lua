@@ -245,6 +245,7 @@ if has_packer then
         config = function()
           require("obsidian").setup {
               dir = "~/notepad",
+              disable_frontmatter = true,
               daily_notes = {
                   folder = "journal",
               },
