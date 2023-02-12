@@ -22,7 +22,12 @@ if has_packer then
     -- sensible key bindings
     use { "tpope/vim-unimpaired", commit = "f992923d336e93c7f50fe9b35a07d5a92660ecaf" }
     -- editor sessions
-    use { "tpope/vim-obsession", commit = "d2818a614ec3a5d174c6bb19e87e2eeb207f4900" }
+    use {
+      "tpope/vim-obsession", commit = "d2818a614ec3a5d174c6bb19e87e2eeb207f4900",
+      config = function (_)
+        vim.keymap.set({"n"}, "<leader>ws", ":Obsession", {})
+      end
+    }
     -- auto alignment
     use {
         "junegunn/vim-easy-align",
