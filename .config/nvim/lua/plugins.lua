@@ -5,6 +5,8 @@
 --
 
 local autocomplete = require("autocomplete")
+local fn = require("functional")
+
 -- load & install plugins with packer plugin manager if its installed
 local has_packer, packer = pcall(require, "packer")
 if has_packer then
@@ -181,11 +183,9 @@ if has_packer then
           map({ "n" }, "<leader>f.", ":NvimTreeFindFile<CR>", {})
           map({ "n" }, "<leader>fa", function()
             -- populate arglist with bookmarked files
-            local paths = {}
-            for _, node in ipairs(require("nvim-tree.api").marks.list()) do
-              table.insert(paths, node.absolute_path)
-            end
-            vim.cmd.args(paths)
+            vim.cmd.args(fn.map(require("nvim-tree.api").marks.list(), function(node)
+              return node.absolute_path
+            end))
           end, {})
         end,
     }
@@ -221,7 +221,7 @@ if has_packer then
                 commit = "071c8895bbff0e4d1d3d4c531adfe20e3a2a6e82",
             }
         },
-        config = require("autocomplete").setup_lsp,
+        config = autocomplete.setup_lsp,
     }
     -- autocomplete & snippets
     use {
