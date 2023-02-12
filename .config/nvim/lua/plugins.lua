@@ -5,7 +5,6 @@
 --
 
 local autocomplete = require("autocomplete")
-
 -- load & install plugins with packer plugin manager if its installed
 local has_packer, packer = pcall(require, "packer")
 if has_packer then
@@ -23,10 +22,10 @@ if has_packer then
     use { "tpope/vim-unimpaired", commit = "f992923d336e93c7f50fe9b35a07d5a92660ecaf" }
     -- editor sessions
     use {
-      "tpope/vim-obsession", commit = "d2818a614ec3a5d174c6bb19e87e2eeb207f4900",
-      config = function (_)
-        vim.keymap.set({"n"}, "<leader>ws", ":Obsession", {})
-      end
+        "tpope/vim-obsession", commit = "d2818a614ec3a5d174c6bb19e87e2eeb207f4900",
+        config = function(_)
+          vim.keymap.set({ "n" }, "<leader>ws", ":Obsession", {})
+        end
     }
     -- auto alignment
     use {
@@ -102,6 +101,16 @@ if has_packer then
           map({ "n" }, "<C-Space>", ":Buffers<CR>", {})
           map({ "n" }, "<C-_>", ":Rg<CR>", {})
           map({ "n" }, "<M-/>", ":Rg<CR>", {})
+          map({ "n" }, "<C-j>", function()
+            vim.lsp.buf.document_symbol {
+                on_list = function(opts)
+                  vim.fn["fzf#run"] {
+                      source = opts.items,
+                      sink = "e",
+                  }
+                end
+            }
+          end, {})
         end,
     }
     -- tag file manager
@@ -134,8 +143,38 @@ if has_packer then
           -- replace netrw builtin in file drawer
           vim.g.loaded_netrw = 1
           vim.g.loaded_netrwPlugin = 1
-          -- TODO(mrzzy): use custom
-          require("nvim-tree").setup {}
+          -- override special glyphs used in nvim-tree that require font support
+          require("nvim-tree").setup {
+              renderer = {
+                  icons = {
+                      glyphs = {
+                          default = ".",
+                          symlink = "~",
+                          modified = "+",
+                          bookmark = "M",
+                          folder = {
+                              arrow_closed = "▷",
+                              arrow_open = "▼",
+                              default = "/",
+                              open = "/",
+                              empty = "",
+                              empty_open = "",
+                              symlink = "",
+                              symlink_open = "",
+                          },
+                          git = {
+                              unstaged = "U",
+                              staged = "S",
+                              unmerged = "↔",
+                              renamed = "⇒",
+                              untracked = "?",
+                              deleted = "D",
+                              ignored = "I",
+                          },
+                      }
+                  }
+              }
+          }
           -- define key bindings
           local map = vim.keymap.set
           map({ "n" }, "<leader>ff", ":NvimTreeToggle<CR>", {})
@@ -144,14 +183,14 @@ if has_packer then
     }
     -- document symbols outline
     use {
-      "simrat39/symbols-outline.nvim",
-      commit = "512791925d57a61c545bc303356e8a8f7869763c",
-      config = function (_)
+        "simrat39/symbols-outline.nvim",
+        commit = "512791925d57a61c545bc303356e8a8f7869763c",
+        config = function(_)
           require("symbols-outline").setup {}
           -- define key bindings
           local map = vim.keymap.set
           map({ "n" }, "<leader>#", ":SymbolsOutline<CR>", {})
-      end,
+        end,
     }
 
     -- Language Support
