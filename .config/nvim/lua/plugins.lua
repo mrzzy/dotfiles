@@ -248,12 +248,48 @@ if has_packer then
           }
         end,
     }
+    -- Obsdian notes
+    use {
+        "epwalsh/obsidian.nvim",
+        tag = "v1.7.0",
+        requires = { "hrsh7th/nvim-cmp" },
+        config = function()
+          require("obsidian").setup {
+              dir = "~/notepad",
+              daily_notes = {
+                  folder = "journal",
+              },
+              -- autocomplete wikilinks
+              completion = {
+                  nvim_cmp = true,
+              }
+          }
+          -- key bindings
+          local map = vim.keymap.set
+          map({ "n" }, "<leader>o[", ":ObsidianBacklinks<CR>", {})
+          map({ "n" }, "<leader>oo", ":ObsidianOpen<CR>", {})
+          map({ "n" }, "<leader>oj", ":ObsidianToday<CR>", {})
+          -- override 'gf' for navigating wikilinks navigation
+          map({ "n" }, "gf", function(_)
+            if require('obsidian').util.cursor_on_markdown_link() then
+              return ":ObsidianFollowLink<CR>"
+            else
+              return "gf"
+            end
+          end, { noremap = false, expr = true })
+        end
+    }
   end)
 
   -- auto :PackerCompile on plugins.lua wrie to sync compiled packer config
+  local plugin_lua = vim.fn.stdpath("config") .. "/lua/plugins.lua"
   vim.api.nvim_create_autocmd({ "BufWritePost" }, {
       group = vim.api.nvim_create_augroup("packer", { clear = true }),
-      pattern = { vim.fn.stdpath("config") .. "/lua/plugins.lua" },
-      callback = function() vim.cmd("PackerCompile") end,
+      pattern = { plugin_lua },
+      callback = function()
+        -- re-source plugins.lua
+        dofile(plugin_lua)
+        vim.cmd("PackerCompile")
+      end,
   })
 end
