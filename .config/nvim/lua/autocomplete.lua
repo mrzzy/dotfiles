@@ -68,7 +68,7 @@ M.language_servers = {
 -- Install language servers
 function M.install()
   local map_package = require("mason-lspconfig.mappings.server").lspconfig_to_package
-  -- convert lsp server name ot mason naming scheme
+  -- convert lsp server name to mason naming scheme
   local mason_servers = {}
   for server, _ in pairs(require("autocomplete").language_servers) do
     -- only install servers supported by mason
@@ -138,7 +138,7 @@ function M.setup_cmp()
               -- select next item if completion menu is visible
               cmp.select_next_item()
             elseif M.lookback() == nil or M.lookback():match("%s") then
-              -- insert a tab if character preceeding is whitespace
+              -- insert a tab if character preceding is whitespace
               fallback()
             else
               -- trigger completion

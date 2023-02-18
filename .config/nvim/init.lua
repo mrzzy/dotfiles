@@ -32,7 +32,7 @@ vim.o.completeopt = "menu,menuone,noselect"
 local map = vim.keymap.set
 -- key bindings default leader key
 vim.g.mapleader = ","
--- toggle vetween light & dark colorschemes
+-- toggle between light & dark colorschemes
 for key, background in pairs({
     ["<leader>hl"] = "light",
     ["<leader>hd"] = "dark",
