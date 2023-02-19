@@ -76,14 +76,14 @@ if has_packer then
     }
   end)
 
-  -- auto :PackerCompile on plugins.lua wrie to sync compiled packer config
-  local plugin_lua = vim.fn.stdpath("config") .. "/lua/plugins.lua"
+  -- auto :PackerCompile on plugins.lua write to sync compiled packer config
+  local plugin_dir = vim.fn.stdpath("config") .. "/lua/plugins/"
   vim.api.nvim_create_autocmd({ "BufWritePost" }, {
       group = vim.api.nvim_create_augroup("packer", { clear = true }),
-      pattern = { plugin_lua },
+      pattern = { plugin_dir .. "*.lua" },
       callback = function()
         -- re-source plugins.lua
-        dofile(plugin_lua)
+        dofile(plugin_dir .. "init.lua")
         vim.cmd("PackerCompile")
       end,
   })
