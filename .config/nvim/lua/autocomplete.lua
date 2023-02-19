@@ -62,7 +62,9 @@ M.language_servers = {
       return {
           cmd = { "clangd", "--query-driver=/usr/bin/*" },
       }
-    end
+    end,
+    -- sql
+    ["sqlls"] = noop,
 }
 
 -- Install language servers
