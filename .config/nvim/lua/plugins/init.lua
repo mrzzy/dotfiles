@@ -14,7 +14,7 @@ if has_packer then
 
     require("plugins.editor").use_plugins(use)
     require("plugins.navigation").use_plugins(use)
-    require("plugins.autocomplete").use_plugins(use)
+    require("plugins.completion").use_plugins(use)
 
     -- Colors
     -- syntax highlighting

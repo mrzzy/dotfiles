@@ -1,13 +1,14 @@
 --
 -- dotfiles
 -- Neovim config
--- Autocomplete Plugins
+-- Completion Plugins
 --
 
-local autocomplete = {}
+local autocomplete = require("autocomplete")
+local completion = {}
 
--- Register Autocomplete Plugins with given packer.nvim 'use' callback.
-function autocomplete.use_plugins(use)
+-- Register Completion Plugins with given packer.nvim 'use' callback.
+function completion.use_plugins(use)
     -- language servers
     use {
         "neovim/nvim-lspconfig",
@@ -16,7 +17,7 @@ function autocomplete.use_plugins(use)
             {
                 "williamboman/mason-lspconfig.nvim",
                 requires = { { "williamboman/mason.nvim" } },
-                run = autocomplete.install,
+                run = completion.install,
                 config = function(_)
                     require('mason').setup()
                     require('mason-lspconfig').setup()
@@ -29,7 +30,7 @@ function autocomplete.use_plugins(use)
         },
         config = autocomplete.setup_lsp,
     }
-    -- autocomplete & snippets
+    -- completion & snippets
     use {
         "hrsh7th/nvim-cmp",
         commit = "8a9e8a89eec87f86b6245d77f313a040a94081c1",
@@ -54,4 +55,4 @@ function autocomplete.use_plugins(use)
     }
 end
 
-return autocomplete
+return completion
