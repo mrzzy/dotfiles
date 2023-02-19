@@ -8,3 +8,6 @@
 !.config/
 !.config/nvim/
 !.config/nvim/init.vim
+
+# blacklist compiled lua by packer.nvim
+.config/nvim/plugin/packer_compiled.lua
