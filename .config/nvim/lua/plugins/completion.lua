@@ -16,6 +16,7 @@ function completion.use_plugins(use)
         requires = {
             {
                 "williamboman/mason-lspconfig.nvim",
+                commit = "93e58e100f37ef4fb0f897deeed20599dae9d128",
                 requires = { { "williamboman/mason.nvim" } },
                 run = autocomplete.install,
                 config = function(_)
