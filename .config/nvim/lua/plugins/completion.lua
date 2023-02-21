@@ -12,7 +12,7 @@ function completion.use_plugins(use)
     -- language servers
     use {
         "neovim/nvim-lspconfig",
-        tag = "v0.1.3",
+        tag = "v0.1.6",
         requires = {
             {
                 "williamboman/mason-lspconfig.nvim",
