@@ -17,7 +17,7 @@ function completion.use_plugins(use)
             {
                 "williamboman/mason-lspconfig.nvim",
                 requires = { { "williamboman/mason.nvim" } },
-                run = completion.install,
+                run = autocomplete.install,
                 config = function(_)
                     require('mason').setup()
                     require('mason-lspconfig').setup()
