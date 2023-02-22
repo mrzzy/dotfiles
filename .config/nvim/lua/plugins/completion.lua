@@ -17,9 +17,10 @@ function completion.use_plugins(use)
             {
                 "williamboman/mason.nvim",
                 commit = "718966fd3204bd1e4aa5af0a032ce1e916295ecd",
+                requires = { {
                     "williamboman/mason-lspconfig.nvim",
                     commit = "93e58e100f37ef4fb0f897deeed20599dae9d128",
-                }},
+                } },
                 run = autocomplete.install,
                 config = function(_)
                     require('mason').setup()
