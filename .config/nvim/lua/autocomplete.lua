@@ -26,45 +26,47 @@ end
 -- each setup function returns a table that is passed to the lspconfig's setup()
 local noop = function() return {} end
 M.language_servers = {
-  -- lua
-  ["sumneko_lua"] = noop,
-  -- terraform
-  ["terraformls"] = noop,
-  -- docker
-  ["dockerls"] = noop,
-  -- bash
-  ["bashls"] = noop,
-  -- python
-  ["pyright"] = noop,
-  -- golang
-  ["gopls"] = noop,
-  -- yaml
-  ["yamlls"] = noop,
-  -- ansible
-  ["ansiblels"] = noop,
-  -- rust
-  ["rust_analyzer"] = noop,
-  -- javascript
-  ["tsserver"] = noop,
-  -- java
-  ["jdtls"] = function()
-    -- jdtls's lspconfig references $JDTLS_HOME env var, so we set it here.
-    vim.env.JDTLS_HOME = require("mason-registry").get_package(
-          require("mason-lspconfig.mappings.server").lspconfig_to_package["jdtls"]
-        ):get_install_path()
-    return {}
-  end,
-  -- scala, installed manually.
-  ["metals"] = noop,
-  -- c/c++
-  ["clangd"] = function()
-    -- clangd needs to query native gcc compiler for build config
-    return {
-      cmd = { "clangd", "--query-driver=/usr/bin/*" },
-    }
-  end,
-  -- sql
-  ["sqlls"] = noop,
+    -- lua
+    ["sumneko_lua"] = noop,
+    -- terraform
+    ["terraformls"] = noop,
+    -- docker
+    ["dockerls"] = noop,
+    -- bash
+    ["bashls"] = noop,
+    -- python
+    ["pyright"] = noop,
+    -- golang
+    ["gopls"] = noop,
+    -- yaml
+    ["yamlls"] = noop,
+    -- ansible
+    ["ansiblels"] = noop,
+    -- rust
+    ["rust_analyzer"] = noop,
+    -- javascript
+    ["tsserver"] = noop,
+    -- java
+    ["jdtls"] = function()
+      -- jdtls's lspconfig references $JDTLS_HOME env var, so we set it here.
+      vim.env.JDTLS_HOME = require("mason-registry").get_package(
+              require("mason-lspconfig.mappings.server").lspconfig_to_package["jdtls"]
+          ):get_install_path()
+      return {}
+    end,
+    -- scala, installed manually, see https://github.com/mrzzy/warp
+    ["metals"] = noop,
+    -- c/c++
+    ["clangd"] = function()
+      -- clangd needs to query native gcc compiler for build config
+      return {
+          cmd = { "clangd", "--query-driver=/usr/bin/*" },
+      }
+    end,
+    -- sql
+    ["sqlls"] = noop,
+    -- latex
+    ["texlab"] = noop,
 }
 
 -- Install language servers
@@ -89,10 +91,10 @@ function M.setup_lsp()
   require("neodev").setup {}
   -- add additional LSP capabilities supported by nvim-cmp
   lsp.util.default_config = vim.tbl_extend(
-    "force",
-    lsp.util.default_config, {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(),
-  })
+          "force",
+          lsp.util.default_config, {
+          capabilities = require('cmp_nvim_lsp').default_capabilities(),
+      })
   -- configure language servers
   for server, setup_fn in pairs(require("autocomplete").language_servers) do
     lsp[server].setup(setup_fn())
@@ -105,82 +107,82 @@ function M.setup_cmp()
   local luasnip = require("luasnip")
   -- complete from all loaded buffers
   local buffer_src = {
-    name = "buffer",
-    option = {
-      get_bufnrs = vim.api.nvim_list_bufs,
-    }
+      name = "buffer",
+      option = {
+          get_bufnrs = vim.api.nvim_list_bufs,
+      }
   }
   cmp.setup({
-    -- trigger completion after 'keyword_length' characters
-    completion = {
-      keyword_length = 2,
-    },
-    -- each list of sources forms a source group. When one group fails
-    -- to produce completions, nvim-cmp falls back to the next source group.
-    sources = cmp.config.sources(
-      {
-        { name = "nvim_lsp_signature_help" },
-        { name = "nvim_lsp" },
-        { name = "path" },
-        { name = "luasnip" },
-      }, {
-      buffer_src,
-    }
-    ),
-    -- snippet expansion
-    snippet = {
-      expand = function(snippet) luasnip.lsp_expand(snippet.body) end,
-    },
-    -- key mappings
-    mapping = cmp.mapping.preset.insert({
-      -- autocomplete bindings
-      ["<Tab>"] = function(fallback)
-        local M = require("autocomplete")
-        if cmp.visible() then
-          -- select next item if completion menu is visible
-          cmp.select_next_item()
-        elseif M.lookback() == nil or M.lookback():match("%s") then
-          -- insert a tab if character preceding is whitespace
-          fallback()
-        else
-          -- trigger completion
-          cmp.complete()
-        end
-      end,
-      ["<S-Tab>"] = function(fallback)
-        if cmp.visible() then
-          -- select previous item if completion menu is visible
-          cmp.select_prev_item()
-        else
-          fallback()
-        end
-      end,
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
-      ['<BS>'] = function(fallback)
-        cmp.close()
-        fallback()
-      end,
-      ['<M-u>'] = cmp.mapping.scroll_docs( -4),
-      ['<M-d>'] = cmp.mapping.scroll_docs(4),
-      -- snippet bindings
-      ['<M-x>'] = cmp.mapping(function() luasnip.expand_or_jump() end, { "i", "s" }),
-      ['<M-k>'] = cmp.mapping(function() luasnip.jump( -1) end, { "i", "s" }),
-      ['<M-j>'] = cmp.mapping(function() luasnip.jump(1) end, { "i", "s" }),
-    }),
+      -- trigger completion after 'keyword_length' characters
+      completion = {
+          keyword_length = 2,
+      },
+      -- each list of sources forms a source group. When one group fails
+      -- to produce completions, nvim-cmp falls back to the next source group.
+      sources = cmp.config.sources(
+          {
+              { name = "nvim_lsp_signature_help" },
+              { name = "nvim_lsp" },
+              { name = "path" },
+              { name = "luasnip" },
+          }, {
+          buffer_src,
+      }
+      ),
+      -- snippet expansion
+      snippet = {
+          expand = function(snippet) luasnip.lsp_expand(snippet.body) end,
+      },
+      -- key mappings
+      mapping = cmp.mapping.preset.insert({
+          -- autocomplete bindings
+          ["<Tab>"] = function(fallback)
+            local M = require("autocomplete")
+            if cmp.visible() then
+              -- select next item if completion menu is visible
+              cmp.select_next_item()
+            elseif M.lookback() == nil or M.lookback():match("%s") then
+              -- insert a tab if character preceding is whitespace
+              fallback()
+            else
+              -- trigger completion
+              cmp.complete()
+            end
+          end,
+          ["<S-Tab>"] = function(fallback)
+            if cmp.visible() then
+              -- select previous item if completion menu is visible
+              cmp.select_prev_item()
+            else
+              fallback()
+            end
+          end,
+          ['<CR>'] = cmp.mapping.confirm({ select = true }),
+          ['<BS>'] = function(fallback)
+            cmp.close()
+            fallback()
+          end,
+          ['<M-u>'] = cmp.mapping.scroll_docs( -4),
+          ['<M-d>'] = cmp.mapping.scroll_docs(4),
+          -- snippet bindings
+          ['<M-x>'] = cmp.mapping(function() luasnip.expand_or_jump() end, { "i", "s" }),
+          ['<M-k>'] = cmp.mapping(function() luasnip.jump( -1) end, { "i", "s" }),
+          ['<M-j>'] = cmp.mapping(function() luasnip.jump(1) end, { "i", "s" }),
+      }),
   })
   -- autocomplete at the vim command line
   cmp.setup.cmdline(":", {
-    -- trigger completion after 'keyword_length' characters
-    completion = {
-      keyword_length = 2,
-    },
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-      { name = "cmdline" },
-      { name = "path" },
-    }, {
-      buffer_src,
-    })
+      -- trigger completion after 'keyword_length' characters
+      completion = {
+          keyword_length = 2,
+      },
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources({
+          { name = "cmdline" },
+          { name = "path" },
+      }, {
+          buffer_src,
+      })
   })
 end
 
