@@ -20,7 +20,7 @@ function editor.use_plugins(use)
     use {
         "tpope/vim-obsession", commit = "d2818a614ec3a5d174c6bb19e87e2eeb207f4900",
         config = function(_)
-            vim.keymap.set({ "n" }, "<leader>ws", ":Obsession", {})
+            vim.keymap.set({ "n" }, "<leader>ss", ":Obsession<cr>", {})
         end
     }
     -- auto alignment
