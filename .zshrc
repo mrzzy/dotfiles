@@ -56,6 +56,8 @@ alias v=nvim
 alias py=python
 alias m=make
 alias tf=terraform
+# redirect vim to neovim
+alias vim=nvim
 
 # Prompt
 # display current repo & branch
