@@ -66,7 +66,27 @@ M.language_servers = {
     -- sql
     ["sqlls"] = noop,
     -- latex
-    ["texlab"] = noop,
+    ["texlab"] = function ()
+      -- configure texlab to use tectonic
+      -- https://github.com/latex-lsp/texlab/wiki/Tectonic
+      return {
+        settings = {
+          texlab = {
+            build = {
+              executable = "tectonic",
+              args = {
+                "-X",
+                "compile",
+                "%f",
+                "--synctex",
+                "--keep-logs",
+                "--keep-intermediates",
+              }
+            }
+          }
+        }
+      }
+    end,
 }
 
 -- Install language servers
