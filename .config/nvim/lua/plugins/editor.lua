@@ -16,6 +16,8 @@ function editor.use_plugins(use)
     use { "tpope/vim-abolish", commit = "3f0c8faadf0c5b68bcf40785c1c42e3731bfa522" }
     -- sensible key bindings
     use { "tpope/vim-unimpaired", commit = "f992923d336e93c7f50fe9b35a07d5a92660ecaf" }
+    -- command dispatch to tmxu
+    use { "tpope/vim-dispatch", commit = "6cc2691576f97d43f8751664d1a1a908b99927e5" }
     -- editor sessions
     use {
         "tpope/vim-obsession", commit = "d2818a614ec3a5d174c6bb19e87e2eeb207f4900",
