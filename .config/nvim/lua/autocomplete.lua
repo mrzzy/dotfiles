@@ -40,6 +40,8 @@ M.language_servers = {
     ["gopls"] = noop,
     -- yaml
     ["yamlls"] = noop,
+    -- html
+    ["html"] = noop,
     -- ansible
     ["ansiblels"] = noop,
     -- rust
@@ -66,25 +68,25 @@ M.language_servers = {
     -- sql
     ["sqlls"] = noop,
     -- latex
-    ["texlab"] = function ()
+    ["texlab"] = function()
       -- configure texlab to use tectonic
       -- https://github.com/latex-lsp/texlab/wiki/Tectonic
       return {
-        settings = {
-          texlab = {
-            build = {
-              executable = "tectonic",
-              args = {
-                "-X",
-                "compile",
-                "%f",
-                "--synctex",
-                "--keep-logs",
-                "--keep-intermediates",
+          settings = {
+              texlab = {
+                  build = {
+                      executable = "tectonic",
+                      args = {
+                          "-X",
+                          "compile",
+                          "%f",
+                          "--synctex",
+                          "--keep-logs",
+                          "--keep-intermediates",
+                      }
+                  }
               }
-            }
           }
-        }
       }
     end,
 }
