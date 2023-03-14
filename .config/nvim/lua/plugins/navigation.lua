@@ -54,9 +54,6 @@ function navigation.use_plugins(use)
         "nvim-tree/nvim-tree.lua",
         commit = "59e65d88db177ad1e6a8cffaafd4738420ad20b6",
         config = function()
-            -- replace netrw builtin in file drawer
-            vim.g.loaded_netrw = 1
-            vim.g.loaded_netrwPlugin = 1
             -- override special glyphs used in nvim-tree that require font support
             require("nvim-tree").setup {
                 renderer = {
