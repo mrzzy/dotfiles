@@ -67,6 +67,9 @@ for key, lsp_fn in pairs({
     ["<leader>cc"] = vim.lsp.buf.code_action,
     ["<leader>cw"] = vim.lsp.buf.rename,
     ["<leader>cf"] = vim.lsp.buf.format,
+    -- lsp commands
+    ["<leader>ll"] = function() vim.cmd [[LspInfo]] end,
+    ["<leader>lr"] = function() vim.cmd [[LspRestart]] end,
 }) do
     map({ "n" }, key, lsp_fn, { noremap = true })
 end
