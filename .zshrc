@@ -58,6 +58,8 @@ alias m=make
 alias tf=terraform
 # redirect vim to neovim
 alias vim=nvim
+# configure less to interpret escape sequences for colored output
+alias less=less -r
 
 # Prompt
 # display current repo & branch
