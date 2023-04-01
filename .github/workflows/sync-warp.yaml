@@ -13,8 +13,6 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       WARP_REPO: mrzzy/warp
-      COMMIT_USER: github-actions[bot]
-      COMMIT_EMAIL: github-actions[bot]@users.noreply.github.com
       BRANCH: build/update-dotfiles
     steps:
       - name: Clone WARP repository
