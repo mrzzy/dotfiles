@@ -39,7 +39,15 @@ M.language_servers = {
     -- golang
     ["gopls"] = noop,
     -- yaml
-    ["yamlls"] = noop,
+    ["yamlls"] = function()
+      return {
+          settings = {
+              yaml = {
+                  keyOrdering = false
+              }
+          }
+      }
+    end,
     -- html
     ["html"] = noop,
     -- ansible
