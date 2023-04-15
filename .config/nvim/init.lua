@@ -27,6 +27,8 @@ vim.o.smartcase = true
 vim.o.grepprg = [[rg --vimgrep --no-heading --smart-case]]
 -- insert & command line auto completion options
 vim.o.completeopt = "menu,menuone,noselect"
+-- enable reading of project-specific config in working dir
+vim.o.exrc = true
 
 -- Keyboard Bindings
 local map = vim.keymap.set
