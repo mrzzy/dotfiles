@@ -35,9 +35,9 @@ jobs:
           # Pull request
           branch: build/update-dotfiles
           title: "build(box): Update dotfiles"
-          body: "Update revision of dotfiles to ${{ github.repository}}@${{ github.sha }}"
+          body: "Update revision of dotfiles to ${{ github.repository }}@${{ github.sha }}"
           delete-branch: true
-      
+
       - name: Automerge Pull Request on WARP
         env:
           GH_TOKEN: "${{ secrets.GH_PUSH_TOKEN }}"
