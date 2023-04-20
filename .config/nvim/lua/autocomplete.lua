@@ -136,7 +136,7 @@ function M.setup_cmp()
   local cmp = require("cmp")
   local luasnip = require("luasnip")
   -- complete from all loaded buffers
-  local buffer_src = {
+  local buffer_src_all = {
       name = "buffer",
       option = {
           get_bufnrs = vim.api.nvim_list_bufs,
@@ -155,8 +155,9 @@ function M.setup_cmp()
               { name = "nvim_lsp" },
               { name = "path" },
               { name = "luasnip" },
+              { name = "buffer" },
           }, {
-          buffer_src,
+          buffer_src_all,
       }
       ),
       -- snippet expansion
@@ -210,8 +211,9 @@ function M.setup_cmp()
       sources = cmp.config.sources({
           { name = "cmdline" },
           { name = "path" },
+          { name = "buffer" },
       }, {
-          buffer_src,
+          buffer_src_all,
       })
   })
 end
