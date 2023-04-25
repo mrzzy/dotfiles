@@ -155,10 +155,8 @@ function M.setup_cmp()
               { name = "nvim_lsp" },
               { name = "path" },
               { name = "luasnip" },
-              { name = "buffer" },
-          }, {
-          buffer_src_all,
-      }
+              buffer_src_all,
+          }
       ),
       -- snippet expansion
       snippet = {
@@ -211,8 +209,6 @@ function M.setup_cmp()
       sources = cmp.config.sources({
           { name = "cmdline" },
           { name = "path" },
-          { name = "buffer" },
-      }, {
           buffer_src_all,
       })
   })
