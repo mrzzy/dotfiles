@@ -29,6 +29,8 @@ vim.o.grepprg = [[rg --vimgrep --no-heading --smart-case]]
 vim.o.completeopt = "menu,menuone,noselect"
 -- enable reading of project-specific config in working dir
 vim.o.exrc = true
+-- keep words together when wrapping text to improve readability
+vim.o.linebreak = true
 
 -- Keyboard Bindings
 local map = vim.keymap.set
