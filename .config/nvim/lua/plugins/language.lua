@@ -8,6 +8,8 @@ local autocomplete = require("autocomplete")
 local langserver = require("langserver")
 local language = {}
 
+local plenary_version = "v0.1.3"
+
 -- Register Completion Plugins with given packer.nvim 'use' callback.
 function language.use_plugins(use)
     -- language servers
@@ -23,7 +25,7 @@ function language.use_plugins(use)
                     commit = "93e58e100f37ef4fb0f897deeed20599dae9d128",
                 } },
                 run = langserver.install,
-                config = function(_)
+                config = function()
                     require('mason').setup()
                     require('mason-lspconfig').setup()
                 end
@@ -39,12 +41,12 @@ function language.use_plugins(use)
     use {
         "mfussenegger/nvim-jdtls",
         tag = "0.2.0",
-        config = function(_)
+        config = function()
             -- autocommand group to start jdtls in java filetypes
             vim.api.nvim_create_autocmd({ "FileType" }, {
                 group = vim.api.nvim_create_augroup("jdtls", { clear = true }),
                 pattern = { "java" },
-                callback = function(_)
+                callback = function()
                     require("jdtls").start_or_attach {
                         -- use jdtls installed by mason
                         cmd = {
@@ -57,6 +59,22 @@ function language.use_plugins(use)
                 end,
             })
         end
+    }
+    -- scala
+    use {
+        "scalameta/nvim-metals",
+        commit = "0a83e0bfd45ab745ea35757b117a080560e8640e",
+        -- install metals language server
+        run = ":MetalsInstall",
+        config = function()
+            vim.api.nvim_create_autocmd({ "FileType" }, {
+                group = vim.api.nvim_create_augroup("metals", { clear = true }),
+                pattern = { "scala", "sbt" },
+                callback = function()
+                    require("metals").initialize_or_attach {}
+                end,
+            })
+        end,
     }
     -- completion & snippets
     use {
@@ -73,7 +91,7 @@ function language.use_plugins(use)
                 "L3MON4D3/LuaSnip",
                 commit = "09ce9a70bd787d4ce188f2de1390f656f119347c",
                 requires = { { "honza/vim-snippets" } },
-                config = function(_)
+                config = function()
                     -- load snapmate snippets from plugins (eg. vim-snippets) into luasnip's catalogue
                     require("luasnip.loaders.from_snipmate").lazy_load()
                 end,
@@ -86,7 +104,7 @@ function language.use_plugins(use)
     use {
         "jose-elias-alvarez/null-ls.nvim",
         commit = "71797bb303ac99a4435592e15068f127970513d7",
-        requires = { { "nvim-lua/plenary.nvim", tag = "v0.1.3" } },
+        requires = { { "nvim-lua/plenary.nvim", tag = plenary_version } },
         config = function()
             local null_ls = require("null-ls")
             null_ls.setup {

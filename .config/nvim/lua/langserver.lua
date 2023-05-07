@@ -69,8 +69,6 @@ M.language_servers = {
   ["rust_analyzer"] = noop,
   -- javascript
   ["tsserver"] = noop,
-  -- scala, installed manually, see https://github.com/mrzzy/warp
-  ["metals"] = noop,
   -- c/c++
   ["clangd"] = function()
     -- clangd needs to query native gcc compiler for build config
