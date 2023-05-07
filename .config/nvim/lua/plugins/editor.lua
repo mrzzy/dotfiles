@@ -52,6 +52,30 @@ function editor.use_plugins(use)
         tag = "v3.6",
         config = function() vim.keymap.set({ "n" }, "<leader>vv", ":Git<CR>", {}) end,
     }
+    use {
+        "lewis6991/gitsigns.nvim",
+        tag = "v0.6",
+        config = function()
+            -- annotate line numbers based on git status
+            local gs = require('gitsigns')
+            gs.setup {
+                signcolumn = false,
+                numhl = true,
+            }
+            -- keybindings to jump to changes
+            local map = vim.keymap.set
+            map('n', ']c', function()
+                if vim.wo.diff then return ']c' end
+                vim.schedule(function() gs.next_hunk() end)
+                return '<Ignore>'
+            end, { expr = true })
+            map('n', '[c', function()
+                if vim.wo.diff then return '[c' end
+                vim.schedule(function() gs.prev_hunk() end)
+                return '<Ignore>'
+            end, { expr = true })
+        end
+    }
     -- commenting code
     use {
         "numToStr/Comment.nvim",
