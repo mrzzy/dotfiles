@@ -5,6 +5,7 @@
 --
 
 local autocomplete = require("autocomplete")
+local langserver = require("langserver")
 local language = {}
 
 -- Register Completion Plugins with given packer.nvim 'use' callback.
@@ -21,7 +22,7 @@ function language.use_plugins(use)
                     "williamboman/mason-lspconfig.nvim",
                     commit = "93e58e100f37ef4fb0f897deeed20599dae9d128",
                 } },
-                run = autocomplete.install,
+                run = langserver.install,
                 config = function(_)
                     require('mason').setup()
                     require('mason-lspconfig').setup()
@@ -32,7 +33,7 @@ function language.use_plugins(use)
                 tag = "v2.5.2",
             }
         },
-        config = autocomplete.setup_lsp,
+        config = langserver.setup_lsp,
     }
     -- completion & snippets
     use {
