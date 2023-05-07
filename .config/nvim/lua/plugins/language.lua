@@ -35,6 +35,29 @@ function language.use_plugins(use)
         },
         config = langserver.setup_lsp,
     }
+    -- java
+    use {
+        "mfussenegger/nvim-jdtls",
+        tag = "0.2.0",
+        config = function(_)
+            -- autocommand group to start jdtls in java filetypes
+            vim.api.nvim_create_autocmd({ "FileType" }, {
+                group = vim.api.nvim_create_augroup("jdtls", { clear = true }),
+                pattern = { "java" },
+                callback = function(_)
+                    require("jdtls").start_or_attach {
+                        -- use jdtls installed by mason
+                        cmd = {
+                            require("mason-registry").get_package(
+                                require("mason-lspconfig.mappings.server")
+                                .lspconfig_to_package["jdtls"]
+                            ):get_install_path() .. "/bin/jdtls",
+                        },
+                    }
+                end,
+            })
+        end
+    }
     -- completion & snippets
     use {
         "hrsh7th/nvim-cmp",
@@ -61,44 +84,44 @@ function language.use_plugins(use)
 
     -- linters & formatters
     use {
-      "jose-elias-alvarez/null-ls.nvim",
-      commit = "71797bb303ac99a4435592e15068f127970513d7",
-      requires = { { "nvim-lua/plenary.nvim", tag = "v0.1.3" } },
-      config = function()
-        local null_ls = require("null-ls")
-        null_ls.setup {
-          debug = true,
-          sources = {
-            -- Code Actions
-            -- git actions
-            null_ls.builtins.code_actions.gitsigns,
+        "jose-elias-alvarez/null-ls.nvim",
+        commit = "71797bb303ac99a4435592e15068f127970513d7",
+        requires = { { "nvim-lua/plenary.nvim", tag = "v0.1.3" } },
+        config = function()
+            local null_ls = require("null-ls")
+            null_ls.setup {
+                debug = true,
+                sources = {
+                    -- Code Actions
+                    -- git actions
+                    null_ls.builtins.code_actions.gitsigns,
 
-            -- Linters
-            -- spelling
-            null_ls.builtins.diagnostics.codespell,
-            -- terraform
-            null_ls.builtins.diagnostics.terraform_validate,
+                    -- Linters
+                    -- spelling
+                    null_ls.builtins.diagnostics.codespell,
+                    -- terraform
+                    null_ls.builtins.diagnostics.terraform_validate,
 
-            -- Formatters
-            -- js, ts, css, html, yaml, markdown
-            null_ls.builtins.formatting.prettier,
-            -- json
-            null_ls.builtins.formatting.jq,
-            -- sql
-            null_ls.builtins.formatting.sqlfmt,
-            -- python
-            null_ls.builtins.formatting.black,
-            -- go
-            null_ls.builtins.formatting.gofmt,
-            -- rust
-            null_ls.builtins.formatting.rustfmt,
-            -- terraform
-            null_ls.builtins.formatting.terraform_fmt,
-            -- packer
-            null_ls.builtins.formatting.packer,
-          },
-        }
-      end,
+                    -- Formatters
+                    -- js, ts, css, html, yaml, markdown
+                    null_ls.builtins.formatting.prettier,
+                    -- json
+                    null_ls.builtins.formatting.jq,
+                    -- sql
+                    null_ls.builtins.formatting.sqlfmt,
+                    -- python
+                    null_ls.builtins.formatting.black,
+                    -- go
+                    null_ls.builtins.formatting.gofmt,
+                    -- rust
+                    null_ls.builtins.formatting.rustfmt,
+                    -- terraform
+                    null_ls.builtins.formatting.terraform_fmt,
+                    -- packer
+                    null_ls.builtins.formatting.packer,
+                },
+            }
+        end,
     }
 end
 

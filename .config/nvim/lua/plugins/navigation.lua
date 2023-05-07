@@ -37,9 +37,8 @@ function navigation.use_plugins(use)
             vim.g.gutentags_define_advanced_commands = true
             -- disable gutentags for git commit as they do not does not play well together
             -- clear any existing autocmds to prevent autocmd spam
-            local group_id = vim.api.nvim_create_augroup("gutentags", { clear = true })
             vim.api.nvim_create_autocmd({ "FileType" }, {
-                group = group_id,
+                group = vim.api.nvim_create_augroup("gutentags", { clear = true }),
                 pattern = { "gitcommit", "gitrebase" },
                 callback = function(_)
                     vim.g.gutentags_enabled = false
