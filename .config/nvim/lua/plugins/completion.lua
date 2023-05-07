@@ -29,7 +29,7 @@ function completion.use_plugins(use)
             },
             {
                 "folke/neodev.nvim",
-                commit = "071c8895bbff0e4d1d3d4c531adfe20e3a2a6e82",
+                tag = "v2.5.2",
             }
         },
         config = autocomplete.setup_lsp,
