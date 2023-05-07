@@ -55,6 +55,8 @@ for key, lsp_fn in pairs({
     ["gr"] = vim.lsp.buf.references,
     ["<C-j>"] = vim.lsp.buf.document_symbol,
     ["<C-k>"] = vim.lsp.buf.workspace_symbol,
+    -- search highlight
+    ["<leader>H"] = vim.cmd.noh,
 }) do
     map({ "n" }, key, lsp_fn, { silent = true, noremap = true })
 end
