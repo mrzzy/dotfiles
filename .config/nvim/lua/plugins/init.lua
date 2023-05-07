@@ -21,11 +21,13 @@ if has_packer then
     use { "sheerun/vim-polyglot" }
     -- colorscheme
     use {
-        "sainnhe/gruvbox-material",
-        tag = "v1.2.3",
+       "ellisonleao/gruvbox.nvim",
+        tag = "1.0.0",
         config = function()
-          vim.g.gruvbox_material_background = "medium"
-          vim.cmd [[colorscheme gruvbox-material]]
+          require("gruvbox").setup({
+              inverse = true,
+          })
+          vim.cmd [[colorscheme gruvbox]]
         end,
     }
 
