@@ -1,14 +1,14 @@
 --
 -- dotfiles
 -- Neovim config
--- Completion Plugins
+-- Language Support
 --
 
 local autocomplete = require("autocomplete")
-local completion = {}
+local language = {}
 
 -- Register Completion Plugins with given packer.nvim 'use' callback.
-function completion.use_plugins(use)
+function language.use_plugins(use)
     -- language servers
     use {
         "neovim/nvim-lspconfig",
@@ -57,6 +57,48 @@ function completion.use_plugins(use)
         },
         config = autocomplete.setup_cmp,
     }
+
+    -- linters & formatters
+    use {
+      "jose-elias-alvarez/null-ls.nvim",
+      commit = "71797bb303ac99a4435592e15068f127970513d7",
+      requires = { { "nvim-lua/plenary.nvim", tag = "v0.1.3" } },
+      config = function()
+        local null_ls = require("null-ls")
+        null_ls.setup {
+          debug = true,
+          sources = {
+            -- Code Actions
+            -- git actions
+            null_ls.builtins.code_actions.gitsigns,
+
+            -- Linters
+            -- spelling
+            null_ls.builtins.diagnostics.codespell,
+            -- terraform
+            null_ls.builtins.diagnostics.terraform_validate,
+
+            -- Formatters
+            -- js, ts, css, html, yaml, markdown
+            null_ls.builtins.formatting.prettier,
+            -- json
+            null_ls.builtins.formatting.jq,
+            -- sql
+            null_ls.builtins.formatting.sqlfmt,
+            -- python
+            null_ls.builtins.formatting.black,
+            -- go
+            null_ls.builtins.formatting.gofmt,
+            -- rust
+            null_ls.builtins.formatting.rustfmt,
+            -- terraform
+            null_ls.builtins.formatting.terraform_fmt,
+            -- packer
+            null_ls.builtins.formatting.packer,
+          },
+        }
+      end,
+    }
 end
 
-return completion
+return language
