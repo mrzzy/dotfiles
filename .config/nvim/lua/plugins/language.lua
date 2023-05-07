@@ -71,7 +71,12 @@ function language.use_plugins(use)
                 group = vim.api.nvim_create_augroup("metals", { clear = true }),
                 pattern = { "scala", "sbt" },
                 callback = function()
-                    require("metals").initialize_or_attach {}
+                    local metals = require("metals")
+                    metals.initialize_or_attach {
+                        on_attach = function(client, bufnr)
+                            metals.setup_dap()
+                        end
+                    }
                 end,
             })
         end,
@@ -140,6 +145,35 @@ function language.use_plugins(use)
                 },
             }
         end,
+    }
+
+    -- debugger adaptors
+    use {
+        "mfussenegger/nvim-dap",
+        tag = "0.6.0",
+        config = function()
+            local dap = require("dap")
+            local dap_widgets = require("dap.ui.widgets")
+
+            for key, dap_fn in pairs({
+                ["<leader>dc"] = dap.continue,
+                ["<leader>dn"] = dap.step_over,
+                ["<leader>ds"] = dap.step_into,
+                ["<leader>do"] = dap.step_out,
+                ["<leader>dd"] = dap.toggle_breakpoint,
+                ["<leader>d:"] = dap.repl.open,
+                ["<leader>d<cr>"] = dap.run_last,
+                ["<Leader>dh"] = dap_widgets.hover,
+                ["<Leader>df"] = function()
+                    dap_widgets.centered_float(dap_widgets.frames)
+                end,
+                ["<Leader>ds"] = function()
+                    dap_widgets.centered_float(dap_widgets.scopes)
+                end,
+            }) do
+                vim.keymap.set({ 'n' }, key, dap_fn, { noremap = true })
+            end
+        end
     }
 end
 
