@@ -69,14 +69,16 @@ for key, lsp_fn in pairs({
     ["<leader>cc"] = vim.lsp.buf.code_action,
     ["<leader>cw"] = vim.lsp.buf.rename,
     ["<leader>cf"] = vim.lsp.buf.format,
+    -- code lens
+    ["<leader>cl"] = vim.lsp.codelens.run,
     -- lsp commands
     ["<leader>ll"] = function() vim.cmd [[LspInfo]] end,
     ["<leader>lr"] = function() vim.cmd [[LspRestart]] end,
+    -- diagnostics key bindings
+    ["[e"] = vim.diagnostic.goto_prev,
+    ["]e"] = vim.diagnostic.goto_next,
+    ["<leader>ee"] = vim.diagnostic.open_float,
+    ["<C-e>"] = vim.diagnostic.setqflist,
 }) do
     map({ "n" }, key, lsp_fn, { noremap = true })
 end
--- diagnostics key bindings
-map({ "n" }, "[e", vim.diagnostic.goto_prev, { silent = true, noremap = true })
-map({ "n" }, "]e", vim.diagnostic.goto_next, { silent = true, noremap = true })
-map({ "n" }, "<leader>ee", vim.diagnostic.open_float, {})
-map({ "n" }, "<C-e>", vim.diagnostic.setqflist, {})
