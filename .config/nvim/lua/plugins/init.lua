@@ -35,8 +35,8 @@ if has_packer then
     -- linters & formatters
     use {
       "jose-elias-alvarez/null-ls.nvim",
-      branch = "0.7-compat",
-      requires = { { "nvim-lua/plenary.nvim", tag = "v0.1.2" } },
+      commit = "71797bb303ac99a4435592e15068f127970513d7",
+      requires = { { "nvim-lua/plenary.nvim", tag = "v0.1.3" } },
       config = function()
         local null_ls = require("null-ls")
         null_ls.setup {
