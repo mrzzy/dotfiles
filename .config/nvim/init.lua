@@ -4,8 +4,6 @@
 --
 
 require("plugins")
-
--- Editor
 -- tab expansion
 vim.o.expandtab = true
 vim.o.shiftwidth = 2
@@ -81,4 +79,4 @@ end
 map({ "n" }, "[e", vim.diagnostic.goto_prev, { silent = true, noremap = true })
 map({ "n" }, "]e", vim.diagnostic.goto_next, { silent = true, noremap = true })
 map({ "n" }, "<leader>ee", vim.diagnostic.open_float, {})
-map({ "n" }, "<C-e>", vim.diagnostic.setloclist, {})
+map({ "n" }, "<C-e>", vim.diagnostic.setqflist, {})
