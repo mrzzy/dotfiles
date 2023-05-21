@@ -57,6 +57,7 @@ alias py=python
 alias m=make
 alias tf=terraform
 alias fd=fdfind
+alias bat=batcat
 # redirect vim to neovim
 alias vim=nvim
 # configure less to interpret escape sequences for colored output
