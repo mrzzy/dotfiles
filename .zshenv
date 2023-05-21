@@ -17,3 +17,6 @@ ram: %KMB avg %MMB max
 page faults: %F major %R minor
 io: %I input %O output
 packets: %s sent %r received"
+
+# default bat color scheme
+export BAT_THEME=gruvbox-dark

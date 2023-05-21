@@ -79,8 +79,31 @@ precmd() {
     RPROMPT='%F{#7c6f64}${vcs_info_msg_0_} %m(%f%(?.%F{#6f8352}OK.%F{red}%?)%F{#7c6f64})%f'
 }
 
-# Syntax Highlighting
+# Colors
+# syntax Highlighting
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+light() {
+    alacritty-themes Gruvbox-Light
+}
+# dark or light theme switching across alacritty terminal, nvim editor & bat pager
+theme() {
+    # check arguments
+    USAGE="Usage: theme <light|dark>"
+    if [ $# -lt 1 ] || [ $1 != "light" -a $1 != "dark" ]
+    then
+        echo "Error: Invalid arguments: $*"
+        echo "$USAGE"
+        return
+    fi
+
+    # alacritty terminal
+    alacritty-themes Gruvbox-$(printf $1 | sed -e 's/.*/\u&/')
+    # nvim editor: has to be manually reloaded
+    sed -i -e "/^vim.o.background =/s/\".*\"/\"$1\"/" ~/.config/nvim/init.lua
+    # bat pager
+    sed -i -e "/^export BAT_THEME=/s/gruvbox-.*/gruvbox-$1/" .zshenv
+    source .zshenv
+}
 
 # Tooling
 # z jump Tool

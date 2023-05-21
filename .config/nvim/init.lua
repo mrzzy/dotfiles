@@ -29,6 +29,8 @@ vim.o.completeopt = "menu,menuone,noselect"
 vim.o.exrc = true
 -- keep words together when wrapping text to improve readability
 vim.o.linebreak = true
+-- dark mode by default
+vim.o.background = "dark"
 
 -- Keyboard Bindings
 local map = vim.keymap.set
