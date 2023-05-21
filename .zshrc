@@ -56,10 +56,13 @@ alias v=nvim
 alias py=python
 alias m=make
 alias tf=terraform
+alias fd=fdfind
 # redirect vim to neovim
 alias vim=nvim
 # configure less to interpret escape sequences for colored output
-alias less=less -r
+alias less=less -R
+# grep with color
+alias grep=grep --color=always
 
 # Prompt
 # display current repo & branch
