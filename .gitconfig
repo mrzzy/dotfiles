@@ -4,3 +4,9 @@
 	signingKey = 1D09BB4C89BF757B42619071BFF4124F7CE0454E
 [init]
 	defaultBranch = main
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
