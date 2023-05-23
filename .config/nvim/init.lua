@@ -8,6 +8,8 @@ require("plugins")
 vim.o.expandtab = true
 vim.o.shiftwidth = 2
 vim.o.tabstop = 2
+-- persist undo history across restarts
+vim.o.undofile = true
 -- reduce for better responsiveness
 vim.o.updatetime = 300
 -- show no-visible characters
