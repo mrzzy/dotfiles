@@ -38,6 +38,8 @@ vim.o.background = "dark"
 local map = vim.keymap.set
 -- key bindings default leader key
 vim.g.mapleader = ","
+--- alternative binding for the <C-w> prefix used in window manipulation keys
+map({ "n" }, "<leader>w", "<C-w>", { silent = true, nowait = true, noremap = true })
 -- toggle between light & dark colorschemes
 for key, background in pairs({
     ["<leader>hl"] = "light",
@@ -45,10 +47,12 @@ for key, background in pairs({
 }) do
     map({ "n" }, key, function() vim.o.background = background end, {})
 end
---- alternative binding for the <C-w> prefix used in window manipulation keys
-map({ "n" }, "<leader>w", "<C-w>", { silent = true, nowait = true })
--- LSP key bindings
-for key, lsp_fn in pairs({
+
+for key, fn in pairs({
+    -- turn off search highlight
+    ["<leader>H"] = vim.cmd.noh,
+
+    -- LSP key bindings
     -- documentation
     ["K"] = vim.lsp.buf.hover,
     -- navigation
@@ -57,14 +61,6 @@ for key, lsp_fn in pairs({
     ["gd"] = vim.lsp.buf.definition,
     ["gi"] = vim.lsp.buf.implementation,
     ["gr"] = vim.lsp.buf.references,
-    ["<C-j>"] = vim.lsp.buf.document_symbol,
-    ["<C-k>"] = vim.lsp.buf.workspace_symbol,
-    -- search highlight
-    ["<leader>H"] = vim.cmd.noh,
-}) do
-    map({ "n" }, key, lsp_fn, { silent = true, noremap = true })
-end
-for key, lsp_fn in pairs({
     -- workspace folders
     ["<leader>wa"] = vim.lsp.buf.add_workspace_folder,
     ["<leader>wd"] = vim.lsp.buf.remove_workspace_folder,
@@ -86,5 +82,5 @@ for key, lsp_fn in pairs({
     ["<leader>ee"] = vim.diagnostic.open_float,
     ["<C-e>"] = vim.diagnostic.setqflist,
 }) do
-    map({ "n" }, key, lsp_fn, { noremap = true })
+    map({ "n" }, key, fn, { noremap = true })
 end

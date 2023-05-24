@@ -9,22 +9,32 @@ local navigation = {}
 -- Register Editor Plugins with given packer.nvim 'use' callback.
 function navigation.use_plugins(use)
     -- Navigation
-    -- code jumping & project wide grep
     use {
-        "junegunn/fzf.vim",
-        commit = "b23e4bb8f853cb9641a609c5c8545751276958b0",
-        requires = {
-            { "junegunn/fzf", tag = "0.29.0" }
-        },
+        "ibhagwan/fzf-lua",
+        commit = "446429138a841b45a2a7743cc08d7bc17493e7c8",
         config = function()
+            local fzf = require("fzf-lua")
             local map = vim.keymap.set
-            map({ "n" }, "<M-p>", ":Files<CR>", {})
-            map({ "n" }, "<C-p>", ":GFiles<CR>", {})
-            map({ "n" }, "<C-t>", ":Tags<CR>", {})
-            map({ "n" }, "<M-t>", ":Tags<CR>", {})
-            map({ "n" }, "<C-Space>", ":Buffers<CR>", {})
-            map({ "n" }, "<C-_>", ":Rg<CR>", {})
-            map({ "n" }, "<M-/>", ":Rg<CR>", {})
+            -- file navigation
+            map({ "n" }, "<C-p>", fzf.git_files, {})
+            map({ "n" }, "<M-p>", fzf.files, {})
+            map({ "n" }, "<C-Space>", fzf.buffers, {})
+            -- tag navigation
+            map({ "n" }, "<C-t>", fzf.tags_live_grep, {})
+            map({ "n" }, "<M-t>", fzf.tags_live_grep, {})
+            -- lsp navigation
+            map({ "n" }, "<C-j>", fzf.lsp_document_symbols, {})
+            map({ "n" }, "<C-k>", fzf.lsp_live_workspace_symbols, {})
+            -- grep search
+            -- <C-_> key is received by nvim when user presses <C-/>
+            map({ "n" }, "<C-_>", fzf.live_grep_native, {})
+            map({ "n" }, "<M-/>", fzf.live_grep_native, {})
+            -- switching buffers & branches
+            map({ "n" }, "<C-b>", fzf.git_branches, {})
+
+            -- register fzf.lua as ui picker for vim.ui.select()
+            -- improves ux when nvim prompts for user input (eg. lsp code action)
+            fzf.register_ui_select()
         end,
     }
     -- tag file manager
