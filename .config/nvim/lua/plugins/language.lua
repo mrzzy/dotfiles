@@ -40,14 +40,15 @@ function language.use_plugins(use)
     -- java
     use {
         "mfussenegger/nvim-jdtls",
-        tag = "0.2.0",
+        tag = "365811ecf97a08d0e2055fba210d65017344fd15",
         config = function()
             -- autocommand group to start jdtls in java filetypes
             vim.api.nvim_create_autocmd({ "FileType" }, {
                 group = vim.api.nvim_create_augroup("jdtls", { clear = true }),
                 pattern = { "java" },
                 callback = function()
-                    require("jdtls").start_or_attach {
+                    local jdtls = require("jdtls")
+                    jdtls.start_or_attach {
                         -- use jdtls installed by mason
                         cmd = {
                             require("mason-registry").get_package(
@@ -55,7 +56,18 @@ function language.use_plugins(use)
                                 .lspconfig_to_package["jdtls"]
                             ):get_install_path() .. "/bin/jdtls",
                         },
+                        -- register extension bundles needed for nvim-dap debugging
+                        init_options = {
+                            bundles = vim.fn.glob("/usr/local/lib/java_dap/*.jar", false, true)
+                        },
+                        on_attach = function(_, _)
+                            -- enable nvim-jdtls's nvim-dap debugger integration
+                            jdtls.setup_dap({ hotcodereplace = "auto" })
+                        end,
                     }
+
+                    -- key binding to debug nearest test case
+                    vim.keymap.set({"n"}, "<leader>dt", jdtls.test_nearest_method())
                 end,
             })
         end
@@ -160,10 +172,16 @@ function language.use_plugins(use)
                 ["<leader>dn"] = dap.step_over,
                 ["<leader>ds"] = dap.step_into,
                 ["<leader>do"] = dap.step_out,
-                ["<leader>dd"] = dap.toggle_breakpoint,
+                ["<leader>*"] = dap.toggle_breakpoint,
+                ["<leader>dd"] = function()
+                    -- populate quickfix window with breakpoints and show them
+                    dap.list_breakpoints()
+                    vim.cmd.copen()
+                end,
+                ["<leader>D"] = dap.clear_breakpoints,
                 ["<leader>d:"] = dap.repl.open,
                 ["<leader>d<cr>"] = dap.run_last,
-                ["<Leader>dh"] = dap_widgets.hover,
+                ["<Leader>dk"] = dap_widgets.hover,
                 ["<Leader>df"] = function()
                     dap_widgets.centered_float(dap_widgets.frames)
                 end,
