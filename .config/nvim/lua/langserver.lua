@@ -61,6 +61,8 @@ M.language_servers = {
       }
     }
   end,
+  -- json
+  ["jsonls"] = noop,
   -- html
   ["html"] = noop,
   -- ansible
