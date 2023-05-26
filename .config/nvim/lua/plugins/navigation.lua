@@ -30,9 +30,7 @@ function navigation.use_plugins(use)
             map({ "n" }, "<C-_>", fzf.live_grep_native, {})
             map({ "n" }, "<M-/>", fzf.live_grep_native, {})
             -- switching buffers & branches
-            map({ "n" }, "<leader>#", fzf.git_branches, {})
-            -- debugging with nvim-dap
-            map({ "n" }, "<leader>d ", fzf.dap_configurations, {})
+            map({ "n" }, "<C-g>", fzf.git_branches, {})
 
             -- register fzf.lua as ui picker for vim.ui.select()
             -- improves ux when nvim prompts for user input (eg. lsp code action)
