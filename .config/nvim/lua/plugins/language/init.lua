@@ -90,6 +90,16 @@ function language.use_plugins(use)
         "michaelb/sniprun",
         tags = "v1.3.3",
         run = "sh install.sh",
+        config = function()
+            require("sniprun").setup {
+                -- use nvim's builtin luajit to evaluate lua snippets
+                selected_interpreters = { "Lua_nvim" },
+            }
+
+            -- sniprun keybinding
+            vim.keymap.set({ "n", "v" }, "<leader><cr><cr>", "<Plug>SnipRun")
+            vim.keymap.set({ "n" }, "<leader><cr>", "<Plug>SnipRunOperator")
+        end
     }
 end
 
