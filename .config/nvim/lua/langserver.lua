@@ -76,8 +76,6 @@ M.language_servers = {
       cmd = { "clangd", "--query-driver=/usr/bin/*" },
     }
   end,
-  -- sql
-  ["sqlls"] = noop,
   -- latex
   ["texlab"] = function()
     -- configure texlab to use tectonic
