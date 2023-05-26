@@ -12,35 +12,44 @@ local plenary_version = "v0.1.3"
 
 -- Register Completion Plugins with given packer.nvim 'use' callback.
 function language.use_plugins(use)
+    -- package manager for language servers & debug adaptors
+    use {
+        "williamboman/mason.nvim",
+        commit = "718966fd3204bd1e4aa5af0a032ce1e916295ecd",
+        config = function() require('mason').setup {} end,
+    }
+
     -- language servers
     use {
         "neovim/nvim-lspconfig",
         tag = "v0.1.6",
         requires = {
+            "williamboman/mason.nvim",
             {
-                "williamboman/mason.nvim",
-                commit = "718966fd3204bd1e4aa5af0a032ce1e916295ecd",
-                requires = { {
-                    "williamboman/mason-lspconfig.nvim",
-                    commit = "93e58e100f37ef4fb0f897deeed20599dae9d128",
-                } },
-                run = langserver.install,
-                config = function()
-                    require('mason').setup()
-                    require('mason-lspconfig').setup()
-                end
+                "williamboman/mason-lspconfig.nvim",
+                commit = "93e58e100f37ef4fb0f897deeed20599dae9d128",
+                config = function() require('mason-lspconfig').setup {} end,
             },
-            {
-                "folke/neodev.nvim",
-                tag = "v2.5.2",
-            }
         },
+        run = langserver.install,
         config = langserver.setup_lsp,
+    }
+    -- neovim lua
+    use {
+        "folke/neodev.nvim",
+        tag = "v2.5.2",
     }
     -- java
     use {
         "mfussenegger/nvim-jdtls",
         tag = "365811ecf97a08d0e2055fba210d65017344fd15",
+        requires = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+        run = function()
+            require("mason.api.command").MasonInstall {
+                "java-debug-adapter", -- java
+                "java-test",          -- java (tests)
+            }
+        end,
         config = function()
             -- autocommand group to start jdtls in java filetypes
             vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -48,17 +57,27 @@ function language.use_plugins(use)
                 pattern = { "java" },
                 callback = function()
                     local jdtls = require("jdtls")
+                    local install_path = require("plugins.mason").install_path
+
+                    -- locate debug adaptors jars installed by mason
+                    local function find_jars(package)
+                        return vim.fn.glob(
+                            install_path(package) .. "/extension/server/*.jar",
+                            false, true)
+                    end
+                    local bundles = {}
+                    vim.list_extend(bundles, find_jars("java-debug-adaptor"))
+                    vim.list_extend(bundles, find_jars("java-test"))
+
                     jdtls.start_or_attach {
                         -- use jdtls installed by mason
                         cmd = {
-                            require("mason-registry").get_package(
-                                require("mason-lspconfig.mappings.server")
-                                .lspconfig_to_package["jdtls"]
-                            ):get_install_path() .. "/bin/jdtls",
+                            install_path(require("mason-lspconfig.mappings.server"))
+                            .. "/bin/jdtls",
                         },
-                        -- register extension bundles needed for nvim-dap debugging
+                        -- register debug adaptor jars needed for nvim-dap debugging
                         init_options = {
-                            bundles = vim.fn.glob("/usr/local/lib/java_dap/*.jar", false, true)
+                            bundles = bundles
                         },
                         on_attach = function(_, _)
                             -- enable nvim-jdtls's nvim-dap debugger integration
@@ -67,7 +86,7 @@ function language.use_plugins(use)
                     }
 
                     -- key binding to debug nearest test case
-                    vim.keymap.set({"n"}, "<leader>dt", jdtls.test_nearest_method())
+                    vim.keymap.set({ "n" }, "<leader>dt", jdtls.test_nearest_method())
                 end,
             })
         end
@@ -75,6 +94,7 @@ function language.use_plugins(use)
     -- scala
     use {
         "scalameta/nvim-metals",
+        requires = { "mfussenegger/nvim-dap" },
         commit = "0a83e0bfd45ab745ea35757b117a080560e8640e",
         -- install metals language server
         run = ":MetalsInstall",
@@ -85,7 +105,7 @@ function language.use_plugins(use)
                 callback = function()
                     local metals = require("metals")
                     metals.initialize_or_attach {
-                        on_attach = function(client, bufnr)
+                        on_attach = function(_)
                             metals.setup_dap()
                         end
                     }
@@ -117,7 +137,7 @@ function language.use_plugins(use)
         config = autocomplete.setup_cmp,
     }
 
-    -- linters & formatters
+    -- null ls: linters, formatters & code actions
     use {
         "jose-elias-alvarez/null-ls.nvim",
         commit = "71797bb303ac99a4435592e15068f127970513d7",
@@ -163,9 +183,38 @@ function language.use_plugins(use)
     use {
         "mfussenegger/nvim-dap",
         tag = "0.6.0",
+        requires = { "williamboman/mason.nvim" },
+        run = function()
+            require("mason.api.command").MasonInstall {
+                "cpptools", -- c,c++,rust
+            }
+        end,
         config = function()
             local dap = require("dap")
             local dap_widgets = require("dap.ui.widgets")
+            local install_path = require("plugins.mason").install_path
+
+            -- c, c++, rust
+            dap.adapters.cppdbg = {
+                id = "cppdbg",
+                type = "executable",
+                command = install_path("cpptools") .. "/extension/debugAdapters/bin/OpenDebugAD7",
+            }
+            local cppdbg = {
+              {
+                name = "Launch file",
+                type = "cppdbg",
+                request = "launch",
+                program = function()
+                    -- prompt user for executable to debug
+                    return vim.fn.input('Executable: ', vim.fn.getcwd() .. '/', 'file')
+                end,
+                cwd = '${workspaceFolder}',
+              }
+            }
+            dap.configurations.c = cppdbg
+            dap.configurations.cpp = cppdbg
+            dap.configurations.rust = cppdbg
 
             for key, dap_fn in pairs({
                 ["<leader>dc"] = dap.continue,
@@ -185,12 +234,70 @@ function language.use_plugins(use)
                 ["<Leader>df"] = function()
                     dap_widgets.centered_float(dap_widgets.frames)
                 end,
-                ["<Leader>ds"] = function()
+                ["<Leader>dS"] = function()
                     dap_widgets.centered_float(dap_widgets.scopes)
                 end,
             }) do
                 vim.keymap.set({ 'n' }, key, dap_fn, { noremap = true })
             end
+        end
+    }
+
+    -- js debugging
+    use {
+        "mxsdev/nvim-dap-vscode-js",
+        tag = "v1.1.0",
+        requires = {
+            "williamboman/mason.nvim",
+            "mfussenegger/nvim-dap",
+            -- manual installation of vscode-js-debug as mason's installer for it is broken
+            {
+                "microsoft/vscode-js-debug",
+                opt = true,
+                run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
+            }
+        },
+        config = function()
+            require("dap-vscode-js").setup {}
+            -- use
+        end
+    }
+
+    -- python debugging
+    use {
+        "mfussenegger/nvim-dap-python",
+        commit = "37b4cba02e337a95cb62ad1609b3d1dccb2e5d42",
+        requires = {
+            "williamboman/mason.nvim",
+            "mfussenegger/nvim-dap",
+        },
+        run = function()
+            require("mason.api.command").MasonInstall { "debugpy" }
+        end,
+        config = function()
+            local install_path = require("plugins.mason").install_path
+            require("dap-python").setup(install_path("debugpy") .. "/venv/bin/python")
+        end
+    }
+
+    -- go debugging
+    use {
+        "leoluz/nvim-dap-go",
+        commit = "cdf604a5703838f65fdee7c198f6cb59b563ef6f",
+        require = {
+            "williamboman/mason.nvim",
+            "mfussenegger/nvim-dap",
+        },
+        run = function()
+            require("mason.api.command").MasonInstall { "delve" }
+        end,
+        config = function()
+            local install_path = require("plugins.mason").install_path
+            require("dap-go").setup {
+                delve = {
+                    path = install_path("delve") .. "/dlv",
+                }
+            }
         end
     }
 end
