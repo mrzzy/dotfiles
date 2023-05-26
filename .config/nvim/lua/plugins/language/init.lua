@@ -36,6 +36,7 @@ function language.use_plugins(use)
         run = langserver.install,
         config = langserver.setup_lsp,
     }
+
     -- neovim lua
     use {
         "folke/neodev.nvim",
@@ -82,6 +83,13 @@ function language.use_plugins(use)
                 },
             }
         end,
+    }
+
+    -- running code snippets
+    use {
+        "michaelb/sniprun",
+        tags = "v1.3.3",
+        run = "sh install.sh",
     }
 end
 

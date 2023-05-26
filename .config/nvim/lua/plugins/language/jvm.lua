@@ -82,3 +82,5 @@ function jvm.use_plugins(use)
         end,
     }
 end
+
+return jvm
