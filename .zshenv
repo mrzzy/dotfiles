@@ -12,7 +12,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/share/coursier/bin:$PATH"
 
 # 'time' builtin output format
-export TIMEFMT="[time %J]
+export TIMEFMT="[time: %J]
 %U user %S system %P cpu %E total
 ram: %KMB avg %MMB max 
 page faults: %F major %R minor

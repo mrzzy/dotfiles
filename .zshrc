@@ -25,7 +25,12 @@ source <(kubectl completion zsh)
 # History
 # cd without having to type cd
 setopt autocd
-# use atuin to provide shell history
+# shared history file
+setopt append_history share_history histignorealldups
+HISTFILE=~/.zsh_history
+HISTSIZE=5000
+SAVEHIST=5000
+# use atuin to provide extend shell history
 export ATUIN_NOBIND="true"
 source <(atuin init zsh)
 # extended globbing syntax
