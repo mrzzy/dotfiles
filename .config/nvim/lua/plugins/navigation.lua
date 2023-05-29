@@ -24,6 +24,7 @@ function navigation.use_plugins(use)
             map({ "n" }, "<M-t>", fzf.tags_live_grep, {})
             -- lsp navigation
             map({ "n" }, "<C-j>", fzf.lsp_document_symbols, {})
+            map({ "n" }, "<M-j>", fzf.btags, {})
             map({ "n" }, "<C-k>", fzf.lsp_live_workspace_symbols, {})
             -- grep search
             -- <C-_> key is received by nvim when user presses <C-/>
