@@ -31,6 +31,8 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # fzf key bindings: CTRL-T for files, CTRL-R for history, ALT-C to chdir
 source /usr/local/share/fzf/key-bindings.zsh
+# kubectl
+source <(kubectl completion zsh)
 
 # Key bindings
 # vi style command editing
