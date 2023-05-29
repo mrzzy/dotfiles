@@ -106,8 +106,8 @@ theme() {
     # nvim editor: has to be manually reloaded
     sed -i -e "/^vim.o.background =/s/\".*\"/\"$1\"/" ~/.config/nvim/init.lua
     # bat pager
-    sed -i -e "/^export BAT_THEME=/s/gruvbox-.*/gruvbox-$1/" .zshenv
-    source .zshenv
+    sed -i -e "/^export BAT_THEME=/s/gruvbox-.*/gruvbox-$1/" ~/.zshenv
+    source ~/.zshenv
 }
 
 # Tooling
