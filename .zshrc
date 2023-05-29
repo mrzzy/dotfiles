@@ -5,18 +5,6 @@
 #
 
 # Settings
-# cd without having to type cd
-setopt autocd
-# shared history file
-setopt append_history share_history histignorealldups
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-# extended globbing syntax
-setopt extendedglob
-# expand expr in prompt
-setopt PROMPT_SUBST
-
 # import completions & prompts
 autoload -Uz compinit promptinit
 compinit
@@ -34,7 +22,17 @@ source /usr/local/share/fzf/key-bindings.zsh
 # kubectl
 source <(kubectl completion zsh)
 
-# Key bindings
+# History
+# cd without having to type cd
+setopt autocd
+# use atuin to provide shell history
+export ATUIN_NOBIND="true"
+source <(atuin init zsh)
+# extended globbing syntax
+setopt extendedglob
+# expand expr in prompt
+setopt PROMPT_SUBST
+
 # vi style command editing
 bindkey -v
 # edit command with double-esc
@@ -42,7 +40,7 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd '\e' edit-command-line
 # fuzzy history recall
-bindkey '^R' fzf-history-widget
+bindkey '^r' _atuin_search_widget
 # fuzzy file completion
 bindkey '^T' fzf-file-widget
 # fuzzy change directory
