@@ -94,6 +94,10 @@ function language.use_plugins(use)
             require("sniprun").setup {
                 -- use nvim's builtin luajit to evaluate lua snippets
                 selected_interpreters = { "Lua_nvim" },
+                display = {
+                    "Terminal",
+                    "VirtualTextOk",
+                },
             }
 
             -- sniprun keybinding
