@@ -28,32 +28,44 @@ function dap.use_plugins(use)
                 command = install_path("cpptools") .. "/extension/debugAdapters/bin/OpenDebugAD7",
             }
 
+            -- debugging key bindings
             for key, dap_fn in pairs({
-                    ["<leader>dc"] = d.continue,
-                    ["<leader>dn"] = d.step_over,
-                    ["<leader>ds"] = d.step_into,
-                    ["<leader>do"] = d.step_out,
-                    ["<leader>*"] = d.toggle_breakpoint,
-                    ["<leader>dd"] = function()
-                        -- populate quickfix window with breakpoints and show them
-                        d.list_breakpoints()
-                        vim.cmd.copen()
-                    end,
-                    ["<leader>D"] = d.clear_breakpoints,
-                    ["<leader>d:"] = d.repl.open,
-                    ["<leader>d<cr>"] = d.run_last,
-                    ["<Leader>dk"] = dap_widgets.hover,
-                    ["<Leader>df"] = function()
-                        dap_widgets.centered_float(dap_widgets.frames)
-                    end,
-                    ["<Leader>dS"] = function()
-                        dap_widgets.centered_float(dap_widgets.scopes)
-                    end,
-                }) do
+                ["<leader>dc"] = function ()
+                    -- load launch.json debugging if one exists
+                    local launch_json = ".vscode/launch.json"
+                    if vim.fn.filereadable(launch_json) then
+                        require("dap.ext.vscode").load_launchjs(launch_json, {
+                                -- adapters -> filetype mapping
+                                cppdbg = { "c", "cpp", "rust" },
+                                ["pwa-node"] = { "javascript", "typescript" },
+                            })
+                    end
+                    d.continue()
+                end,
+                ["<leader>dn"] = d.step_over,
+                ["<leader>ds"] = d.step_into,
+                ["<leader>do"] = d.step_out,
+                ["<leader>*"] = d.toggle_breakpoint,
+                ["<leader>dd"] = function()
+                    -- populate quickfix window with breakpoints and show them
+                    d.list_breakpoints()
+                    vim.cmd.copen()
+                end,
+                ["<leader>D"] = d.clear_breakpoints,
+                ["<leader>d:"] = d.repl.open,
+                ["<leader>d<cr>"] = d.run_last,
+                ["<Leader>dk"] = dap_widgets.hover,
+                ["<Leader>df"] = function()
+                    dap_widgets.centered_float(dap_widgets.frames)
+                end,
+                ["<Leader>dS"] = function()
+                    dap_widgets.centered_float(dap_widgets.scopes)
+                end,
+            }) do
                 vim.keymap.set({ 'n' }, key, dap_fn, { noremap = true })
             end
         end
-    }    -- js debugging
+    } -- js debugging
     use {
         "mxsdev/nvim-dap-vscode-js",
         tag = "v1.1.0",
