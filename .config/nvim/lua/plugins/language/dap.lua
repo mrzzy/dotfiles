@@ -27,21 +27,6 @@ function dap.use_plugins(use)
                 type = "executable",
                 command = install_path("cpptools") .. "/extension/debugAdapters/bin/OpenDebugAD7",
             }
-            local cppdbg = {
-                {
-                    name = "Launch file",
-                    type = "cppdbg",
-                    request = "launch",
-                    program = function()
-                        -- prompt user for executable to debug
-                        return vim.fn.input('Executable: ', vim.fn.getcwd() .. '/', 'file')
-                    end,
-                    cwd = '${workspaceFolder}',
-                }
-            }
-            d.configurations.c = cppdbg
-            d.configurations.cpp = cppdbg
-            d.configurations.rust = cppdbg
 
             for key, dap_fn in pairs({
                     ["<leader>dc"] = d.continue,
@@ -84,7 +69,6 @@ function dap.use_plugins(use)
         },
         config = function()
             require("dap-vscode-js").setup {}
-            -- use
         end
     }
 
