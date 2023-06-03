@@ -76,6 +76,7 @@ for key, fn in pairs({
     -- lsp commands
     ["<leader>ll"] = function() vim.cmd [[LspInfo]] end,
     ["<leader>lr"] = function() vim.cmd [[LspRestart]] end,
+    ["<M-j>"] = vim.lsp.buf.document_symbol,
     -- diagnostics key bindings
     ["[e"] = vim.diagnostic.goto_prev,
     ["]e"] = vim.diagnostic.goto_next,
