@@ -53,8 +53,9 @@ function jvm.use_plugins(use)
                         end,
                     }
 
-                    -- key binding to debug nearest test case
-                    vim.keymap.set({ "n" }, "<leader>dt", jdtls.test_nearest_method())
+                    -- key binding to debug nearest test case / class
+                    vim.keymap.set({ "n" }, "<leader>dt", jdtls.test_nearest_method)
+                    vim.keymap.set({ "n" }, "<leader>dT", jdtls.test_class)
                 end,
             })
         end

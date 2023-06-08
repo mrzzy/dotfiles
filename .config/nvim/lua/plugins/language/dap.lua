@@ -97,7 +97,12 @@ function dap.use_plugins(use)
         end,
         config = function()
             local install_path = require("plugins.mason").install_path
-            require("dap-python").setup(install_path("debugpy") .. "/venv/bin/python")
+            local dap_py = require("dap-python")
+            dap_py.setup(install_path("debugpy") .. "/venv/bin/python")
+            dap_py.test_runner = "pytest"
+            -- key binding to debug nearest test case / class
+            vim.keymap.set({ "n" }, "<leader>dt", dap_py.test_method)
+            vim.keymap.set({ "n" }, "<leader>dT", dap_py.test_class)
         end
     }
 
