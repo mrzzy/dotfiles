@@ -54,6 +54,8 @@ function M.setup_cmp()
     snippet = {
       expand = function(snippet) luasnip.lsp_expand(snippet.body) end,
     },
+    -- disable LSP preselect feature
+    preselect = cmp.PreselectMode.None,
     -- key mappings
     mapping = cmp.mapping.preset.insert({
       -- autocomplete bindings
@@ -78,7 +80,7 @@ function M.setup_cmp()
           fallback()
         end
       end,
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      ['<CR>'] = cmp.mapping.confirm({ select = false }),
       ['<BS>'] = function(fallback)
         cmp.close()
         fallback()
