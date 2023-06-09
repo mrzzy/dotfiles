@@ -33,6 +33,8 @@ vim.o.exrc = true
 vim.o.linebreak = true
 -- dark mode by default
 vim.o.background = "dark"
+-- expand all folds when opening a file with folds
+vim.o.foldenable = false
 
 -- Keyboard Bindings
 local map = vim.keymap.set

@@ -105,6 +105,55 @@ function language.use_plugins(use)
             vim.keymap.set({ "n" }, "<leader><cr>", "<Plug>SnipRunOperator")
         end
     }
+
+    -- treesitter: syntax tree
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = function()
+            -- install or upgrade treesitter parsers
+            local ts = require('nvim-treesitter.install')
+            ts.update { with_sync = true } {
+                "python", "c", "lua", "vim", "vimdoc", "query", "go", "rust", "java", "scala",
+                "bash", "cpp", "css", "html", "javascript", "typescript", "dockerfile",
+                "latex", "lua", "make", "cmake", "sql", "proto", "yaml",
+            }
+        end,
+        config = function()
+            require 'nvim-treesitter.configs'.setup {
+                -- auto install parsers when opening a buffer without one
+                auto_install = true,
+                -- use treesitter for '=' auto indent
+                indent = {
+                    enabled = true,
+                },
+                -- use treesitter for syntax highlighting
+                highlight = {
+                    enabled = true,
+                    -- disable on large files
+                    disable = function(_, buf)
+                        local max_filesize = 100 * 1024 -- 100 KB
+                        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+                        if ok and stats and stats.size > max_filesize then
+                            return true
+                        end
+                    end,
+                },
+                -- treesitter's incremental selection based on syntax nodes
+                incremental_selection = {
+                    enable = true,
+                    keymaps = {
+                        init_selection = '<leader>v',
+                        scope_incremental = '<CR>',
+                        node_incremental = '<TAB>',
+                        node_decremental = '<S-TAB>',
+                    },
+                },
+            }
+            -- use treesitter for code folding
+            vim.o.foldmethod = "expr"
+            vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+        end
+    }
 end
 
 return language
