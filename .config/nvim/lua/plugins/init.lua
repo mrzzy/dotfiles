@@ -16,6 +16,7 @@ if has_packer then
     require("plugins.navigation").use_plugins(use)
     require("plugins.language").use_plugins(use)
     require("plugins.completion").use_plugins(use)
+    require("plugins.execution").use_plugins(use)
 
     -- Colors
     -- syntax highlighting

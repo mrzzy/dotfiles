@@ -76,7 +76,9 @@ function navigation.use_plugins(use)
                 },
             }
         end
-    }    -- tag file manager
+    }
+
+    -- tag file manager
     use {
         "ludovicchabant/vim-gutentags",
         commit = "b77b8fabcb0b052c32fe17efcc0d44f020975244",
