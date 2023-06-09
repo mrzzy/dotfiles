@@ -109,6 +109,7 @@ function language.use_plugins(use)
     -- treesitter: syntax tree
     use {
         'nvim-treesitter/nvim-treesitter',
+        tag = "v0.9.0",
         run = function()
             -- install or upgrade treesitter parsers
             local ts = require('nvim-treesitter.install')

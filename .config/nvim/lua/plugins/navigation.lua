@@ -37,7 +37,46 @@ function navigation.use_plugins(use)
             fzf.register_ui_select()
         end,
     }
-    -- tag file manager
+    -- treesitter textobjects selection & navigation
+    use {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        requires = "nvim-treesitter/nvim-treesitter",
+        config   = function()
+            require('nvim-treesitter.configs').setup {
+                textobjects = {
+                    select = {
+                        enable = true,
+                        -- automatically jump forward to textobjects
+                        lookahead = true,
+                        -- mappings for textobjects
+                        keymaps = {
+                            ["af"] = "@function.outer",
+                            ["if"] = "@function.inner",
+                            ["ac"] = "@class.outer",
+                            ["ic"] = "@class.inner"
+                        },
+                    },
+                    move = {
+                        enable = true,
+                        -- whether to set jumps in the jumplist
+                        set_jumps = true,
+                        goto_next_start = {
+                            ["]m"] = "@function.outer",
+                            ["]]"] = "@class.outer",
+                            ["]o"] = "@loop.inner",
+                            ["]d"] = "@conditional.outer",
+                        },
+                        goto_previous_start = {
+                            ["[m"] = "@function.outer",
+                            ["[["] = "@class.outer",
+                            ["[o"] = "@loop.inner",
+                            ["[d"] = "@conditional.outer",
+                        },
+                    },
+                },
+            }
+        end
+    }    -- tag file manager
     use {
         "ludovicchabant/vim-gutentags",
         commit = "b77b8fabcb0b052c32fe17efcc0d44f020975244",
