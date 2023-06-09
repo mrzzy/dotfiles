@@ -47,10 +47,15 @@ for key, background in pairs({
 }) do
     map({ "n" }, key, function() vim.o.background = background end, {})
 end
-
 for key, fn in pairs({
     -- turn off search highlight
     ["<leader>H"] = vim.cmd.noh,
+    -- close location, quickfix & preview windows
+    ["<leader>W"] = function ()
+        vim.cmd.cclose()
+        vim.cmd.lclose()
+        vim.cmd.pclose()
+    end,
 
     -- LSP key bindings
     -- documentation
