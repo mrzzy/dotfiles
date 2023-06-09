@@ -119,11 +119,15 @@ function dap.use_plugins(use)
         end,
         config = function()
             local install_path = require("plugins.mason").install_path
-            require("dap-go").setup {
+            local dap_go = require("dap-go")
+            dap_go.setup {
                 delve = {
                     path = install_path("delve") .. "/dlv",
                 }
             }
+
+            -- key binding to debug nearest test case 
+            vim.keymap.set({ "n" }, "<leader>dt", dap_go.debug_test)
         end
     }
 end
