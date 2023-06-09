@@ -25,7 +25,8 @@ function completion.use_plugins(use)
                 commit = "09ce9a70bd787d4ce188f2de1390f656f119347c",
                 requires = { { "honza/vim-snippets" } },
                 config = function()
-                    -- load snapmate snippets from plugins (eg. vim-snippets) into luasnip's catalogue
+                    -- load snapmate snippets from plugins (eg. vim-snippets) &
+                    -- runtime path nvim config into luasnip's catalogue
                     require("luasnip.loaders.from_snipmate").lazy_load()
                 end,
             },
