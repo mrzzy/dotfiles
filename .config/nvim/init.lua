@@ -53,11 +53,13 @@ for key, fn in pairs({
     -- turn off search highlight
     ["<leader>H"] = vim.cmd.noh,
     -- close location, quickfix & preview windows
-    ["<leader>W"] = function ()
+    ["<leader>W"] = function()
         vim.cmd.cclose()
         vim.cmd.lclose()
         vim.cmd.pclose()
     end,
+    -- view manpage of keyword under cursor
+    ["gK"] = function() vim.cmd.Man(vim.fn.expand("<cword>")) end,
 
     -- LSP key bindings
     -- documentation
