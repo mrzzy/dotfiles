@@ -63,6 +63,8 @@ alias m=make
 alias tf=terraform
 alias fd=fdfind
 alias bat=batcat
+alias d=pushd
+alias D=popd
 # redirect vim to neovim
 alias vim=nvim
 # configure less to interpret escape sequences for colored output
