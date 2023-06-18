@@ -30,15 +30,15 @@ function dap.use_plugins(use)
 
             -- debugging key bindings
             for key, dap_fn in pairs({
-                ["<leader>dc"] = function ()
+                ["<leader>dc"] = function()
                     -- load launch.json debugging if one exists
                     local launch_json = ".vscode/launch.json"
                     if vim.fn.filereadable(launch_json) then
                         require("dap.ext.vscode").load_launchjs(launch_json, {
-                                -- adapters -> filetype mapping
-                                cppdbg = { "c", "cpp", "rust" },
-                                ["pwa-node"] = { "javascript", "typescript" },
-                            })
+                            -- adapters -> filetype mapping
+                            cppdbg = { "c", "cpp", "rust" },
+                            ["pwa-node"] = { "javascript", "typescript" },
+                        })
                     end
                     d.continue()
                 end,
@@ -80,7 +80,13 @@ function dap.use_plugins(use)
             }
         },
         config = function()
-            require("dap-vscode-js").setup {}
+            vim.api.nvim_create_autocmd({ "FileType" }, {
+                group = vim.api.nvim_create_augroup("dap-vscode-js", { clear = true }),
+                pattern = { "javascript", "typescript" },
+                callback = function()
+                    require("dap-vscode-js").setup {}
+                end,
+            })
         end
     }
 
@@ -96,13 +102,19 @@ function dap.use_plugins(use)
             require("mason.api.command").MasonInstall { "debugpy" }
         end,
         config = function()
-            local install_path = require("plugins.mason").install_path
-            local dap_py = require("dap-python")
-            dap_py.setup(install_path("debugpy") .. "/venv/bin/python")
-            dap_py.test_runner = "pytest"
-            -- key binding to debug nearest test case / class
-            vim.keymap.set({ "n" }, "<leader>dt", dap_py.test_method)
-            vim.keymap.set({ "n" }, "<leader>dT", dap_py.test_class)
+            vim.api.nvim_create_autocmd({ "FileType" }, {
+                group = vim.api.nvim_create_augroup("dap-python", { clear = true }),
+                pattern = { "python" },
+                callback = function()
+                    local install_path = require("plugins.mason").install_path
+                    local dap_py = require("dap-python")
+                    dap_py.setup(install_path("debugpy") .. "/venv/bin/python")
+                    dap_py.test_runner = "pytest"
+                    -- key binding to debug nearest test case / class
+                    vim.keymap.set({ "n" }, "<leader>dt", dap_py.test_method, { buffer = true })
+                    vim.keymap.set({ "n" }, "<leader>dT", dap_py.test_class, { buffer = true })
+                end,
+            })
         end
     }
 
@@ -118,16 +130,21 @@ function dap.use_plugins(use)
             require("mason.api.command").MasonInstall { "delve" }
         end,
         config = function()
-            local install_path = require("plugins.mason").install_path
-            local dap_go = require("dap-go")
-            dap_go.setup {
-                delve = {
-                    path = install_path("delve") .. "/dlv",
-                }
-            }
-
-            -- key binding to debug nearest test case 
-            vim.keymap.set({ "n" }, "<leader>dt", dap_go.debug_test)
+            vim.api.nvim_create_autocmd({ "FileType" }, {
+                group = vim.api.nvim_create_augroup("dap-go", { clear = true }),
+                pattern = { "go" },
+                callback = function()
+                    local install_path = require("plugins.mason").install_path
+                    local dap_go = require("dap-go")
+                    dap_go.setup {
+                        delve = {
+                            path = install_path("delve") .. "/dlv",
+                        }
+                    }
+                    -- key binding to debug nearest test case
+                    vim.keymap.set({ "n" }, "<leader>dt", dap_go.debug_test, { buffer = true })
+                end,
+            })
         end
     }
 end
