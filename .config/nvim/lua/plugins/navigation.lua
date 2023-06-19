@@ -17,20 +17,31 @@ function navigation.use_plugins(use)
             local map = vim.keymap.set
             -- file navigation
             map({ "n" }, "<C-p>", fzf.git_files, {})
-            map({ "n" }, "<M-p>", fzf.files, {})
+            map({ "n" }, "<M-p>", fzf.git_files, {})
+            map({ "n" }, "<C-a>", fzf.args, {})
+            map({ "n" }, "<M-a>", fzf.args, {})
             map({ "n" }, "<C-Space>", fzf.buffers, {})
+            map({ "n" }, "<M-Space>", fzf.buffers, {})
             -- tag navigation
             map({ "n" }, "<C-t>", fzf.tags_live_grep, {})
             map({ "n" }, "<M-t>", fzf.tags_live_grep, {})
             -- lsp navigation
             map({ "n" }, "<C-j>", fzf.lsp_document_symbols, {})
+            map({ "n" }, "<M-j>", fzf.lsp_document_symbols, {})
             map({ "n" }, "<C-k>", fzf.lsp_live_workspace_symbols, {})
+            map({ "n" }, "<M-k>", fzf.lsp_live_workspace_symbols, {})
             -- grep search
             -- <C-_> key is received by nvim when user presses <C-/>
             map({ "n" }, "<C-_>", fzf.live_grep_native, {})
             map({ "n" }, "<M-/>", fzf.live_grep_native, {})
-            -- switching buffers & branches
+            -- git
             map({ "n" }, "<C-g>", fzf.git_branches, {})
+            map({ "n" }, "<M-g>", fzf.git_branches, {})
+            map({ "n" }, "<C-s>", fzf.git_stash, {})
+            map({ "n" }, "<M-s>", fzf.git_stash, {})
+            -- pasting registers
+            map({ "n" }, "<C-c>", fzf.registers, {})
+            map({ "n" }, "<M-c>", fzf.registers, {})
 
             -- register fzf.lua as ui picker for vim.ui.select()
             -- improves ux when nvim prompts for user input (eg. lsp code action)
