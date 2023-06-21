@@ -70,7 +70,7 @@ alias vim=nvim
 # configure less to interpret escape sequences for colored output
 alias less="less -R"
 # grep with color
-alias grep="grep --color=always"
+alias grep="grep --color=auto"
 
 # Prompt
 # display current repo & branch
