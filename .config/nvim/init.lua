@@ -44,53 +44,53 @@ vim.g.mapleader = ","
 map({ "n" }, "<leader>w", "<C-w>", { silent = true, nowait = true, noremap = true })
 -- toggle between light & dark colorschemes
 for key, background in pairs({
-    ["<leader>hl"] = "light",
-    ["<leader>hd"] = "dark",
+  ["<leader>hl"] = "light",
+  ["<leader>hd"] = "dark",
 }) do
-    map({ "n" }, key, function() vim.o.background = background end, {})
+  map({ "n" }, key, function() vim.o.background = background end, {})
 end
 for key, fn in pairs({
-    -- turn off search highlight
-    ["<leader>H"] = vim.cmd.noh,
-    -- close location, quickfix & preview windows
-    ["<leader>W"] = function()
-        vim.cmd.cclose()
-        vim.cmd.lclose()
-        vim.cmd.pclose()
-    end,
-    -- view manpage of keyword under cursor
-    ["gK"] = function() vim.cmd.Man(vim.fn.expand("<cword>")) end,
+  -- turn off search highlight
+  ["<leader>H"] = vim.cmd.noh,
+  -- close location, quickfix & preview windows
+  ["<leader>W"] = function()
+    vim.cmd.cclose()
+    vim.cmd.lclose()
+    vim.cmd.pclose()
+  end,
+  -- view manpage of keyword under cursor
+  ["gK"] = function() vim.cmd.Man(vim.fn.expand("<cword>")) end,
 
-    -- LSP key bindings
-    -- documentation
-    ["K"] = vim.lsp.buf.hover,
-    -- navigation
-    ["gT"] = vim.lsp.buf.type_definition,
-    ["gD"] = vim.lsp.buf.declaration,
-    ["gd"] = vim.lsp.buf.definition,
-    ["gi"] = vim.lsp.buf.implementation,
-    ["gr"] = vim.lsp.buf.references,
-    -- workspace folders
-    ["<leader>wa"] = vim.lsp.buf.add_workspace_folder,
-    ["<leader>wd"] = vim.lsp.buf.remove_workspace_folder,
-    ["<leader>ww"] = function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end,
-    -- code actions
-    ["<leader>cc"] = vim.lsp.buf.code_action,
-    ["<leader>cw"] = vim.lsp.buf.rename,
-    ["<leader>cf"] = vim.lsp.buf.format,
-    -- code lens
-    ["<leader>cl"] = vim.lsp.codelens.run,
-    -- lsp commands
-    ["<leader>ll"] = function() vim.cmd [[LspInfo]] end,
-    ["<leader>lr"] = function() vim.cmd [[LspRestart]] end,
-    ["<M-j>"] = vim.lsp.buf.document_symbol,
-    -- diagnostics key bindings
-    ["[e"] = vim.diagnostic.goto_prev,
-    ["]e"] = vim.diagnostic.goto_next,
-    ["<leader>ee"] = vim.diagnostic.open_float,
-    ["<C-e>"] = vim.diagnostic.setqflist,
+  -- LSP key bindings
+  -- documentation
+  ["K"] = vim.lsp.buf.hover,
+  -- navigation
+  ["gT"] = vim.lsp.buf.type_definition,
+  ["gD"] = vim.lsp.buf.declaration,
+  ["gd"] = vim.lsp.buf.definition,
+  ["gi"] = vim.lsp.buf.implementation,
+  ["gr"] = vim.lsp.buf.references,
+  -- workspace folders
+  ["<leader>wa"] = vim.lsp.buf.add_workspace_folder,
+  ["<leader>wd"] = vim.lsp.buf.remove_workspace_folder,
+  ["<leader>ww"] = function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end,
+  -- code actions
+  ["<leader>cc"] = vim.lsp.buf.code_action,
+  ["<leader>cw"] = vim.lsp.buf.rename,
+  ["<leader>cf"] = vim.lsp.buf.format,
+  -- code lens
+  ["<leader>cl"] = vim.lsp.codelens.run,
+  -- lsp commands
+  ["<leader>ll"] = function() vim.cmd [[LspInfo]] end,
+  ["<leader>lr"] = function() vim.cmd [[LspRestart]] end,
+  ["<M-j>"] = vim.lsp.buf.document_symbol,
+  -- diagnostics key bindings
+  ["[e"] = vim.diagnostic.goto_prev,
+  ["]e"] = vim.diagnostic.goto_next,
+  ["<leader>ee"] = vim.diagnostic.open_float,
+  ["<C-e>"] = vim.diagnostic.setqflist,
 }) do
-    map({ "n" }, key, fn, { noremap = true })
+  map({ "n" }, key, fn, { noremap = true })
 end
