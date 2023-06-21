@@ -22,7 +22,6 @@ function M.lookback()
   return vim.api.nvim_buf_get_text(buffer, line - 1, col - 1, line - 1, col, {})[1]
 end
 
-
 -- Setup the autocomplete engine based on nvim-cmp & neovim's LSP client
 function M.setup_cmp()
   local cmp = require("cmp")
@@ -101,7 +100,6 @@ function M.setup_cmp()
     },
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-      { name = "cmdline" },
       { name = "path" },
       buffer_src_all,
     })
