@@ -77,13 +77,14 @@ alias grep="grep --color=auto"
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr '+'
-zstyle ':vcs_info:git:*' formats '%u%r[%b]'
+zstyle ':vcs_info:git:*' formats '%u[%b]'
 # render prompt before running command
 precmd() {
     vcs_info
     # style prompt using https://github.com/sainnhe/gruvbox-material palette
     PROMPT='%B%F{#d4be98}%#%f%b '
-    RPROMPT='%F{#7c6f64}${vcs_info_msg_0_} %m(%f%(?.%F{#6f8352}OK.%F{red}%?)%F{#7c6f64})%f'
+    # format: path +[branch] host(status code)
+    RPROMPT='%F{#7c6f64} %(3~|%-1~/…/%1~|%2~) ${vcs_info_msg_0_} %m(%f%(?.%F{#6f8352}OK.%F{red}%?)%F{#7c6f64})%f'
 }
 
 # Colors
