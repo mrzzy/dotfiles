@@ -76,6 +76,22 @@ function jvm.use_plugins(use)
           metals.initialize_or_attach {
             on_attach = function(_)
               metals.setup_dap()
+
+              -- default dap debug configuration for scala
+              require("dap").configurations.scala = {
+                {
+                  type = "scala",
+                  request = "launch",
+                  name = "Run or Test Target",
+                  metals = {
+                    runType = "runOrTestFile",
+                  },
+                },
+              }
+
+              -- key binding to debug test case
+              -- nvim-metals registers debug test case as code lenses
+              vim.keymap.set({ "n" }, "<leader>dt", vim.lsp.codelens.run, { buffer = true })
             end
           }
         end,
