@@ -16,8 +16,8 @@ function navigation.use_plugins(use)
       local fzf = require("fzf-lua")
       local map = vim.keymap.set
       -- file navigation
-      map({ "n" }, "<C-p>", fzf.git_files, {})
-      map({ "n" }, "<M-p>", fzf.git_files, {})
+      map({ "n" }, "<C-p>", fzf.files, {})
+      map({ "n" }, "<M-p>", fzf.files, {})
       map({ "n" }, "<C-a>", fzf.args, {})
       map({ "n" }, "<M-a>", fzf.args, {})
       map({ "n" }, "<C-Space>", fzf.buffers, {})
