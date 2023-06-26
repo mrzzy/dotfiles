@@ -33,13 +33,6 @@ function completion.use_plugins(use)
     },
     config = autocomplete.setup_cmp,
   }
-
-  -- populate 'wildignore' option with the contents of .gitignore
-  -- improves performance filesystem completion (eg. globbing) by reducing file candidates
-  use {
-    "octref/RootIgnore",
-    commit = "e0142359f297021f8d35f26476bff78f4938b297",
-  }
 end
 
 return completion
