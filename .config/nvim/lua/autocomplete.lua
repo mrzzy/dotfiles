@@ -100,6 +100,7 @@ function M.setup_cmp()
     },
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
+      { name = "cmdline" },
       { name = "path" },
       buffer_src_all,
     })
