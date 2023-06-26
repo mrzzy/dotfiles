@@ -18,8 +18,8 @@ function navigation.use_plugins(use)
       -- file navigation
       map({ "n" }, "<C-p>", fzf.files, {})
       map({ "n" }, "<M-p>", fzf.files, {})
-      map({ "n" }, "<C-a>", fzf.args, {})
-      map({ "n" }, "<M-a>", fzf.args, {})
+      map({ "n" }, "<C-n>", fzf.args, {})
+      map({ "n" }, "<M-n>", fzf.args, {})
       map({ "n" }, "<C-Space>", fzf.buffers, {})
       map({ "n" }, "<M-Space>", fzf.buffers, {})
       -- tag navigation
