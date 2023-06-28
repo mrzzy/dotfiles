@@ -27,7 +27,7 @@ jobs:
             box/ansible/roles/dotfiles/defaults/main.yaml
 
       - name: Create Pull Request on WARP
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v5
         with:
           token: "${{ secrets.GH_PUSH_TOKEN }}"
           # Commit
@@ -41,4 +41,4 @@ jobs:
       - name: Automerge Pull Request on WARP
         env:
           GH_TOKEN: "${{ secrets.GH_PUSH_TOKEN }}"
-        run: gh pr merge --squash --auto
+        run: gh pr merge --squash --auto ${PULL_REQUEST_NUMBER}
