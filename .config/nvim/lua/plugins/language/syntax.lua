@@ -112,6 +112,17 @@ function syntax.use_plugins(use)
           },
         },
       }
+
+      -- key bindings
+      -- repeat movement with ; and ,
+      local ts_repeat = require("nvim-treesitter.textobjects.repeatable_move")
+      vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat.repeat_last_move)
+      vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat.repeat_last_move_opposite)
+      -- make builtin f, F, t, T also repeatable with ; and ,
+      vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat.builtin_f)
+      vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat.builtin_F)
+      vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat.builtin_t)
+      vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat.builtin_T)
     end
   }
 end
