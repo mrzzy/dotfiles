@@ -35,6 +35,8 @@ vim.o.linebreak = true
 vim.o.background = "dark"
 -- expand all folds when opening a file with folds
 vim.o.foldenable = false
+-- disable nested folding
+vim.o.foldnestmax = 1
 
 -- Keyboard Bindings
 local map = vim.keymap.set

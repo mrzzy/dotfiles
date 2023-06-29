@@ -58,6 +58,62 @@ function syntax.use_plugins(use)
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
     end
   }
+  -- treesitter textobjects selection & navigation
+  use {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    requires = "nvim-treesitter/nvim-treesitter",
+    config   = function()
+    require('nvim-treesitter.configs').setup {
+      textobjects = {
+          select = {
+            enable = true,
+            -- automatically jump forward to textobjects
+            lookahead = true,
+            -- mappings for textobjects
+            keymaps = {
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+              ["ac"] = "@class.outer",
+              ["ic"] = "@class.inner",
+              ["a<TAB>"] = "@block.outer",
+              ["i<TAB>"] = "@block.inner",
+              ["a,"] = "@parameter.outer",
+              ["i,"] = "@parameter.inner",
+            },
+          },
+          move = {
+            enable = true,
+            -- whether to set jumps in the jumplist
+            set_jumps = true,
+            goto_next_start = {
+              ["]m"] = "@function.outer",
+              ["]]"] = "@class.outer",
+              ["]<TAB>"] = "@block.inner",
+              ["],"] = "@parameter.inner",
+            },
+            goto_next_end = {
+              ["]M"] = "@function.outer",
+              ["]}"] = "@class.outer",
+              ["]<CR>"] = "@block.inner",
+              ["]<"] = "@parameter.inner",
+            },
+            goto_previous_start = {
+              ["[m"] = "@function.outer",
+              ["[["] = "@class.outer",
+              ["[<TAB>"] = "@block.inner",
+              ["[,"] = "@parameter.inner",
+            },
+            goto_previous_end = {
+              ["[M"] = "@function.outer",
+              ["[}"] = "@class.outer",
+              ["[<CR>"] = "@block.inner",
+              ["[<"] = "@parameter.inner",
+            },
+          },
+        },
+      }
+    end
+  }
 end
 
 return syntax
