@@ -26,13 +26,20 @@ end
 function M.setup_cmp()
   local cmp = require("cmp")
   local luasnip = require("luasnip")
-  -- complete from all loaded buffers
-  local buffer_src_all = {
-    name = "buffer",
-    option = {
-      get_bufnrs = vim.api.nvim_list_bufs,
+
+  -- buffer sources group
+  local buffers = {
+    -- complete from current buffer
+    { name = "buffer" },
+    -- complete from all loaded buffers
+    {
+      name = "buffer",
+      option = {
+        get_bufnrs = vim.api.nvim_list_bufs,
+      }
     }
   }
+
   cmp.setup({
     -- trigger completion after 'keyword_length' characters
     completion = {
@@ -44,10 +51,10 @@ function M.setup_cmp()
       {
         { name = "nvim_lsp_signature_help" },
         { name = "nvim_lsp" },
-        { name = "path" },
         { name = "luasnip" },
-        buffer_src_all,
-      }
+        { name = "path" },
+      },
+      buffers
     ),
     -- snippet expansion
     snippet = {
@@ -100,10 +107,11 @@ function M.setup_cmp()
     },
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-      { name = "cmdline" },
-      { name = "path" },
-      buffer_src_all,
-    })
+        { name = "cmdline" },
+        { name = "path" },
+      },
+      buffers
+    )
   })
 end
 
