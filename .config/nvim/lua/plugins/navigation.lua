@@ -153,8 +153,8 @@ function navigation.use_plugins(use)
       map({ "n" }, "<leader>f.", ":NvimTreeFindFile<CR>", {})
       map({ "n" }, "<leader>fa", function()
         -- populate arglist with bookmarked files
-        local fn = require("functional")
-        vim.cmd.args(fn.map(require("nvim-tree.api").marks.list(), function(node)
+        local utils = require("utilities")
+        vim.cmd.args(utils.map(require("nvim-tree.api").marks.list(), function(node)
           return node.absolute_path
         end))
       end, {})

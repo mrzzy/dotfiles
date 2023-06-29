@@ -39,11 +39,7 @@ function syntax.use_plugins(use)
           enabled = true,
           -- disable on large files
           disable = function(_, buf)
-            local max_filesize = 100 * 1024             -- 100 KB
-            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-            if ok and stats and stats.size > max_filesize then
-              return true
-            end
+            return require("utilities").is_large(buf)
           end,
         },
         -- treesitter's incremental selection based on syntax nodes

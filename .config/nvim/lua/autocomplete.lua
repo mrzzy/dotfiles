@@ -26,16 +26,31 @@ end
 function M.setup_cmp()
   local cmp = require("cmp")
   local luasnip = require("luasnip")
+  local utils = require("utilities")
 
   -- buffer sources group
   local buffers = {
-    -- complete from current buffer
-    { name = "buffer" },
+    -- complete from visible buffers
+    {
+      name = "buffer",
+      option = {
+        get_bufnrs = function ()
+          local visible_bufs = utils.map(vim.api.nvim_list_wins(), vim.api.nvim_win_get_buf)
+          return utils.filter(visible_bufs, function(buf)
+            return not utils.is_large(buf)
+          end)
+        end
+      }
+    },
     -- complete from all loaded buffers
     {
       name = "buffer",
       option = {
-        get_bufnrs = vim.api.nvim_list_bufs,
+        get_bufnrs = function()
+          return utils.filter(vim.api.nvim_list_bufs(), function(buf)
+            return vim.api.nvim_buf_is_loaded(buf) and not utils.is_large(buf)
+          end)
+        end
       }
     }
   }
