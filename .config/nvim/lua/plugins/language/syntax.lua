@@ -63,22 +63,24 @@ function syntax.use_plugins(use)
     "nvim-treesitter/nvim-treesitter-textobjects",
     requires = "nvim-treesitter/nvim-treesitter",
     config   = function()
-    require('nvim-treesitter.configs').setup {
-      textobjects = {
+      require('nvim-treesitter.configs').setup {
+        textobjects = {
           select = {
             enable = true,
             -- automatically jump forward to textobjects
             lookahead = true,
             -- mappings for textobjects
             keymaps = {
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-              ["ac"] = "@class.outer",
-              ["ic"] = "@class.inner",
+              ["am"] = "@function.outer",
+              ["im"] = "@function.inner",
+              ["a]"] = "@class.outer",
+              ["i]"] = "@class.inner",
               ["a<TAB>"] = "@block.outer",
               ["i<TAB>"] = "@block.inner",
               ["a,"] = "@parameter.outer",
               ["i,"] = "@parameter.inner",
+              ["a/"] = "@comment.outer",
+              ["i/"] = "@comment.inner",
             },
           },
           move = {
@@ -90,24 +92,28 @@ function syntax.use_plugins(use)
               ["]]"] = "@class.outer",
               ["]<TAB>"] = "@block.inner",
               ["],"] = "@parameter.inner",
+              ["]/"] = "@comment.outer",
             },
             goto_next_end = {
               ["]M"] = "@function.outer",
               ["]}"] = "@class.outer",
               ["]<CR>"] = "@block.inner",
               ["]<"] = "@parameter.inner",
+              ["]?"] = "@comment.outer",
             },
             goto_previous_start = {
               ["[m"] = "@function.outer",
               ["[["] = "@class.outer",
               ["[<TAB>"] = "@block.inner",
               ["[,"] = "@parameter.inner",
+              ["[/"] = "@comment.outer",
             },
             goto_previous_end = {
               ["[M"] = "@function.outer",
               ["[}"] = "@class.outer",
               ["[<CR>"] = "@block.inner",
               ["[<"] = "@parameter.inner",
+              ["[?"] = "@comment.outer",
             },
           },
         },
