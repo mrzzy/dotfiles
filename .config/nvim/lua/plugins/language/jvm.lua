@@ -1,24 +1,22 @@
 --
 -- dotfiles
 -- Neovim config
--- Language Support
+-- JVM Language Support
 --
 
-local jvm = {}
-
-function jvm.use_plugins(use)
+return {
   -- java
-  use {
+  {
     "mfussenegger/nvim-jdtls",
     tag = "365811ecf97a08d0e2055fba210d65017344fd15",
-    requires = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
-    run = function()
+    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+    build = function()
       require("mason.api.command").MasonInstall {
         "java-debug-adapter",         -- java
         "java-test",                  -- java (tests)
       }
     end,
-    config = function()
+    config = function(_)
       -- autocommand group to start jdtls in java filetypes
       vim.api.nvim_create_autocmd({ "FileType" }, {
         group = vim.api.nvim_create_augroup("jdtls", { clear = true }),
@@ -36,7 +34,6 @@ function jvm.use_plugins(use)
           local bundles = {}
           vim.list_extend(bundles, find_jars("java-debug-adaptor"))
           vim.list_extend(bundles, find_jars("java-test"))
-
           jdtls.start_or_attach {
             -- use jdtls installed by mason
             cmd = {
@@ -59,15 +56,15 @@ function jvm.use_plugins(use)
         end,
       })
     end
-  }
+  },
   -- scala
-  use {
+  {
     "scalameta/nvim-metals",
-    requires = { "mfussenegger/nvim-dap" },
+    dependencies = { "mfussenegger/nvim-dap" },
     commit = "0a83e0bfd45ab745ea35757b117a080560e8640e",
     -- install metals language server
-    run = ":MetalsInstall",
-    config = function()
+    build = ":MetalsInstall",
+    config = function(_)
       vim.api.nvim_create_autocmd({ "FileType" }, {
         group = vim.api.nvim_create_augroup("metals", { clear = true }),
         pattern = { "scala", "sbt" },
@@ -97,7 +94,5 @@ function jvm.use_plugins(use)
         end,
       })
     end,
-  }
-end
-
-return jvm
+  },
+}
