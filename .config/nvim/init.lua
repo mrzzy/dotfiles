@@ -3,7 +3,6 @@
 -- nvim config
 --
 
-require("plugins")
 -- tab expansion
 vim.o.expandtab = true
 vim.o.shiftwidth = 2
@@ -96,3 +95,5 @@ for key, fn in pairs({
 }) do
   map({ "n" }, key, fn, { noremap = true })
 end
+
+require("plugins")

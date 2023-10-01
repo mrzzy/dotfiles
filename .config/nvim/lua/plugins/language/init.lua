@@ -5,44 +5,41 @@
 --
 
 local langserver = require("langserver")
-local language = {}
 
-local plenary_version = "v0.1.3"
 
--- Register Completion Plugins with given packer.nvim 'use' callback.
-function language.use_plugins(use)
-  require("plugins.language.jvm").use_plugins(use)
-  require("plugins.language.dap").use_plugins(use)
-  require("plugins.language.syntax").use_plugins(use)
+-- Language Support Plugins
+return {
+  { import = "plugins.language.jvm" },
+  { import = "plugins.language.dap" },
+  { import = "plugins.language.syntax" },
 
   -- package manager for language servers & debug adaptors
-  use {
+  {
     "williamboman/mason.nvim",
     commit = "718966fd3204bd1e4aa5af0a032ce1e916295ecd",
-    config = function() require('mason').setup {} end,
-  }
+  },
 
   -- language servers
-  use {
+  {
     "neovim/nvim-lspconfig",
     tag = "v0.1.6",
-    requires = {
-      "williamboman/mason.nvim",
-      {
-        "williamboman/mason-lspconfig.nvim",
-        commit = "93e58e100f37ef4fb0f897deeed20599dae9d128",
-        config = function() require('mason-lspconfig').setup {} end,
-      },
-    },
     run = langserver.install,
     config = langserver.setup_lsp,
-  }
-
+  },
+  -- Mason - lspconfig integration
+  {
+    "williamboman/mason-lspconfig.nvim",
+    commit = "93e58e100f37ef4fb0f897deeed20599dae9d128",
+    dependencies = {  
+      "williamboman/mason.nvim",
+      "neovim/nvim-lspconfig",
+    }
+  },
   -- null ls: linters, formatters & code actions
-  use {
+  {
     "jose-elias-alvarez/null-ls.nvim",
     commit = "71797bb303ac99a4435592e15068f127970513d7",
-    requires = { { "nvim-lua/plenary.nvim", tag = plenary_version } },
+    dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local null_ls = require("null-ls")
       null_ls.setup {
@@ -78,7 +75,5 @@ function language.use_plugins(use)
         },
       }
     end,
-  }
-end
-
-return language
+  },
+}

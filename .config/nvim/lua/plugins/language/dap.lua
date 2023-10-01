@@ -4,14 +4,12 @@
 -- Debug Adaptors
 --
 
-local dap = {}
-
-function dap.use_plugins(use)
-  use {
+return {
+  {
     "mfussenegger/nvim-dap",
     tag = "0.6.0",
-    requires = { "williamboman/mason.nvim" },
-    run = function()
+    dependencies = { "williamboman/mason.nvim" },
+    build = function()
       require("mason.api.command").MasonInstall {
         "cpptools",         -- c,c++,rust
       }
@@ -65,88 +63,73 @@ function dap.use_plugins(use)
         vim.keymap.set({ 'n' }, key, dap_fn, { noremap = true })
       end
     end
-  }   -- js debugging
-  use {
+  },   
+  -- js debugging
+  {
+      "microsoft/vscode-js-debug",
+      lazy = true,
+      build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
+  },
+  {
     "mxsdev/nvim-dap-vscode-js",
+    lazy = true,
+    ft ={ "javascript", "typescript" },
     tag = "v1.1.0",
-    requires = {
+    dependencies = {
       "williamboman/mason.nvim",
       "mfussenegger/nvim-dap",
-      -- manual installation of vscode-js-debug as mason's installer for it is broken
-      {
-        "microsoft/vscode-js-debug",
-        opt = true,
-        run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
-      }
+      "microsoft/vscode-js-debug",
     },
-    config = function()
-      vim.api.nvim_create_autocmd({ "FileType" }, {
-        group = vim.api.nvim_create_augroup("dap-vscode-js", { clear = true }),
-        pattern = { "javascript", "typescript" },
-        callback = function()
-          require("dap-vscode-js").setup {}
-        end,
-      })
-    end
-  }
+  },
 
   -- python debugging
-  use {
+  {
     "mfussenegger/nvim-dap-python",
     commit = "37b4cba02e337a95cb62ad1609b3d1dccb2e5d42",
-    requires = {
+    dependencies = {
       "williamboman/mason.nvim",
       "mfussenegger/nvim-dap",
     },
-    run = function()
+    build = function()
       require("mason.api.command").MasonInstall { "debugpy" }
     end,
+    lazy = true,
+    ft = { "python" },
     config = function()
-      vim.api.nvim_create_autocmd({ "FileType" }, {
-        group = vim.api.nvim_create_augroup("dap-python", { clear = true }),
-        pattern = { "python" },
-        callback = function()
-          local install_path = require("plugins.mason").install_path
-          local dap_py = require("dap-python")
-          dap_py.setup(install_path("debugpy") .. "/venv/bin/python")
-          dap_py.test_runner = "pytest"
-          -- key binding to debug nearest test case / class
-          vim.keymap.set({ "n" }, "<leader>dt", dap_py.test_method, { buffer = true })
-          vim.keymap.set({ "n" }, "<leader>dT", dap_py.test_class, { buffer = true })
-        end,
-      })
+      local install_path = require("plugins.mason").install_path
+      local dap_py = require("dap-python")
+      dap_py.setup(install_path("debugpy") .. "/venv/bin/python")
+      dap_py.test_runner = "pytest"
+      -- key binding to debug nearest test case / class
+      vim.keymap.set({ "n" }, "<leader>dt", dap_py.test_method, { buffer = true })
+      vim.keymap.set({ "n" }, "<leader>dT", dap_py.test_class, { buffer = true })
     end
-  }
+  },
 
   -- go debugging
-  use {
+  {
     "leoluz/nvim-dap-go",
     commit = "cdf604a5703838f65fdee7c198f6cb59b563ef6f",
-    require = {
+    dependencies = {
       "williamboman/mason.nvim",
       "mfussenegger/nvim-dap",
     },
-    run = function()
+    build = function()
       require("mason.api.command").MasonInstall { "delve" }
     end,
+    lazy = true,
+    ft = { "go" },
     config = function()
-      vim.api.nvim_create_autocmd({ "FileType" }, {
-        group = vim.api.nvim_create_augroup("dap-go", { clear = true }),
-        pattern = { "go" },
-        callback = function()
-          local install_path = require("plugins.mason").install_path
-          local dap_go = require("dap-go")
-          dap_go.setup {
-            delve = {
-              path = install_path("delve") .. "/dlv",
-            }
-          }
-          -- key binding to debug nearest test case
-          vim.keymap.set({ "n" }, "<leader>dt", dap_go.debug_test, { buffer = true })
-        end,
-      })
+      local install_path = require("plugins.mason").install_path
+      local dap_go = require("dap-go")
+      dap_go.setup {
+        delve = {
+          path = install_path("delve") .. "/dlv",
+        }
+      }
+      -- key binding to debug nearest test case
+      vim.keymap.set({ "n" }, "<leader>dt", dap_go.debug_test, { buffer = true })
     end
-  }
-end
+  },
 
-return dap
+}

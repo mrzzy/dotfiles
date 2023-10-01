@@ -4,12 +4,9 @@
 -- Navigation Plugins
 --
 
-
-local navigation = {}
--- Register Editor Plugins with given packer.nvim 'use' callback.
-function navigation.use_plugins(use)
-  -- Navigation
-  use {
+return {
+  -- fuzzy navigation
+  {
     "ibhagwan/fzf-lua",
     commit = "446429138a841b45a2a7743cc08d7bc17493e7c8",
     config = function()
@@ -47,10 +44,10 @@ function navigation.use_plugins(use)
       -- improves ux when nvim prompts for user input (eg. lsp code action)
       fzf.register_ui_select()
     end,
-  }
+  },
 
   -- tag file manager
-  use {
+  {
     "ludovicchabant/vim-gutentags",
     commit = "b77b8fabcb0b052c32fe17efcc0d44f020975244",
     config = function()
@@ -67,14 +64,14 @@ function navigation.use_plugins(use)
         end,
       })
     end
-  }
+  },
   -- project specific file navigation
-  use {
+  {
     "tpope/vim-projectionist",
     commit = "d4aee3035699b82b3789cee0e88dad0e38c423ab"
-  }
+  },
   -- file drawer
-  use {
+  {
     "nvim-tree/nvim-tree.lua",
     commit = "59e65d88db177ad1e6a8cffaafd4738420ad20b6",
     config = function()
@@ -122,7 +119,5 @@ function navigation.use_plugins(use)
         end))
       end, {})
     end,
-  }
-end
-
-return navigation
+  },
+}
