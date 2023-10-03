@@ -8,7 +8,7 @@ return {
   -- java
   {
     "mfussenegger/nvim-jdtls",
-    tag = "365811ecf97a08d0e2055fba210d65017344fd15",
+    version = "0.2.0",
     dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
     build = function()
       require("mason.api.command").MasonInstall {

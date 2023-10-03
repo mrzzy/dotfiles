@@ -4,20 +4,18 @@
 -- Language Support: Syntax
 --
 
-local syntax = {}
-
-function syntax.use_plugins(use)
+return {
   -- neovim lua
-  use {
+  {
     "folke/neodev.nvim",
     tag = "v2.5.2",
-  }
+  },
 
   -- treesitter: syntax tree
-  use {
+  {
     'nvim-treesitter/nvim-treesitter',
     tag = "v0.9.0",
-    run = function()
+    build = function()
       -- install or upgrade treesitter parsers
       local ts = require('nvim-treesitter.install')
       ts.update { with_sync = true } {
@@ -57,11 +55,11 @@ function syntax.use_plugins(use)
       vim.o.foldmethod = "expr"
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
     end
-  }
+  },
   -- treesitter textobjects selection & navigation
-  use {
+  {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    requires = "nvim-treesitter/nvim-treesitter",
+    dependencies = "nvim-treesitter/nvim-treesitter",
     config   = function()
       require('nvim-treesitter.configs').setup {
         textobjects = {
@@ -130,7 +128,6 @@ function syntax.use_plugins(use)
       vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat.builtin_t)
       vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat.builtin_T)
     end
-  }
-end
+  },
+}
 
-return syntax
