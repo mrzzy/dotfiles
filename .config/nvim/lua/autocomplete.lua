@@ -35,10 +35,10 @@ function M.setup_cmp()
 			name = "buffer",
 			option = {
 				get_bufnrs = function()
-					local visible_bufs = utils.map(vim.api.nvim_list_wins(), vim.api.nvim_win_get_buf)
-					return utils.filter(visible_bufs, function(buf)
+					local visible_bufs = vim.tbl_map(vim.api.nvim_win_get_buf, vim.api.nvim_list_wins())
+					return vim.tbl_filter(function(buf)
 						return not utils.is_large(buf)
-					end)
+					end, visible_bufs)
 				end,
 			},
 		},
@@ -47,9 +47,9 @@ function M.setup_cmp()
 			name = "buffer",
 			option = {
 				get_bufnrs = function()
-					return utils.filter(vim.api.nvim_list_bufs(), function(buf)
+					return vim.tbl_filter(function(buf)
 						return vim.api.nvim_buf_is_loaded(buf) and not utils.is_large(buf)
-					end)
+					end, vim.api.nvim_list_bufs())
 				end,
 			},
 		},

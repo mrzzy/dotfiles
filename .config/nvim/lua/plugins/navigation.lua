@@ -114,9 +114,9 @@ return {
 			map({ "n" }, "<leader>fa", function()
 				-- populate arglist with bookmarked files
 				local utils = require("utilities")
-				vim.cmd.args(utils.map(require("nvim-tree.api").marks.list(), function(node)
+				vim.cmd.args(vim.tbl_map(function(node)
 					return node.absolute_path
-				end))
+				end, require("nvim-tree.api").marks.list()))
 			end, {})
 		end,
 	},
