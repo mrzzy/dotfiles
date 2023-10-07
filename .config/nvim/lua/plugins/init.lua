@@ -31,7 +31,7 @@ lazy.setup({
 	{ import = "plugins.completion" },
 	{ import = "plugins.execution" },
 
-	-- Colors
+	-- UX
 	-- syntax highlighting
 	"sheerun/vim-polyglot",
 	-- colorscheme
@@ -43,6 +43,15 @@ lazy.setup({
 				inverse = true,
 			})
 			vim.cmd([[colorscheme gruvbox]])
+		end,
+	},
+	-- indent guides
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		tag = "v2.20.2",
+		dependencies = { { "ellisonleao/gruvbox.nvim" } },
+		config = function()
+			require("indent_blankline").setup({})
 		end,
 	},
 

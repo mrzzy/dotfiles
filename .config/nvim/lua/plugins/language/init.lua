@@ -16,7 +16,9 @@ return {
 	{
 		"williamboman/mason.nvim",
 		commit = "718966fd3204bd1e4aa5af0a032ce1e916295ecd",
-		config = function () require("mason").setup() end,
+		config = function()
+			require("mason").setup()
+		end,
 	},
 
 	-- language servers
