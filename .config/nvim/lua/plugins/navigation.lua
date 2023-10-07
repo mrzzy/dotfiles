@@ -54,13 +54,18 @@ return {
 			-- disable gutentags by default, unless toggled on explicitly
 			vim.g.gutentags_enabled = false
 			vim.g.gutentags_define_advanced_commands = true
+			-- key binding to toggle gutentags
+			vim.keymap.set({ "n" }, "<leader>gt", function()
+				vim.g.gutentags_enabled = not vim.g.gutentags_enabled
+				print("Gutentags: " .. (vim.g.gutentags_enabled and "Enabled" or "Disabled"))
+			end)
 			-- disable gutentags for git commit as they do not does not play well together
 			-- clear any existing autocmds to prevent autocmd spam
 			vim.api.nvim_create_autocmd({ "FileType" }, {
 				group = vim.api.nvim_create_augroup("gutentags", { clear = true }),
 				pattern = { "gitcommit", "gitrebase" },
 				callback = function(_)
-					vim.g.gutentags_enabled = false
+					vim.b[vim.api.nvim_buf_get_name(0)].gutentags_enabled = false
 				end,
 			})
 		end,
