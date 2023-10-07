@@ -6,74 +6,73 @@
 
 local langserver = require("langserver")
 
-
 -- Language Support Plugins
 return {
-  { import = "plugins.language.jvm" },
-  { import = "plugins.language.dap" },
-  { import = "plugins.language.syntax" },
+	{ import = "plugins.language.jvm" },
+	{ import = "plugins.language.dap" },
+	{ import = "plugins.language.syntax" },
 
-  -- package manager for language servers & debug adaptors
-  {
-    "williamboman/mason.nvim",
-    commit = "718966fd3204bd1e4aa5af0a032ce1e916295ecd",
-  },
+	-- package manager for language servers & debug adaptors
+	{
+		"williamboman/mason.nvim",
+		commit = "718966fd3204bd1e4aa5af0a032ce1e916295ecd",
+	},
 
-  -- language servers
-  {
-    "neovim/nvim-lspconfig",
-    tag = "v0.1.6",
-    run = langserver.install,
-    config = langserver.setup_lsp,
-  },
-  -- Mason - lspconfig integration
-  {
-    "williamboman/mason-lspconfig.nvim",
-    commit = "93e58e100f37ef4fb0f897deeed20599dae9d128",
-    dependencies = {  
-      "williamboman/mason.nvim",
-      "neovim/nvim-lspconfig",
-    }
-  },
-  -- null ls: linters, formatters & code actions
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    commit = "71797bb303ac99a4435592e15068f127970513d7",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      local null_ls = require("null-ls")
-      null_ls.setup {
-        debug = true,
-        sources = {
-          -- Code Actions
-          -- git actions
-          null_ls.builtins.code_actions.gitsigns,
+	-- language servers
+	{
+		"neovim/nvim-lspconfig",
+		tag = "v0.1.6",
+	},
+	-- Mason - lspconfig integration
+	{
+		"williamboman/mason-lspconfig.nvim",
+		commit = "93e58e100f37ef4fb0f897deeed20599dae9d128",
+		dependencies = {
+			"williamboman/mason.nvim",
+			"neovim/nvim-lspconfig",
+		},
+		build = langserver.install,
+		config = langserver.setup_lsp,
+	},
+	-- null ls: linters, formatters & code actions
+	{
+		"jose-elias-alvarez/null-ls.nvim",
+		commit = "71797bb303ac99a4435592e15068f127970513d7",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			local null_ls = require("null-ls")
+			null_ls.setup({
+				debug = true,
+				sources = {
+					-- Code Actions
+					-- git actions
+					null_ls.builtins.code_actions.gitsigns,
 
-          -- Linters
-          -- spelling
-          null_ls.builtins.diagnostics.codespell,
-          -- terraform
-          null_ls.builtins.diagnostics.terraform_validate,
+					-- Linters
+					-- spelling
+					null_ls.builtins.diagnostics.codespell,
+					-- terraform
+					null_ls.builtins.diagnostics.terraform_validate,
 
-          -- Formatters
-          -- js, ts, css, html, yaml, markdown
-          null_ls.builtins.formatting.prettier,
-          -- json
-          null_ls.builtins.formatting.jq,
-          -- sql
-          null_ls.builtins.formatting.sqlfmt,
-          -- python
-          null_ls.builtins.formatting.black,
-          -- go
-          null_ls.builtins.formatting.gofmt,
-          -- rust
-          null_ls.builtins.formatting.rustfmt,
-          -- terraform
-          null_ls.builtins.formatting.terraform_fmt,
-          -- packer
-          null_ls.builtins.formatting.packer,
-        },
-      }
-    end,
-  },
+					-- Formatters
+					-- js, ts, css, html, yaml, markdown
+					null_ls.builtins.formatting.prettier,
+					-- json
+					null_ls.builtins.formatting.jq,
+					-- sql
+					null_ls.builtins.formatting.sqlfmt,
+					-- python
+					null_ls.builtins.formatting.black,
+					-- go
+					null_ls.builtins.formatting.gofmt,
+					-- rust
+					null_ls.builtins.formatting.rustfmt,
+					-- terraform
+					null_ls.builtins.formatting.terraform_fmt,
+					-- packer
+					null_ls.builtins.formatting.packer,
+				},
+			})
+		end,
+	},
 }
