@@ -16,6 +16,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		commit = "718966fd3204bd1e4aa5af0a032ce1e916295ecd",
+		config = function () require("mason").setup() end,
 	},
 
 	-- language servers
@@ -23,6 +24,7 @@ return {
 		"neovim/nvim-lspconfig",
 		tag = "v0.1.6",
 	},
+
 	-- Mason - lspconfig integration
 	{
 		"williamboman/mason-lspconfig.nvim",
@@ -32,7 +34,10 @@ return {
 			"neovim/nvim-lspconfig",
 		},
 		build = langserver.install,
-		config = langserver.setup_lsp,
+		config = function()
+			require("mason-lspconfig").setup()
+			langserver.setup_lsp()
+		end,
 	},
 	-- null ls: linters, formatters & code actions
 	{
