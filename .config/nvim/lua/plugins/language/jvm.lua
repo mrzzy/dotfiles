@@ -20,7 +20,7 @@ local nvim_jdtls = {
 	config = function(_)
 		-- autocommand group to start jdtls in java filetypes
 		local jdtls = require("jdtls")
-		local install_path = require("plugins.mason").install_path
+		local install_path = require("utilities").mason_install_path
 
 		-- locate debug adaptors jars installed by mason
 		local function find_jars(package)

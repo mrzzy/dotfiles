@@ -17,7 +17,7 @@ return {
 		config = function()
 			local d = require("dap")
 			local dap_widgets = require("dap.ui.widgets")
-			local install_path = require("plugins.mason").install_path
+			local install_path = require("utilities").mason_install_path
 
 			-- c, c++, rust
 			d.adapters.cppdbg = {
@@ -96,7 +96,7 @@ return {
 		lazy = true,
 		ft = { "python" },
 		config = function()
-			local install_path = require("plugins.mason").install_path
+			local install_path = require("utilities").mason_install_path
 			local dap_py = require("dap-python")
 			dap_py.setup(install_path("debugpy") .. "/venv/bin/python")
 			dap_py.test_runner = "pytest"
@@ -120,7 +120,7 @@ return {
 		lazy = true,
 		ft = { "go" },
 		config = function()
-			local install_path = require("plugins.mason").install_path
+			local install_path = require("utilities").mason_install_path
 			local dap_go = require("dap-go")
 			dap_go.setup({
 				delve = {

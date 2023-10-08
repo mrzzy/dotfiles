@@ -17,4 +17,9 @@ function M.is_large(buf)
 	end
 end
 
+-- Get the installation path of the mason package with given name
+function M.mason_install_path(package)
+	return require("mason-registry").get_package(package):get_install_path()
+end
+
 return M
