@@ -61,8 +61,8 @@ lazy.setup({
 		-- lazy load plugin only when opening a note from vault
 		lazy = true,
 		event = {
-			"BufReadPre " .. obsidian_vault_dir,
-			"BufNewFile " .. obsidian_vault_dir,
+			"BufReadPre " .. obsidian_vault_dir .. "**/*.md",
+			"BufNewFile " .. obsidian_vault_dir .. "**/*.md",
 		},
 		tag = "v1.7.0",
 		dependencies = { "nvim-lua/plenary.nvim" },
@@ -77,20 +77,29 @@ lazy.setup({
 				completion = {
 					nvim_cmp = true,
 				},
+				-- key bindings
+				mappings = {
+					["<leader>o["] = {
+						action = ":ObsidianBacklinks<CR>",
+						opts = {},
+					},
+					["<leader>oo"] = {
+						action = ":ObsidianOpen<CR>",
+						opts = {},
+					},
+					["<leader>oj"] = {
+						action = ":ObsidianToday<CR>",
+						opts = {},
+					},
+					-- override 'gf' for navigating wikilinks navigation
+					["gf"] = {
+						action = require("obsidian").util.gf_passthrough,
+						opts = { noremap = false, expr = true },
+					},
+				},
+				-- force override mappings to silence warnings about conflicts
+				overwrite_mappings = true,
 			})
-			-- key bindings
-			local map = vim.keymap.set
-			map({ "n" }, "<leader>o[", ":ObsidianBacklinks<CR>", {})
-			map({ "n" }, "<leader>oo", ":ObsidianOpen<CR>", {})
-			map({ "n" }, "<leader>oj", ":ObsidianToday<CR>", {})
-			-- override 'gf' for navigating wikilinks navigation
-			map({ "n" }, "gf", function(_)
-				if require("obsidian").util.cursor_on_markdown_link() then
-					return ":ObsidianFollowLink<CR>"
-				else
-					return "gf"
-				end
-			end, { noremap = false, expr = true })
 		end,
 	},
 
