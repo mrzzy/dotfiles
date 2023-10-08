@@ -65,7 +65,7 @@ return {
 				group = vim.api.nvim_create_augroup("gutentags", { clear = true }),
 				pattern = { "gitcommit", "gitrebase" },
 				callback = function(_)
-					vim.b[vim.api.nvim_buf_get_name(0)].gutentags_enabled = false
+					vim.b.gutentags_enabled = false
 				end,
 			})
 		end,
