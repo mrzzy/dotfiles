@@ -15,7 +15,7 @@ return {
 	-- package manager for language servers & debug adaptors
 	{
 		"williamboman/mason.nvim",
-		commit = "718966fd3204bd1e4aa5af0a032ce1e916295ecd",
+		tag = "v1.8.0",
 		config = function()
 			require("mason").setup()
 		end,
@@ -30,7 +30,7 @@ return {
 	-- Mason - lspconfig integration
 	{
 		"williamboman/mason-lspconfig.nvim",
-		commit = "93e58e100f37ef4fb0f897deeed20599dae9d128",
+		tag = "v1.17.1",
 		dependencies = {
 			"williamboman/mason.nvim",
 			"neovim/nvim-lspconfig",
