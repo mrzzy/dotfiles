@@ -43,6 +43,7 @@ return {
 				"sql",
 				"proto",
 				"yaml",
+				"verilog",
 			})
 		end,
 		config = function()
