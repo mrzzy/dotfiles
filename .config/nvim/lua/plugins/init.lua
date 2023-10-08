@@ -64,7 +64,7 @@ lazy.setup({
 			"BufReadPre " .. obsidian_vault_dir .. "**/*.md",
 			"BufNewFile " .. obsidian_vault_dir .. "**/*.md",
 		},
-		tag = "v1.7.0",
+		tag = "v1.14.2",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function(_)
 			require("obsidian").setup({
