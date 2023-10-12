@@ -102,7 +102,7 @@ M.language_servers = {
 		}
 	end,
 	-- verilog
-	["verible"] = noop
+	["verible"] = noop,
 }
 
 -- Install language servers

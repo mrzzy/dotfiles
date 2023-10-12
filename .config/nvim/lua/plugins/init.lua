@@ -67,7 +67,8 @@ lazy.setup({
 		tag = "v1.14.2",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function(_)
-			require("obsidian").setup({
+			local obsidian = require("obsidian")
+			obsidian.setup({
 				dir = obsidian_vault_dir,
 				disable_frontmatter = true,
 				daily_notes = {
@@ -77,29 +78,16 @@ lazy.setup({
 				completion = {
 					nvim_cmp = true,
 				},
-				-- key bindings
-				mappings = {
-					["<leader>o["] = {
-						action = ":ObsidianBacklinks<CR>",
-						opts = {},
-					},
-					["<leader>oo"] = {
-						action = ":ObsidianOpen<CR>",
-						opts = {},
-					},
-					["<leader>oj"] = {
-						action = ":ObsidianToday<CR>",
-						opts = {},
-					},
-					-- override 'gf' for navigating wikilinks navigation
-					["gf"] = {
-						action = require("obsidian").util.gf_passthrough,
-						opts = { noremap = false, expr = true },
-					},
-				},
-				-- force override mappings to silence warnings about conflicts
-				overwrite_mappings = true,
+				-- disable automatic mappings
+				mappings = {},
 			})
+			-- key bindings
+			local map = vim.keymap.set
+			map({ "n" }, "<leader>o[", ":ObsidianBacklinks<CR>", {})
+			map({ "n" }, "<leader>oo", ":ObsidianOpen<CR>", {})
+			map({ "n" }, "<leader>oj", ":ObsidianToday<CR>", {})
+			-- override 'gf' for navigating wikilinks navigation
+			map({ "n" }, "gf", obsidian.util.gf_passthrough, { noremap = false, expr = true })
 		end,
 	},
 
