@@ -40,7 +40,7 @@ vim.o.foldnestmax = 1
 -- Keyboard Bindings
 local map = vim.keymap.set
 -- key bindings default leader key
-vim.g.mapleader = ","
+vim.g.mapleader = " "
 --- alternative binding for the <C-w> prefix used in window manipulation keys
 map({ "n" }, "<leader>w", "<C-w>", { silent = true, nowait = true, noremap = true })
 -- toggle between light & dark colorschemes
