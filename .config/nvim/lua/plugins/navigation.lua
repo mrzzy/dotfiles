@@ -14,7 +14,8 @@ return {
 			local map = vim.keymap.set
 			-- file navigation
 			map({ "n" }, "<C-p>", fzf.files, {})
-			map({ "n" }, "<M-p>", fzf.files, {})
+			map({ "n" }, "<Leader>p", fzf.files, {})
+			map({ "n" }, "<M-p>", fzf.git_files, {})
 			map({ "n" }, "<C-n>", fzf.args, {})
 			map({ "n" }, "<M-n>", fzf.args, {})
 			map({ "n" }, "<C-Space>", fzf.buffers, {})
