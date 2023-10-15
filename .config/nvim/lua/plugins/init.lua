@@ -15,7 +15,6 @@ if not has_lazy then
 		"git",
 		"clone",
 		"--filter=blob:none",
-		"--branch=v10.7.0",
 		"https://github.com/folke/lazy.nvim.git",
 		lazy_dir,
 	})
