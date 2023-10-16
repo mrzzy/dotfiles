@@ -40,7 +40,7 @@ return {
 	-- window management
 	{
 		"simeji/winresizer",
-		config = function()
+		init = function()
 			vim.g.winresizer_start_key = "<leader>w<CR>"
 		end,
 	},
