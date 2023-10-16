@@ -1,7 +1,7 @@
 --
 -- dotfiles
 -- Neovim config
--- Debug Adaptors
+-- Debug Adaptors Plugins
 --
 
 return {
@@ -9,11 +9,6 @@ return {
 		"mfussenegger/nvim-dap",
 		tag = "0.6.0",
 		dependencies = { "williamboman/mason.nvim" },
-		build = function()
-			require("mason.api.command").MasonInstall({
-				"cpptools", -- c,c++,rust
-			})
-		end,
 		config = function()
 			local d = require("dap")
 			local dap_widgets = require("dap.ui.widgets")
@@ -90,9 +85,6 @@ return {
 			"williamboman/mason.nvim",
 			"mfussenegger/nvim-dap",
 		},
-		build = function()
-			require("mason.api.command").MasonInstall({ "debugpy" })
-		end,
 		lazy = true,
 		ft = { "python" },
 		config = function()
@@ -114,9 +106,6 @@ return {
 			"williamboman/mason.nvim",
 			"mfussenegger/nvim-dap",
 		},
-		build = function()
-			require("mason.api.command").MasonInstall({ "delve" })
-		end,
 		lazy = true,
 		ft = { "go" },
 		config = function()

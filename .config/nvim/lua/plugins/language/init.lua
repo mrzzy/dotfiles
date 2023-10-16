@@ -16,6 +16,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		tag = "v1.8.0",
+		build = require("debugadaptor").install,
 		config = function()
 			require("mason").setup()
 		end,
