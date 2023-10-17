@@ -9,12 +9,6 @@ local nvim_jdtls = {
 	"mfussenegger/nvim-jdtls",
 	version = "0.2.0",
 	dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
-	build = function()
-		require("mason.api.command").MasonInstall({
-			"java-debug-adapter", -- java
-			"java-test", -- java (tests)
-		})
-	end,
 	lazy = true,
 	ft = { "java" },
 	config = function(_)
