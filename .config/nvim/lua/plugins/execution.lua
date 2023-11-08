@@ -9,9 +9,9 @@ return {
 	{
 		"tpope/vim-dispatch",
 		commit = "6cc2691576f97d43f8751664d1a1a908b99927e5",
-		keys = {
-			{"<leader>` ", ":FocusDispatch "},
-		},
+		config = function()
+			vim.keymap.set({ "n" }, "<leader>` ", ":FocusDispatch ")
+		end
 	},
 	-- running code snippets
 	{
