@@ -16,19 +16,19 @@ local nvim_jdtls = {
 		local jdtls = require("jdtls")
 		local install_path = require("utilities").mason_install_path
 
-		-- locate debug adaptors jars installed by mason
-		local function find_jars(package)
-			return vim.fn.glob(install_path(package) .. "/extension/server/*.jar", false, true)
+		-- locate debug adapters jars installed by mason
+		local function find_jars(pkg)
+			return vim.fn.glob(install_path(pkg) .. "/extension/server/*.jar", false, true)
 		end
 		local bundles = {}
-		vim.list_extend(bundles, find_jars("java-debug-adaptor"))
+		vim.list_extend(bundles, find_jars("java-debug-adapter"))
 		vim.list_extend(bundles, find_jars("java-test"))
 		jdtls.start_or_attach({
 			-- use jdtls installed by mason
 			cmd = {
-				install_path(require("mason-lspconfig.mappings.server")) .. "/bin/jdtls",
+				install_path("jdtls") .. "/bin/jdtls",
 			},
-			-- register debug adaptor jars needed for nvim-dap debugging
+			-- register debug adapter jars needed for nvim-dap debugging
 			init_options = {
 				bundles = bundles,
 			},
