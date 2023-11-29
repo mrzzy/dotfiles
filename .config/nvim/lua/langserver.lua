@@ -13,7 +13,7 @@ local noop = function()
 end
 M.language_servers = {
 	-- lua
-	["sumneko_lua"] = function()
+	["lua_ls"] = function()
 		-- setup vim lua api completion, must be done before lspconfig setup of lua lsp
 		require("neodev").setup({})
 
