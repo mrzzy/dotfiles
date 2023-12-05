@@ -47,7 +47,7 @@ local nvim_jdtls = {
 -- scala
 local metals_config = {
 	on_attach = function(_)
-		metals.setup_dap()
+		require("metals").setup_dap()
 
 		-- default dap debug configuration for scala
 		require("dap").configurations.scala = {
