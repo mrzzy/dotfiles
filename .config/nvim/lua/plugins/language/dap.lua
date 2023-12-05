@@ -25,7 +25,7 @@ return {
 			for key, dap_fn in pairs({
 				["<leader>dc"] = function()
 					-- load launch.json debugging if one exists
-					local launch_json = ".vscode/launch.json"
+					local launch_json = vim.fn.getcwd() .. "/.vscode/launch.json"
 					if vim.fn.filereadable(launch_json) then
 						require("dap.ext.vscode").load_launchjs(launch_json, {
 							-- adapters -> filetype mapping
