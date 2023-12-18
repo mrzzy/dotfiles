@@ -38,7 +38,8 @@ return {
 				["<leader>dn"] = d.step_over,
 				["<leader>ds"] = d.step_into,
 				["<leader>do"] = d.step_out,
-				["<leader>*"] = d.toggle_breakpoint,
+				["<leader>B"] = d.toggle_breakpoint,
+				["<leader>b "] = function() d.toggle_breakpoint(vim.fn.input("Break On: ")) end,
 				["<leader>dd"] = function()
 					-- populate quickfix window with breakpoints and show them
 					d.list_breakpoints()
