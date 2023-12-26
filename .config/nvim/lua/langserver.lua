@@ -70,8 +70,6 @@ M.language_servers = {
 	["ansiblels"] = noop,
 	-- rust
 	["rust_analyzer"] = noop,
-	-- javascript
-	["tsserver"] = noop,
 	-- c/c++
 	["clangd"] = function()
 		-- clangd needs to query native gcc compiler for build config

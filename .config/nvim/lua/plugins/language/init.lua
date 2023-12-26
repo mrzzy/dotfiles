@@ -10,12 +10,12 @@ local langserver = require("langserver")
 return {
 	{ import = "plugins.language.jvm" },
 	{ import = "plugins.language.dap" },
-	{ import = "plugins.language.syntax" },
+	{ import = "plugins.language.treesitter" },
 
 	-- package manager for language servers & debug adaptors
 	{
 		"williamboman/mason.nvim",
-		tag = "v1.8.0",
+		tag = "v1.8.3",
 		build = require("debugadaptor").install,
 		config = function()
 			require("mason").setup()
@@ -25,13 +25,13 @@ return {
 	-- language servers
 	{
 		"neovim/nvim-lspconfig",
-		commit = "39546f730bdff8eccf7cec344cfce694f19ac908",
+		commit = "9099871a7c7e1c16122e00d70208a2cd02078d80",
 	},
 
 	-- Mason - lspconfig integration
 	{
 		"williamboman/mason-lspconfig.nvim",
-		tag = "v1.17.1",
+		tag = "v1.26.0",
 		dependencies = {
 			"williamboman/mason.nvim",
 			"neovim/nvim-lspconfig",
@@ -83,4 +83,22 @@ return {
 			})
 		end,
 	},
+	-- neovim lua
+	{
+		"folke/neodev.nvim",
+		tag = "v2.5.2",
+	},
+
+	-- typescript / javascript
+	{
+		"pmizio/typescript-tools.nvim",
+		-- ft = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		commit = "829b5dc4f6704b249624e5157ad094dcb20cdc6b",
+		opts = {},
+		build = function()
+			-- install language server with mason
+			require("mason.api.command").MasonInstall("typescript-language-server")
+		end,
+	}
 }

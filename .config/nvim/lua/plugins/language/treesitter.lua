@@ -1,16 +1,10 @@
 --
 -- dotfiles
 -- Neovim config
--- Language Support: Syntax
+-- Language Support: Treesitter
 --
 
 return {
-	-- neovim lua
-	{
-		"folke/neodev.nvim",
-		tag = "v2.5.2",
-	},
-
 	-- treesitter: syntax tree
 	{
 		"nvim-treesitter/nvim-treesitter",
