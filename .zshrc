@@ -28,8 +28,8 @@ setopt autocd
 # shared history file
 setopt append_history share_history histignorealldups
 HISTFILE=~/.zsh_history
-HISTSIZE=5000
-SAVEHIST=5000
+HISTSIZE=50000
+SAVEHIST=50000
 # use atuin to provide extend shell history
 export ATUIN_NOBIND="true"
 source <(atuin init zsh)
