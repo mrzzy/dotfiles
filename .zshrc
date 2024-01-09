@@ -119,4 +119,6 @@ source /usr/local/share/zsh/site-functions/zsh-z.plugin.zsh
 export SDKMAN_DIR="/usr/local/lib/sdkman"
 source "$SDKMAN_DIR/bin/sdkman-init.sh"
 # direnv
+# silence verbose log output from direnv 
+export DIRENV_LOG_FORMAT=""
 eval "$(direnv hook zsh)"
