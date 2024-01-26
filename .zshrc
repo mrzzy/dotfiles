@@ -115,10 +115,18 @@ theme() {
 # Tooling
 # z jump Tool
 source /usr/local/share/zsh/site-functions/zsh-z.plugin.zsh
+
 # sdkman: jvm sdk manager
 export SDKMAN_DIR="/usr/local/lib/sdkman"
 source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
 # direnv
+eval "$(direnv hook zsh)"
 # silence verbose log output from direnv 
 export DIRENV_LOG_FORMAT=""
-eval "$(direnv hook zsh)"
+
+# conda
+__conda_setup="$('/home/mrzzy/.conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+fi
