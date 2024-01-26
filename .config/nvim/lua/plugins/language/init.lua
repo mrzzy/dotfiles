@@ -15,7 +15,7 @@ return {
 	-- package manager for language servers & debug adaptors
 	{
 		"williamboman/mason.nvim",
-		tag = "v1.8.3",
+		tag = "v1.9.0",
 		build = require("debugadaptor").install,
 		config = function()
 			require("mason").setup()
