@@ -130,3 +130,9 @@ __conda_setup="$('/home/mrzzy/.conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 fi
+
+# asdf
+ASDF_SETUP="$HOME/.asdf/asdf.sh"
+if [ -f "$ASDF_SETUP" ]; then
+    source "$ASDF_SETUP"
+fi
