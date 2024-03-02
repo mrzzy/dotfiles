@@ -101,6 +101,8 @@ M.language_servers = {
 	end,
 	-- verilog
 	["verible"] = noop,
+	-- OpenSCAD
+	["openscad_lsp"] = noop,
 }
 
 -- Install language servers
