@@ -7,7 +7,7 @@
 -- java
 local nvim_jdtls = {
 	"mfussenegger/nvim-jdtls",
-	version = "0.2.0",
+	version = "8eb5f0dbe6e126b392ddcaf45893358619893e45",
 	dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
 	lazy = true,
 	ft = { "java" },
@@ -34,7 +34,7 @@ local nvim_jdtls = {
 			},
 			on_attach = function(_, _)
 				-- enable nvim-jdtls's nvim-dap debugger integration
-				jdtls.setup_dap({ hotcodereplace = "auto" })
+				jdtls.setup_dap({ hotcodereplace = "auto", config_overrides = {} })
 			end,
 		})
 
