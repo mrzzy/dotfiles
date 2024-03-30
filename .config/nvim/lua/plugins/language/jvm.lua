@@ -12,32 +12,37 @@ local nvim_jdtls = {
 	lazy = true,
 	ft = { "java" },
 	config = function(_)
-		-- autocommand group to start jdtls in java filetypes
 		local jdtls = require("jdtls")
-		local install_path = require("utilities").mason_install_path
+		-- autocommand group to start jdtls in java filetypes
+		vim.api.nvim_create_autocmd({ "FileType" }, {
+			group = vim.api.nvim_create_augroup("nvim-jdtls", { clear = true }),
+			pattern = { "java" },
+			callback = function(_)
+				local install_path = require("utilities").mason_install_path
 
-		-- locate debug adapters jars installed by mason
-		local function find_jars(pkg)
-			return vim.fn.glob(install_path(pkg) .. "/extension/server/*.jar", false, true)
-		end
-		local bundles = {}
-		vim.list_extend(bundles, find_jars("java-debug-adapter"))
-		vim.list_extend(bundles, find_jars("java-test"))
-		jdtls.start_or_attach({
-			-- use jdtls installed by mason
-			cmd = {
-				install_path("jdtls") .. "/bin/jdtls",
-			},
-			-- register debug adapter jars needed for nvim-dap debugging
-			init_options = {
-				bundles = bundles,
-			},
-			on_attach = function(_, _)
-				-- enable nvim-jdtls's nvim-dap debugger integration
-				jdtls.setup_dap({ hotcodereplace = "auto", config_overrides = {} })
-			end,
+				-- locate debug adapters jars installed by mason
+				local function find_jars(pkg)
+					return vim.fn.glob(install_path(pkg) .. "/extension/server/*.jar", false, true)
+				end
+				local bundles = {}
+				vim.list_extend(bundles, find_jars("java-debug-adapter"))
+				vim.list_extend(bundles, find_jars("java-test"))
+				jdtls.start_or_attach({
+					-- use jdtls installed by mason
+					cmd = {
+						install_path("jdtls") .. "/bin/jdtls",
+					},
+					-- register debug adapter jars needed for nvim-dap debugging
+					init_options = {
+						bundles = bundles,
+					},
+					on_attach = function(_, _)
+						-- enable nvim-jdtls's nvim-dap debugger integration
+						jdtls.setup_dap({ hotcodereplace = "auto", config_overrides = {} })
+					end,
+				})
+			end
 		})
-
 		-- key binding to debug nearest test case / class
 		vim.keymap.set({ "n" }, "<leader>dt", jdtls.test_nearest_method, { buffer = true })
 		vim.keymap.set({ "n" }, "<leader>dT", jdtls.test_class, { buffer = true })
