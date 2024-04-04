@@ -42,10 +42,10 @@ return {
 			langserver.setup_lsp()
 		end,
 	},
-	-- null ls: linters, formatters & code actions
+	-- none ls: linters, formatters & code actions
 	{
-		"jose-elias-alvarez/null-ls.nvim",
-		commit = "71797bb303ac99a4435592e15068f127970513d7",
+		"nvimtools/none-ls.nvim",
+		commit = "fff481b65d88415933b9574dc0e1947724bcf64a",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			local null_ls = require("null-ls")
