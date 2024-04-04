@@ -65,16 +65,12 @@ return {
 					-- Formatters
 					-- js, ts, css, html, yaml, markdown
 					null_ls.builtins.formatting.prettier,
-					-- json
-					null_ls.builtins.formatting.jq,
 					-- sql
 					null_ls.builtins.formatting.sqlfmt,
 					-- python
 					null_ls.builtins.formatting.black,
 					-- go
 					null_ls.builtins.formatting.gofmt,
-					-- rust
-					null_ls.builtins.formatting.rustfmt,
 					-- terraform
 					null_ls.builtins.formatting.terraform_fmt,
 					-- packer
