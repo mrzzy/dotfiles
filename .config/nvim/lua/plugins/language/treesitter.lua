@@ -8,7 +8,7 @@ return {
 	-- treesitter: syntax tree
 	{
 		"nvim-treesitter/nvim-treesitter",
-		tag = "v0.9.0",
+		commit = "979beffc1a86e7ba19bd6535c0370d8e1aaaad3c",
 		build = function()
 			-- install or upgrade treesitter parsers
 			local ts = require("nvim-treesitter.install")
