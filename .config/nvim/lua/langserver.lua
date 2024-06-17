@@ -133,7 +133,9 @@ function M.setup_lsp()
 	})
 	-- configure language servers
 	for server, setup_fn in pairs(require("langserver").language_servers) do
-		lsp[server].setup(setup_fn())
+		-- remove version (if exists) from server name
+		local name = string.gsub(server, "([^@]+)@?.*", "%1")
+		lsp[name].setup(setup_fn())
 	end
 end
 
