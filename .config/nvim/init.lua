@@ -28,8 +28,8 @@ vim.o.grepprg = [[rg --vimgrep --no-heading --smart-case]]
 vim.o.completeopt = "menu,menuone,noselect"
 -- enable reading of project-specific config in working dir
 vim.o.exrc = true
--- keep words together when wrapping text to improve readability
-vim.o.linebreak = true
+-- disable text wrapping
+vim.o.wrap = false
 -- dark mode by default
 vim.o.background = "dark"
 -- expand all folds when opening a file with folds
