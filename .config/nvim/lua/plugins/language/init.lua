@@ -15,7 +15,7 @@ return {
 	-- package manager for language servers & debug adaptors
 	{
 		"williamboman/mason.nvim",
-		tag = "v1.9.0",
+		tag = "v1.10.0",
 		build = require("debugadaptor").install,
 		config = function()
 			require("mason").setup()
@@ -25,13 +25,13 @@ return {
 	-- language servers
 	{
 		"neovim/nvim-lspconfig",
-		commit = "9099871a7c7e1c16122e00d70208a2cd02078d80",
+		tag = "v0.1.8",
 	},
 
 	-- Mason - lspconfig integration
 	{
 		"williamboman/mason-lspconfig.nvim",
-		tag = "v1.26.0",
+		tag = "v1.29.0",
 		dependencies = {
 			"williamboman/mason.nvim",
 			"neovim/nvim-lspconfig",
