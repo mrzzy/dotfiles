@@ -10,6 +10,7 @@ export EDITOR=nvim
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/share/coursier/bin:$PATH"
+export PATH="/usr/local/go/bin:$PATH"
 
 # 'time' builtin output format
 export TIMEFMT="[time: %J]
@@ -21,3 +22,7 @@ packets: %s sent %r received"
 
 # default bat color scheme
 export BAT_THEME=gruvbox-dark
+
+# TODO(mrzzy): disable after vpn teardown
+export HTTP_PROXY=http://localhost:1081
+export HTTPS_PROXY=http://localhost:1081
