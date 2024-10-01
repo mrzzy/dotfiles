@@ -24,3 +24,7 @@
 	helper = !/usr/bin/gh auth git-credential
 [mergetool]
 	prompt = false
+[rerere]
+	enabled = true
+	autoupdate = true
+	
