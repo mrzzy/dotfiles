@@ -96,5 +96,17 @@ return {
 			-- install language server with mason
 			require("mason.api.command").MasonInstall("typescript-language-server")
 		end,
+	},
+	-- flutter / dart
+	{
+		"akinsho/flutter-tools.nvim",
+		lazy = true,
+		ft = {
+        "dart",
+    },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		config = true,
 	}
 }
