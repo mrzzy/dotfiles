@@ -7,10 +7,10 @@
 return {
 	-- Editor
 	-- text editing
-	{ "tpope/vim-repeat", commit = "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
-	{ "tpope/vim-surround", commit = "9857a874632d1b983a7f4b1c85e3d15990c8b101" },
+	{ "tpope/vim-repeat",     commit = "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
+	{ "tpope/vim-surround",   commit = "9857a874632d1b983a7f4b1c85e3d15990c8b101" },
 	-- multi-subsitute command
-	{ "tpope/vim-abolish", commit = "3f0c8faadf0c5b68bcf40785c1c42e3731bfa522" },
+	{ "tpope/vim-abolish",    commit = "3f0c8faadf0c5b68bcf40785c1c42e3731bfa522" },
 	-- sensible key bindings
 	{ "tpope/vim-unimpaired", commit = "f992923d336e93c7f50fe9b35a07d5a92660ecaf" },
 	-- editor sessions
@@ -94,4 +94,15 @@ return {
 			require("Comment").setup()
 		end,
 	},
+	-- markdown viewer
+	{
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		ft = { "markdown" },
+		config = function()
+			vim.g.mkdp_echo_preview_url = 1
+		end,
+		build = function() vim.fn["mkdp#util#install"]() end,
+	}
+
 }
