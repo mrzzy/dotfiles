@@ -4,6 +4,20 @@
 -- Debug Adaptors Plugins
 --
 
+local M = {}
+
+function M.reload_launch_json()
+	-- load launch.json debugging if one exists
+	local launch_json = vim.fn.getcwd() .. "/.vscode/launch.json"
+	if vim.fn.filereadable(launch_json) then
+		require("dap.ext.vscode").load_launchjs(launch_json, {
+			-- adapters -> filetype mapping
+			cppdbg = { "c", "cpp", "rust" },
+			["pwa-node"] = { "javascript", "typescript" },
+		})
+	end
+end
+
 return {
 	{
 		"mfussenegger/nvim-dap",
@@ -20,19 +34,12 @@ return {
 				type = "executable",
 				command = install_path("cpptools") .. "/extension/debugAdapters/bin/OpenDebugAD7",
 			}
+			M.reload_launch_json()
 
 			-- debugging key bindings
 			for key, dap_fn in pairs({
 				["<leader>dc"] = function()
-					-- load launch.json debugging if one exists
-					local launch_json = vim.fn.getcwd() .. "/.vscode/launch.json"
-					if vim.fn.filereadable(launch_json) then
-						require("dap.ext.vscode").load_launchjs(launch_json, {
-							-- adapters -> filetype mapping
-							cppdbg = { "c", "cpp", "rust" },
-							["pwa-node"] = { "javascript", "typescript" },
-						})
-					end
+					M.reload_launch_json()
 					d.continue()
 				end,
 				["<leader>dn"] = d.step_over,
