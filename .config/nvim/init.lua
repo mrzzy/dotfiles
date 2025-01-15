@@ -1,6 +1,6 @@
 --
 -- dotfiles
--- nvim config
+-- Neovim config
 --
 
 -- tab expansion

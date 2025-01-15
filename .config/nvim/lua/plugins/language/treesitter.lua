@@ -38,6 +38,7 @@ return {
 				"proto",
 				"yaml",
 				"verilog",
+				"astro",
 			})
 		end,
 		config = function()
