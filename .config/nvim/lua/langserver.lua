@@ -102,6 +102,8 @@ M.language_servers = {
 	["verible"] = noop,
 	-- OpenSCAD
 	["openscad_lsp"] = noop,
+	-- Astro
+	["astro"] = noop,
 }
 
 -- Install language servers
