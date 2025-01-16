@@ -10,7 +10,7 @@ return {
 	-- completion & snippets
 	{
 		"hrsh7th/nvim-cmp",
-		commit = "8a9e8a89eec87f86b6245d77f313a040a94081c1",
+		tag = "v0.0.2",
 		config = autocomplete.setup_cmp,
 	},
 
