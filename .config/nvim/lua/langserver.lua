@@ -64,7 +64,15 @@ M.language_servers = {
 		}
 	end,
 	-- html
-	["html"] = noop,
+	["html"] = function ()
+		return {
+			on_attach = function (client, _)
+				-- disable diagnostics as html lsp does not support diagnostics
+        client.server_capabilities.diagnosticProvider = false
+			end
+		}
+		
+	end,
 	-- ansible
 	["ansiblels"] = noop,
 	-- rust
