@@ -25,7 +25,7 @@ return {
 	-- language servers
 	{
 		"neovim/nvim-lspconfig",
-		tag = "v0.1.8",
+		tag = "v1.4.0",
 	},
 
 	-- Mason - lspconfig integration
