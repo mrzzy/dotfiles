@@ -7,7 +7,7 @@
 -- java
 local nvim_jdtls = {
 	"mfussenegger/nvim-jdtls",
-	version = "8eb5f0dbe6e126b392ddcaf45893358619893e45",
+	version = "2f7bff9b8d2ee1918b36ca55f19547d9d335a268",
 	dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
 	lazy = true,
 	ft = { "java" },
