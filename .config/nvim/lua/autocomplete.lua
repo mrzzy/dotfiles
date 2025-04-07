@@ -63,11 +63,13 @@ function M.setup_cmp()
 		-- each list of sources forms a source group. When one group fails
 		-- to produce completions, nvim-cmp falls back to the next source group.
 		sources = cmp.config.sources({
-			{ name = "nvim_lsp_signature_help" },
-			{ name = "nvim_lsp" },
+				{ name = "copilot" },
+				{ name = "nvim_lsp_signature_help" },
+				{ name = "path" },
+				{ name = "nvim_lsp" },
+			},
 			{ name = "luasnip" },
-			{ name = "path" },
-		}, buffers),
+			buffers),
 		-- snippet expansion
 		snippet = {
 			expand = function(snippet)
@@ -92,6 +94,7 @@ function M.setup_cmp()
 					cmp.complete()
 				end
 			end,
+			["<C-Space>"] = cmp.mapping.complete(),
 			["<S-Tab>"] = function(fallback)
 				if cmp.visible() then
 					-- select previous item if completion menu is visible

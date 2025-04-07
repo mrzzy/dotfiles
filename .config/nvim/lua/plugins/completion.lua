@@ -10,7 +10,7 @@ return {
 	-- completion & snippets
 	{
 		"hrsh7th/nvim-cmp",
-		tag = "v0.0.2",
+		commit = "v0.0.2",
 		config = autocomplete.setup_cmp,
 	},
 
@@ -55,4 +55,22 @@ return {
 		end,
 	},
 	{ "honza/vim-snippets" },
+	-- LLM Integration
+	{
+		"zbirenbaum/copilot.lua",
+		config = function()
+			require("copilot").setup({
+				copilot_model = "gpt-4o-copilot",
+				suggestion = { enabled = false },
+				panel = { enabled = true },
+			})
+		end,
+	},
+
+	{
+		"zbirenbaum/copilot-cmp",
+		config = function()
+			require("copilot_cmp").setup()
+		end,
+	},
 }
