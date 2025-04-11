@@ -63,6 +63,18 @@ return {
 				copilot_model = "gpt-4o-copilot",
 				suggestion = { enabled = false },
 				panel = { enabled = true },
+				-- enable on all filetypes
+				filetypes = {
+					yaml = true,
+					markdown = true,
+					help = true,
+					gitcommit = true,
+					gitrebase = true,
+					hgcommit = true,
+					svn = true,
+					cvs = true,
+					["."] = true,
+				}
 			})
 		end,
 	},
