@@ -37,6 +37,8 @@ SAVEHIST=50000
 if [ -d $HOME/.atuin ]
 then
     export ATUIN_NOBIND="true"
+    export PATH="$HOME/.atuin/bin:$PATH"
+    # register atuin completions
     source <(atuin init zsh)
     # fuzzy history recall
     bindkey '^r' _atuin_search_widget
