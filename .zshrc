@@ -125,14 +125,10 @@ eval "$(direnv hook zsh)"
 # silence verbose log output from direnv 
 export DIRENV_LOG_FORMAT=""
 
-# conda
-__conda_setup="$('/home/mrzzy/.conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-fi
-
-# asdf
-ASDF_SETUP="$HOME/.asdf/asdf.sh"
-if [ -f "$ASDF_SETUP" ]; then
-    source "$ASDF_SETUP"
+# asdf version manager
+ASDF_DATA_DIR=${ASDF_DATA_DIR:-$HOME/.asdf}
+if [ -d ${ASDF_DATA_DIR} ]
+then
+    # put asdf installed tools on the path
+    export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 fi
