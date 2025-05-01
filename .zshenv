@@ -8,9 +8,10 @@
 export EDITOR=nvim
 # search path
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.local/share/coursier/bin:$PATH"
-export PATH="/usr/local/go/bin:$PATH"
+# atuin shell history
+export PATH="$HOME/.atuin/bin:$PATH"
+# asdf version manager
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # 'time' builtin output format
 export TIMEFMT="[time: %J]

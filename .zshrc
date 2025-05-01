@@ -33,16 +33,6 @@ setopt append_history share_history histignorealldups
 HISTFILE=~/.zsh_history
 HISTSIZE=50000
 SAVEHIST=50000
-# use atuin to provide extend shell history
-if [ -d $HOME/.atuin ]
-then
-    export ATUIN_NOBIND="true"
-    export PATH="$HOME/.atuin/bin:$PATH"
-    # register atuin completions
-    source <(atuin init zsh)
-    # fuzzy history recall
-    bindkey '^r' _atuin_search_widget
-fi
 # extended globbing syntax
 setopt extendedglob
 # expand expr in prompt
@@ -122,7 +112,7 @@ theme() {
 
 # Tooling
 # z jump Tool
-source /usr/local/share/zsh/site-functions/zsh-z.plugin.zsh
+source $HOME/.local/share/zsh/site-functions/zsh-z.plugin.zsh
 
 # sdkman: jvm sdk manager
 export SDKMAN_DIR="/usr/local/lib/sdkman"
@@ -133,10 +123,12 @@ eval "$(direnv hook zsh)"
 # silence verbose log output from direnv 
 export DIRENV_LOG_FORMAT=""
 
-# asdf version manager
-ASDF_DATA_DIR=${ASDF_DATA_DIR:-$HOME/.asdf}
-if [ -d ${ASDF_DATA_DIR} ]
+# use atuin to provide extend shell history
+if [ -d $HOME/.atuin ]
 then
-    # put asdf installed tools on the path
-    export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+    export ATUIN_NOBIND="true"
+    # register atuin completions
+    source <(atuin init zsh)
+    # fuzzy history recall
+    bindkey '^r' _atuin_search_widget
 fi
