@@ -20,7 +20,10 @@ source $HOME/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # fzf key bindings: CTRL-T for files, CTRL-R for history, ALT-C to chdir
 source /usr/local/share/fzf/key-bindings.zsh
 # kubectl
-source <(kubectl completion zsh)
+if command -v kubectl &> /dev/null
+then
+    source <(kubectl completion zsh)
+fi
 
 # History
 # cd without having to type cd
@@ -31,8 +34,13 @@ HISTFILE=~/.zsh_history
 HISTSIZE=50000
 SAVEHIST=50000
 # use atuin to provide extend shell history
-export ATUIN_NOBIND="true"
-source <(atuin init zsh)
+if [ -d $HOME/.atuin ]
+then
+    export ATUIN_NOBIND="true"
+    source <(atuin init zsh)
+    # fuzzy history recall
+    bindkey '^r' _atuin_search_widget
+fi
 # extended globbing syntax
 setopt extendedglob
 # expand expr in prompt
@@ -44,8 +52,6 @@ bindkey -v
 autoload edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd '\e' edit-command-line
-# fuzzy history recall
-bindkey '^r' _atuin_search_widget
 # fuzzy file completion
 bindkey '^T' fzf-file-widget
 # fuzzy change directory
