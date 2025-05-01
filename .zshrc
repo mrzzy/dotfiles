@@ -16,7 +16,7 @@ zstyle ':completion:*' menu select
 # enable colors on path completion
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # fuzzy suggestions while typing commands
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # fzf key bindings: CTRL-T for files, CTRL-R for history, ALT-C to chdir
 source /usr/local/share/fzf/key-bindings.zsh
 # kubectl
@@ -88,7 +88,7 @@ precmd() {
 
 # Colors
 # syntax Highlighting
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 light() {
     alacritty-themes Gruvbox-Light
 }
