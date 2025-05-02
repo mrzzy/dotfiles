@@ -10,54 +10,55 @@ return {
 	-- completion & snippets
 	{
 		"hrsh7th/nvim-cmp",
-		commit = "v0.0.2",
+		tag = "v0.0.2",
 		config = autocomplete.setup_cmp,
 	},
-
 	{
 		"hrsh7th/cmp-nvim-lsp",
 		dependencies = { { "hrsh7th/nvim-cmp" } },
-		commit = "59224771f91b86d1de12570b4070fe4ad7cd1eeb",
+		commit = "99c4e3ea26262dbe457d8fd57b1136ede6157531",
 	},
 	{
 		"hrsh7th/cmp-path",
 		dependencies = { { "hrsh7th/nvim-cmp" } },
-		commit = "91ff86cd9c29299a64f968ebb45846c485725f23",
+		commit = "853aefbca4edd58d21a6b4171a4f76a85ae01666",
 	},
 	{
 		"hrsh7th/cmp-cmdline",
 		dependencies = { { "hrsh7th/nvim-cmp" } },
-		commit = "8bc9c4a34b223888b7ffbe45c4fe39a7bee5b74d",
+		commit = "d250c63aa13ead745e3a40f61fdd3470efde3923",
 	},
 	{
 		"hrsh7th/cmp-buffer",
 		dependencies = { { "hrsh7th/nvim-cmp" } },
-		commit = "3022dbc9166796b644a841a02de8dd1cc1d311fa",
+		commit = "51f42e6ef64e6ec6601f640731a94c524f165d7c",
 	},
 	{
 		"hrsh7th/cmp-nvim-lsp-signature-help",
 		dependencies = { { "hrsh7th/nvim-cmp" } },
-		commit = "d2768cb1b83de649d57d967085fe73c5e01f8fd7",
+		commit = "031e6ba70b0ad5eee49fd2120ff7a2e325b17fa7",
 	},
 	{
 		"saadparwaiz1/cmp_luasnip",
 		dependencies = { { "hrsh7th/nvim-cmp" } },
-		commit = "18095520391186d634a0045dacaa346291096566",
+		commit = "98d9cb5c2c38532bd9bdb481067b20fea8f32e90",
 	},
 	{
 		"L3MON4D3/LuaSnip",
-		commit = "09ce9a70bd787d4ce188f2de1390f656f119347c",
-		dependencies = { "honza/vim-snippets" },
+		tag = "v2.3.0",
+		dependencies = { "rafamadriz/friendly-snippets" },
 		config = function()
-			-- load snapmate snippets from plugins (eg. vim-snippets) &
-			-- runtime path nvim config into luasnip's catalogue
+			-- load snapmate snippets from runtime path nvim config into luasnip's catalogue
 			require("luasnip.loaders.from_snipmate").lazy_load()
+			-- load vscode snippets (eg. from friendly snippets)
+			require("luasnip.loaders.from_vscode").lazy_load()
 		end,
 	},
-	{ "honza/vim-snippets" },
+	{ "rafamadriz/friendly-snippets" },
 	-- LLM Integration
 	{
 		"zbirenbaum/copilot.lua",
+		commit = "a5c390f8d8e85b501b22dcb2f30e0cbbd69d5ff0",
 		config = function()
 			require("copilot").setup({
 				copilot_model = "gpt-4o-copilot",
@@ -81,6 +82,7 @@ return {
 
 	{
 		"zbirenbaum/copilot-cmp",
+		commit = "15fc12af3d0109fa76b60b5cffa1373697e261d1",
 		config = function()
 			require("copilot_cmp").setup()
 		end,
