@@ -45,7 +45,7 @@ return {
 	-- none ls: linters, formatters & code actions
 	{
 		"nvimtools/none-ls.nvim",
-		commit = "fff481b65d88415933b9574dc0e1947724bcf64a",
+		commit = "a49f5a79cdb76e0dc1a98899c8598f4db014c5e7",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			local null_ls = require("null-ls")
