@@ -83,7 +83,7 @@ local nvim_metals = {
 		-- validate_config() fills in missing config values
 		-- 0: special value to refer to current buffer
 		local full_config = config.validate_config(metals_config, 0)
-		config.set_config_cache(metals_config)
+		config.set_config_cache(full_config)
 		require("metals").install()
 	end,
 	config = function(_)

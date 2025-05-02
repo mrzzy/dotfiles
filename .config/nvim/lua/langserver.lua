@@ -64,14 +64,13 @@ M.language_servers = {
 		}
 	end,
 	-- html
-	["html"] = function ()
+	["html"] = function()
 		return {
-			on_attach = function (client, _)
+			on_attach = function(client, _)
 				-- disable diagnostics as html lsp does not support diagnostics
-        client.server_capabilities.diagnosticProvider = false
+				client.server_capabilities.diagnosticProvider = false
 			end
 		}
-		
 	end,
 	-- ansible
 	["ansiblels"] = noop,
@@ -106,10 +105,6 @@ M.language_servers = {
 			},
 		}
 	end,
-	-- verilog
-	["verible"] = noop,
-	-- OpenSCAD
-	["openscad_lsp"] = noop,
 	-- Astro
 	["astro"] = noop,
 }
