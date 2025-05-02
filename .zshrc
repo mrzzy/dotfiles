@@ -38,6 +38,7 @@ setopt extendedglob
 # expand expr in prompt
 setopt PROMPT_SUBST
 
+# Key Bindings
 # vi style command editing
 bindkey -v
 # edit command with double-esc
@@ -48,6 +49,9 @@ bindkey -M vicmd '\e' edit-command-line
 bindkey '^T' fzf-file-widget
 # fuzzy change directory
 bindkey '\ec' fzf-cd-widget
+# fix home and end keys
+bindkey  "^[[1~"   beginning-of-line
+bindkey  "^[[4~"   end-of-line
 
 # Aliases
 alias r=ranger
