@@ -7,7 +7,7 @@
 # default editor
 export EDITOR=nvim
 # default shell
-export SHELL=zsh
+export SHELL=$HOME/.local/zsh
 # search path
 export PATH="$HOME/.local/bin:$PATH"
 # atuin shell history
