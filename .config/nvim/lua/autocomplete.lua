@@ -28,33 +28,6 @@ function M.setup_cmp()
 	local luasnip = require("luasnip")
 	local utils = require("utilities")
 
-	-- buffer sources group
-	local buffers = {
-		-- complete from visible buffers
-		{
-			name = "buffer",
-			option = {
-				get_bufnrs = function()
-					local visible_bufs = vim.tbl_map(vim.api.nvim_win_get_buf, vim.api.nvim_list_wins())
-					return vim.tbl_filter(function(buf)
-						return not utils.is_large(buf)
-					end, visible_bufs)
-				end,
-			},
-		},
-		-- complete from all loaded buffers
-		{
-			name = "buffer",
-			option = {
-				get_bufnrs = function()
-					return vim.tbl_filter(function(buf)
-						return vim.api.nvim_buf_is_loaded(buf) and not utils.is_large(buf)
-					end, vim.api.nvim_list_bufs())
-				end,
-			},
-		},
-	}
-
 	cmp.setup({
 		-- trigger completion after 'keyword_length' characters
 		completion = {
@@ -63,13 +36,37 @@ function M.setup_cmp()
 		-- each list of sources forms a source group. When one group fails
 		-- to produce completions, nvim-cmp falls back to the next source group.
 		sources = cmp.config.sources({
-				{ name = "copilot" },
 				{ name = "nvim_lsp_signature_help" },
-				{ name = "path" },
 				{ name = "nvim_lsp" },
+				{ name = "copilot" },
+				{ name = "luasnip" },
+				{ name = "path" },
+				-- complete from visible buffers
+				{
+					name = "buffer",
+					option = {
+						get_bufnrs = function()
+							local visible_bufs = vim.tbl_map(vim.api.nvim_win_get_buf, vim.api.nvim_list_wins())
+							return vim.tbl_filter(function(buf)
+								return not utils.is_large(buf)
+							end, visible_bufs)
+						end,
+					},
+				},
 			},
-			{ name = "luasnip" },
-			buffers),
+			{
+				-- fallback: complete from all loaded buffers
+				{
+					name = "buffer",
+					option = {
+						get_bufnrs = function()
+							return vim.tbl_filter(function(buf)
+								return vim.api.nvim_buf_is_loaded(buf) and not utils.is_large(buf)
+							end, vim.api.nvim_list_bufs())
+						end,
+					},
+				},
+			}),
 		-- snippet expansion
 		snippet = {
 			expand = function(snippet)
