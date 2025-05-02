@@ -88,7 +88,7 @@ return {
 	-- typescript / javascript
 	{
 		"pmizio/typescript-tools.nvim",
-		-- ft = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+		ft = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 		commit = "829b5dc4f6704b249624e5157ad094dcb20cdc6b",
 		opts = {},
