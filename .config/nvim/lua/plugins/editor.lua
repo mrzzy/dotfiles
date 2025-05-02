@@ -103,6 +103,27 @@ return {
 			vim.g.mkdp_echo_preview_url = 1
 		end,
 		build = function() vim.fn["mkdp#util#install"]() end,
-	}
-
+	},
+	-- syntax highlighting
+	"sheerun/vim-polyglot",
+	-- colorscheme
+	{
+		"ellisonleao/gruvbox.nvim",
+		tag = "2.0.0",
+		config = function(_)
+			require("gruvbox").setup({
+				inverse = true,
+			})
+			vim.cmd([[colorscheme gruvbox]])
+		end,
+	},
+	-- indent guides
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		tag = "v2.20.2",
+		dependencies = { { "ellisonleao/gruvbox.nvim" } },
+		config = function()
+			require("indent_blankline").setup({})
+		end,
+	},
 }

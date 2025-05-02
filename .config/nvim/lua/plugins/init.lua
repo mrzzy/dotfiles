@@ -21,40 +21,12 @@ if not has_lazy then
 end
 
 -- Plugin Specification
-local obsidian_vault_dir = vim.fn.expand("~/notepad")
-
 lazy.setup({
+	-- Common utilities shared by plugins
+	{ "nvim-lua/plenary.nvim",      tag = "v0.1.3" },
 	{ import = "plugins.editor" },
 	{ import = "plugins.navigation" },
 	{ import = "plugins.language" },
 	{ import = "plugins.completion" },
 	{ import = "plugins.execution" },
-
-	-- UX
-	-- syntax highlighting
-	"sheerun/vim-polyglot",
-	-- colorscheme
-	{
-		"ellisonleao/gruvbox.nvim",
-		tag = "1.0.0",
-		config = function(_)
-			require("gruvbox").setup({
-				inverse = true,
-			})
-			vim.cmd([[colorscheme gruvbox]])
-		end,
-	},
-	-- indent guides
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		tag = "v2.20.2",
-		dependencies = { { "ellisonleao/gruvbox.nvim" } },
-		config = function()
-			require("indent_blankline").setup({})
-		end,
-	},
-	-- Common utilities shared by plugins
-	{ "nvim-lua/plenary.nvim", tag = "v0.1.3" },
-
-
 })
