@@ -18,7 +18,9 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # fuzzy suggestions while typing commands
 source $HOME/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # fzf key bindings: CTRL-T for files, CTRL-R for history, ALT-C to chdir
-source /usr/local/share/fzf/key-bindings.zsh
+if command -v asdf &> /dev/null && command -v fzf &> /dev/null then
+    source "$(asdf where fzf)/shell/key-bindings.zsh"
+fi
 # kubectl
 if command -v kubectl &> /dev/null
 then
