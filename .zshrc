@@ -115,11 +115,6 @@ theme() {
 # Tooling
 # z jump Tool
 source $HOME/.local/share/zsh/site-functions/zsh-z.plugin.zsh
-
-# sdkman: jvm sdk manager
-export SDKMAN_DIR="/usr/local/lib/sdkman"
-source "$SDKMAN_DIR/bin/sdkman-init.sh"
-
 # direnv
 eval "$(direnv hook zsh)"
 # silence verbose log output from direnv 
