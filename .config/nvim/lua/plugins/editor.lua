@@ -111,8 +111,17 @@ return {
 		"ellisonleao/gruvbox.nvim",
 		tag = "2.0.0",
 		config = function(_)
-			require("gruvbox").setup({
+			local gruvbox = require("gruvbox")
+			gruvbox.setup({
 				inverse = true,
+				overrides = {
+					-- override difftext highlighting for legibility
+					DiffText = {
+						-- disable default yellow highlight on difflines
+						bg = "",
+						reverse = true,
+					}
+				}
 			})
 			vim.cmd([[colorscheme gruvbox]])
 		end,
