@@ -21,11 +21,13 @@
 [init]
 	defaultBranch = main
 [credential "https://github.com"]
+	# empty: clear previously registered auth helpers
 	helper = 
-	helper = !/usr/bin/gh auth git-credential
+	helper = !gh auth git-credential
 [credential "https://gist.github.com"]
+	# empty: clear previously registered auth helpers
 	helper = 
-	helper = !/usr/bin/gh auth git-credential
+	helper = !gh auth git-credential
 [mergetool]
 	prompt = false
 [rerere]
