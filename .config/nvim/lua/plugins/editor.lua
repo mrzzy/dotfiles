@@ -24,9 +24,9 @@ return {
 	-- auto alignment
 	{
 		"junegunn/vim-easy-align",
-		commit = "12dd6316974f71ce333e360c0260b4e1f81169c3",
+		commit = "9815a55dbcd817784458df7a18acacc6f82b1241",
 		config = function()
-			vim.keymap.set({ "n", "x" }, "<leader>=", "<Plug>(EasyAlign)", {})
+			vim.keymap.set({ "n", "x" }, "<leader>=", "<Plug>(LiveEasyAlign)", {})
 		end,
 	},
 	-- undo history
