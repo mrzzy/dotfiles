@@ -122,13 +122,3 @@ source $HOME/.local/share/zsh/site-functions/zsh-z.plugin.zsh
 eval "$(direnv hook zsh)"
 # silence verbose log output from direnv 
 export DIRENV_LOG_FORMAT=""
-
-# use atuin to provide extend shell history
-if [ -d $HOME/.atuin ]
-then
-    export ATUIN_NOBIND="true"
-    # register atuin completions
-    source <(atuin init zsh)
-    # fuzzy history recall
-    bindkey '^r' _atuin_search_widget
-fi
