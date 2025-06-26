@@ -109,6 +109,9 @@ M.language_servers = {
 	["astro"] = noop,
 }
 
+-- Mason Install ignore list assume LSP preinstalled in system
+M.mason_ignore = { ["clangd"] = true }
+
 -- Install language servers
 function M.install()
 	local map_package = require("mason-lspconfig.mappings.server").lspconfig_to_package
@@ -116,7 +119,7 @@ function M.install()
 	local mason_servers = {}
 	for server, _ in pairs(require("langserver").language_servers) do
 		-- only install servers supported by mason
-		if map_package[server] ~= nil then
+		if map_package[server] ~= nil and not M.mason_ignore[server] then
 			table.insert(mason_servers, map_package[server])
 		end
 	end
