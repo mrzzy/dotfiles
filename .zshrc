@@ -67,6 +67,8 @@ alias m=make
 alias tf=terraform
 alias d=pushd
 alias D=popd
+alias docker="sudo docker"
+alias dc="sudo docker"
 # redirect vim to neovim
 alias vim=nvim
 # configure less to interpret escape sequences for colored output
