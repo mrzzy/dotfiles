@@ -1,0 +1,22 @@
+{
+    "$schema": "https://raw.githubusercontent.com/sourcebot-dev/sourcebot/main/schemas/v3/index.json",
+    "connections": {
+        "starter-connection": {
+            "type": "github",
+            "repos": [
+	      "mrzzy/warp",
+	      "mrzzy/nimbus",
+	      "mrzzy/dotfiles",
+	      "mrzzy/art.mrzzy.co",
+	      "mrzzy/mrzzy.co",
+	      "mrzzy/csproblems",
+	      "mrzzy/ntuhpc",
+	      "ntuhpc/workshops",
+              "ntuhpc/mlperf_inference_results_v5.0"
+            ],
+            "token": {
+                "env": "GITHUB_TOKEN"
+            }
+        }
+    }
+}
