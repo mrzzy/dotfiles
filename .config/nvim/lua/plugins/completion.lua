@@ -63,7 +63,12 @@ return {
 			require("copilot").setup({
 				copilot_model = "gpt-4o-copilot",
 				suggestion = { enabled = false },
-				panel = { enabled = true },
+				panel = {
+					enabled = true,
+					keymap = {
+						open = "<C-h>"
+					}
+				},
 				-- enable on all filetypes
 				filetypes = {
 					yaml = true,
