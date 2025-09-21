@@ -124,3 +124,8 @@ source $HOME/.local/share/zsh/site-functions/zsh-z.plugin.zsh
 eval "$(direnv hook zsh)"
 # silence verbose log output from direnv 
 export DIRENV_LOG_FORMAT=""
+# asdf-golang
+if command -v asdf &> /dev/null && command -v go &> /dev/null 
+then
+    . $HOME/.asdf/plugins/golang/set-env.zsh
+fi
