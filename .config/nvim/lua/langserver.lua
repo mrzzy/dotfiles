@@ -51,8 +51,7 @@ M.language_servers = {
 	-- python
 	["pyright"] = noop,
 	-- golang
-	-- TODO(mrzzy): remove version peg once golang is updated
-	["gopls@v0.14.2"] = noop,
+	["gopls"] = noop,
 	-- yaml
 	["yamlls"] = function()
 		return {
