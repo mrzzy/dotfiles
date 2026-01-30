@@ -55,41 +55,5 @@ return {
 		end,
 	},
 	{ "rafamadriz/friendly-snippets" },
-	-- LLM Integration
-	{
-		"zbirenbaum/copilot.lua",
-		commit = "a5c390f8d8e85b501b22dcb2f30e0cbbd69d5ff0",
-		config = function()
-			require("copilot").setup({
-				copilot_model = "gpt-4o-copilot",
-				suggestion = { enabled = false },
-				panel = {
-					enabled = true,
-					keymap = {
-						open = "<C-h>"
-					}
-				},
-				-- enable on all filetypes
-				filetypes = {
-					yaml = true,
-					markdown = true,
-					help = true,
-					gitcommit = true,
-					gitrebase = true,
-					hgcommit = true,
-					svn = true,
-					cvs = true,
-					["."] = true,
-				}
-			})
-		end,
-	},
-
-	{
-		"zbirenbaum/copilot-cmp",
-		commit = "15fc12af3d0109fa76b60b5cffa1373697e261d1",
-		config = function()
-			require("copilot_cmp").setup()
-		end,
-	},
+	-- See plugins/ai.lua for Copilot completions
 }
