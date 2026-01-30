@@ -36,6 +36,8 @@ vim.o.background = "dark"
 vim.o.foldenable = false
 -- disable nested folding
 vim.o.foldnestmax = 1
+-- autoread changes to files from disk
+vim.o.autoread = true
 
 -- Keyboard Bindings
 local map = vim.keymap.set
