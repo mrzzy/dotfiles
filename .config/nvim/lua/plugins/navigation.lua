@@ -125,4 +125,13 @@ return {
 			end, {})
 		end,
 	},
+	-- cwd-scoped marks
+	{
+		"mohseenrm/marko.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("marko").setup()
+		end
+	},
 }
