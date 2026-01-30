@@ -12,7 +12,7 @@ return {
 			-- Recommended for `ask()` and `select()`.
 			-- Required for `snacks` provider.
 			---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
-			-- { "folke/snacks.nvim", opts = { input = {}, picker = {} },
+			-- { "folke/snacks.nvim", opts = { input = {}, picker = {} } },
 		},
 		config = function()
 			vim.g.opencode_opts = {
@@ -23,17 +23,15 @@ return {
 			}
 			-- keymaps.
 			-- keymap modes v: visual mode, x: visual mode with activive selection
-			vim.keymap.set({ "n", "x" }, "<leader>aa", function() require("opencode").ask("@this: ", { submit = true }) end,
+			vim.keymap.set({ "n", "x" }, "<leader>yy", function() require("opencode").ask("@this: ", { submit = true }) end,
 				{ desc = "Ask opencode…" })
-			vim.keymap.set({ "n", "x" }, "<leader>a:", function() require("opencode").select() end,
+			vim.keymap.set({ "n", "x" }, "<C-y>", function() require("opencode").select() end,
+				{ desc = "Execute opencode action…" })
+			vim.keymap.set({ "n", "x" }, "<M-y>", function() require("opencode").select() end,
 				{ desc = "Execute opencode action…" })
 
-			local function toggle() require("opencode").toggle() end
-
 			-- toggle opencode window
-			vim.keymap.set({ "n", "t" }, "<leader>A", toggle, { desc = "Toggle opencode" })
-			vim.keymap.set({ "n", "t" }, "<C-c>", toggle, { desc = "Toggle opencode" })
-			vim.keymap.set({ "n", "t" }, "<M-c>", toggle, { desc = "Toggle opencode" })
+			vim.keymap.set({ "n", "t" }, "<leader>Y", function() require("opencode").toggle() end, { desc = "Toggle opencode" })
 
 			-- send code to opencode window
 			vim.keymap.set({ "n", "x" }, "go", function() return require("opencode").operator("@this ") end,
