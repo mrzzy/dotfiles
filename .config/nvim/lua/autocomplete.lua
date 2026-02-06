@@ -105,8 +105,6 @@ function M.setup_cmp()
 				cmp.close()
 				fallback()
 			end,
-			["<M-u>"] = cmp.mapping.scroll_docs(-4),
-			["<M-d>"] = cmp.mapping.scroll_docs(4),
 			-- snippet bindings
 			["<M-x>"] = cmp.mapping(function()
 				luasnip.expand_or_jump()
