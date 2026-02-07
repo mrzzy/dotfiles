@@ -84,11 +84,11 @@ for key, fn in pairs({
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end,
 	-- code actions
-	["<leader>cc"] = vim.lsp.buf.code_action,
-	["<leader>cw"] = vim.lsp.buf.rename,
-	["<leader>cf"] = vim.lsp.buf.format,
+	["<leader>lc"] = vim.lsp.buf.code_action,
+	["<leader>lw"] = vim.lsp.buf.rename,
+	["<leader>lf"] = vim.lsp.buf.format,
 	-- code lens
-	["<leader>cl"] = vim.lsp.codelens.run,
+	["<leader>l<CR>"] = vim.lsp.codelens.run,
 	-- lsp commands
 	["<leader>ll"] = function()
 		vim.cmd([[LspInfo]])
