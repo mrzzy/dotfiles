@@ -38,8 +38,7 @@ return {
 			map({ "n" }, "<C-s>", fzf.git_stash, {})
 			map({ "n" }, "<M-s>", fzf.git_stash, {})
 			-- pasting registers
-			map({ "n" }, "<C-c>", fzf.registers, {})
-			map({ "n" }, "<M-c>", fzf.registers, {})
+			map({ "n" }, "<M-r>", fzf.registers, {})
 
 			-- register fzf.lua as ui picker for vim.ui.select()
 			-- improves ux when nvim prompts for user input (eg. lsp code action)
