@@ -23,15 +23,15 @@ return {
 			}
 			-- keymaps.
 			-- keymap modes v: visual mode, x: visual mode with activive selection
-			vim.keymap.set({ "n", "x" }, "<leader>yy", function() require("opencode").ask("@this: ", { submit = true }) end,
+			vim.keymap.set({ "n", "x" }, "<leader>ca", function() require("opencode").ask("@this: ", { submit = true }) end,
 				{ desc = "Ask opencode…" })
-			vim.keymap.set({ "n", "x" }, "<C-y>", function() require("opencode").select() end,
+			vim.keymap.set({ "n", "x" }, "<C-c>", function() require("opencode").select() end,
 				{ desc = "Execute opencode action…" })
-			vim.keymap.set({ "n", "x" }, "<M-y>", function() require("opencode").select() end,
+			vim.keymap.set({ "n", "x" }, "<M-c>", function() require("opencode").select() end,
 				{ desc = "Execute opencode action…" })
 
 			-- toggle opencode window
-			vim.keymap.set({ "n", "t" }, "<leader>Y", function() require("opencode").toggle() end, { desc = "Toggle opencode" })
+			vim.keymap.set({ "n", "t" }, "<leader>cc", function() require("opencode").toggle() end, { desc = "Toggle opencode" })
 
 			-- send code to opencode window
 			vim.keymap.set({ "n", "x" }, "go", function() return require("opencode").operator("@this ") end,
@@ -43,13 +43,11 @@ return {
 			-- scroll opencode window
 			local function scroll_up() require("opencode").command("session.half.page.up") end
 			vim.keymap.set("n", "<M-u>", scroll_up, { desc = "Scroll opencode up" })
-			vim.keymap.set("n", "<S-C-u>", scroll_up, { desc = "Scroll opencode up" })
-			vim.keymap.set("n", "<leader>au", scroll_up, { desc = "Scroll opencode up" })
+			vim.keymap.set("n", "<leader>cu", scroll_up, { desc = "Scroll opencode up" })
 
 			local function scroll_down() require("opencode").command("session.half.page.down") end
-			vim.keymap.set("n", "<leader>ad", scroll_down, { desc = "Scroll opencode down" })
-			vim.keymap.set("n", "<S-C-d>", scroll_down, { desc = "Scroll opencode down" })
-			vim.keymap.set("n", "<leader>ad", scroll_down, { desc = "Scroll opencode down" })
+			vim.keymap.set("n", "<M-d>", scroll_down, { desc = "Scroll opencode down" })
+			vim.keymap.set("n", "<leader>cd", scroll_down, { desc = "Scroll opencode down" })
 		end,
 	},
 	-- Copilot Completions
