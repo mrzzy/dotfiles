@@ -85,7 +85,7 @@ for key, fn in pairs({
 	end,
 	-- code actions
 	["<leader>lc"] = vim.lsp.buf.code_action,
-	["<leader>lr"] = vim.lsp.buf.rename,
+	["<leader>lw"] = vim.lsp.buf.rename,
 	["<leader>lf"] = vim.lsp.buf.format,
 	-- code lens
 	["<leader>l<CR>"] = vim.lsp.codelens.run,
