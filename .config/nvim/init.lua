@@ -46,7 +46,7 @@ vim.g.mapleader = " "
 --- alternative binding for the <C-w> prefix used in window manipulation keys
 map({ "n" }, "<leader>w", "<C-w>", { silent = true, nowait = true, noremap = true })
 -- return to normal mode from terminal mode with Esc
-map({ "t" }, "<Esc>", "<C-\\><C-N>", { noremap = true })
+map({ "t" }, "<Esc><Esc>", "<C-\\><C-N>", { noremap = true })
 -- toggle between light & dark colorschemes
 for key, background in pairs({
 	["<leader>hl"] = "light",
