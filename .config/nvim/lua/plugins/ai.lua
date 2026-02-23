@@ -22,9 +22,9 @@ return {
 			}
 			-- keymaps.
 			-- keymap modes v: visual mode, x: visual mode with activive selection
-			vim.keymap.set({ "n", "x" }, "<leader>ca", function() require("opencode").ask("@this: ", { submit = true }) end,
+			vim.keymap.set({ "n", "x" }, "<M-c>", function() require("opencode").ask("", { submit = true }) end,
 				{ desc = "Ask opencode…" })
-			vim.keymap.set({ "n", "x" }, "<M-c>", function() require("opencode").select() end,
+			vim.keymap.set({ "n", "x" }, "<leader>ca", function() require("opencode").select() end,
 				{ desc = "Execute opencode action…" })
 
 			-- toggle opencode window
