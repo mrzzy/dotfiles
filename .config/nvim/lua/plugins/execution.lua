@@ -36,7 +36,7 @@ return {
 	-- running tests
 	{
 		"vim-test/vim-test",
-		commit = "08250c56f11cb3460c8a02c8fdb80c8d39c92173",
+		commit = "bc0e94059de40641d163516a83c63bc45c716acf",
 		config = function()
 			-- use vim-dispatch to run tests
 			vim.g["test#strategy"] = "dispatch"
