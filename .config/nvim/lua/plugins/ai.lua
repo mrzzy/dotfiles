@@ -86,7 +86,7 @@ return {
 	-- Copilot Completions
 	{
 		"zbirenbaum/copilot.lua",
-		commit = "a5c390f8d8e85b501b22dcb2f30e0cbbd69d5ff0",
+		commit = "1d457ad5f267b8ef855a6b8b3fe152403cb00947",
 		config = function()
 			require("copilot").setup({
 				copilot_model = "gpt-4o-copilot",
