@@ -9,6 +9,7 @@ local langserver = require("langserver")
 -- Language Support Plugins
 return {
 	{ import = "plugins.language.jvm" },
+	{ import = "plugins.language.xcode" },
 	{ import = "plugins.language.dap" },
 	{ import = "plugins.language.treesitter" },
 
@@ -75,6 +76,8 @@ return {
 					null_ls.builtins.formatting.terraform_fmt,
 					-- packer
 					null_ls.builtins.formatting.packer,
+					-- swift
+					null_ls.builtins.formatting.swiftformat,
 				},
 			})
 		end,

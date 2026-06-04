@@ -106,16 +106,22 @@ M.language_servers = {
 	end,
 	-- Astro
 	["astro"] = noop,
+	-- Swift
+	["sourcekit"] = noop,
 }
 
+-- Additional Mason Servers to install
+M.mason_servers = {"tree-sitter-cli", "codespell", "swiftformat"}
+
 -- Mason Install ignore list assume LSP preinstalled in system
-M.mason_ignore = { ["clangd"] = true }
+M.mason_ignore = { ["clangd"] = true, ["swift"] = true }
+
 
 -- Install language servers
 function M.install()
 	local map_package = require("mason-lspconfig.mappings.server").lspconfig_to_package
 	-- convert lsp server name to mason naming scheme
-	local mason_servers = {}
+	local mason_servers = vim.deepcopy(M.mason_servers)
 	for server, _ in pairs(require("langserver").language_servers) do
 		-- only install servers supported by mason
 		if map_package[server] ~= nil and not M.mason_ignore[server] then
