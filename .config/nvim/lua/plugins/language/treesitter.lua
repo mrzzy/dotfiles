@@ -8,7 +8,7 @@ return {
 	-- treesitter: syntax tree
 	{
 		"nvim-treesitter/nvim-treesitter",
-		commit = "979beffc1a86e7ba19bd6535c0370d8e1aaaad3c",
+		commit = "4916d6592ede8c07973490d9322f187e07dfefac",
 		build = function()
 			-- install or upgrade treesitter parsers
 			local ts = require("nvim-treesitter.install")
@@ -42,7 +42,7 @@ return {
 			})
 		end,
 		config = function()
-			require("nvim-treesitter.configs").setup({
+			require("nvim-treesitter.config").setup({
 				-- auto install parsers when opening a buffer without one
 				auto_install = true,
 				-- use treesitter for '=' auto indent
@@ -78,7 +78,7 @@ return {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
-			require("nvim-treesitter.configs").setup({
+			require("nvim-treesitter.config").setup({
 				textobjects = {
 					select = {
 						enable = true,
