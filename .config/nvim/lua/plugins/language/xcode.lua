@@ -13,6 +13,8 @@ return {
     "XcodebuildBuild",
     "XcodebuildBuildForTesting",
     "XcodebuildTest",
+    "XcodebuildRun",
+    "XcodebuildBuildRun",
     "XcodebuildTestClass",
     "XcodebuildTestNearest",
     "XcodebuildDebug",
