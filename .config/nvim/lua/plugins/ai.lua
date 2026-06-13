@@ -9,6 +9,7 @@ return {
 	-- Opencode AI coding agent
 	{
 		"NickvanDyke/opencode.nvim",
+		tag = "v0.10.2",
 		dependencies = {
 			-- Recommended for `ask()` and `select()`.
 			-- Required for `snacks` provider.
