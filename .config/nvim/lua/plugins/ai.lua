@@ -89,7 +89,6 @@ return {
 		commit = "1d457ad5f267b8ef855a6b8b3fe152403cb00947",
 		config = function()
 			require("copilot").setup({
-				copilot_model = "gpt-4o-copilot",
 				suggestion = { enabled = false },
 				panel = {
 					enabled = true,
