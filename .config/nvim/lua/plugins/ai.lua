@@ -45,12 +45,10 @@ return {
 						local start_pos = vim.api.nvim_buf_get_mark(0, "[")
 						local end_pos = vim.api.nvim_buf_get_mark(0, "]")
 
-
 						-- normalise range: ensure start_pos comes before end_pos
 						if start_pos[1] > end_pos[1] or (start_pos[1] == end_pos[1] and start_pos[2] > end_pos[2]) then
 							start_pos, end_pos = end_pos, start_pos
 						end
-
 
 						-- extract text from buffer for the selected range
 						local lines = vim.api.nvim_buf_get_text(
@@ -65,7 +63,8 @@ return {
 						local text = table.concat(lines, "\n")
 
 						-- send extracted text to opencode
-						require("opencode").prompt(text .. "\n\n")
+						-- add additional whitespace to avoid submitting
+						require("opencode").prompt(text .. "\n\n ")
 					end
 					-- g@ calls operatorfunc, which is set to our copy operator
 					vim.o.operatorfunc = "v:lua.opencode_prompt_copy_operator"
