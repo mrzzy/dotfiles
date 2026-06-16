@@ -8,7 +8,7 @@ return {
 	-- fuzzy navigation
 	{
 		"ibhagwan/fzf-lua",
-		commit = "446429138a841b45a2a7743cc08d7bc17493e7c8",
+		commit = "988416cc782dfe28bff3f0da9b8c943b236cd86a",
 		config = function()
 			local fzf = require("fzf-lua")
 			local map = vim.keymap.set
