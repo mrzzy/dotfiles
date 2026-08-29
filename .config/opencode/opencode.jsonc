@@ -10,8 +10,8 @@
     },
   },
   // LLM models: code generation
-  "model": "zai-coding-plan/glm-4.7",
-  "small_model": "zai-coding-plan/glm-4.7-flash",
+  "model": "zai-coding-plan/glm-5-turbo",
+  "small_model": "zai-coding-plan/glm-5-turbo",
   // MCP servers: context fed to LLM models
   "mcp": {
     "context7": {
