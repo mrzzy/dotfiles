@@ -25,3 +25,6 @@ packets: %s sent %r received"
 
 # default bat color scheme
 export BAT_THEME=gruvbox-dark
+
+# Opt out of client telemetry
+export DO_NOT_TRACK=1
