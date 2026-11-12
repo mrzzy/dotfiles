@@ -9,33 +9,19 @@ return {
 	-- Opencode AI coding agent
 	{
 		"NickvanDyke/opencode.nvim",
-		tag = "v0.10.2",
-		dependencies = {
-			-- Recommended for `ask()` and `select()`.
-			-- Required for `snacks` provider.
-		},
+		commit = "4851ae503585dc5142ad66a98e8952a74e1f7b3a",
 		config = function()
-			vim.g.opencode_opts = {
-				-- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition" on the type or field.
-				provider = {
-					enabled = "terminal",
-				}
-			}
 			-- keymaps.
 			-- keymap modes v: visual mode, x: visual mode with activive selection
-			vim.keymap.set({ "n", "x" }, "<M-c>", function() require("opencode").ask("", { submit = true }) end,
+			vim.keymap.set({ "n", "x" }, "<M-c>", function() require("opencode").ask("") end,
 				{ desc = "Ask opencode…" })
 			vim.keymap.set({ "n", "x" }, "<leader>ca", function() require("opencode").select() end,
 				{ desc = "Execute opencode action…" })
 
-			-- toggle opencode window
-			vim.keymap.set({ "n", "t" }, "<leader>cc", function() require("opencode").toggle() end,
-				{ desc = "Toggle opencode" })
-
 			-- send code selection (specification) to opencode window
-			vim.keymap.set({ "n", "x" }, "go", function() return require("opencode").operator("@this ") end,
+			vim.keymap.set({ "n", "x" }, "go", function() return require("opencode").operator("@this: ...") end,
 				{ desc = "Add range to opencode", expr = true })
-			vim.keymap.set("n", "goo", function() return require("opencode").operator("@this ") .. "_" end,
+			vim.keymap.set("n", "goo", function() return require("opencode").operator("@this: ...") .. "_" end,
 				{ desc = "Add line to opencode", expr = true })
 
 			-- send code selection (text) to opencode window
@@ -64,7 +50,7 @@ return {
 
 						-- send extracted text to opencode
 						-- add additional whitespace to avoid submitting
-						require("opencode").prompt(text .. "\n\n ")
+						require("opencode").prompt(text .. "\n\n ...")
 					end
 					-- g@ calls operatorfunc, which is set to our copy operator
 					vim.o.operatorfunc = "v:lua.opencode_prompt_copy_operator"
